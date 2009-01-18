@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Sun Jan 18 16:11:16 +0100 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Request-log-analyzer</h1>
+<p>
+This is a simple command line tool to analyze request log files of both
+Rails and Merb to produce a performance report. Its purpose is to find what
+actions are best candidates for optimization.
+</p>
+<ul>
+<li>Analyzes Rails log files (all versions)
+
+</li>
+<li>Can combine multiple files (handy if you are using logrotate)
+
+</li>
+<li>Uses several metrics, including cumulative request time, average request
+time, process blockers, database and rendering time, HTTP methods and
+states, Rails action cache statistics, etc.) (Sample output: <a
+href="http://wiki.github.com/wvanbergen/request-log-analyzer/sample-output">wiki.github.com/wvanbergen/request-log-analyzer/sample-output</a>)
+
+</li>
+<li>Low memory footprint (server-safe)
+
+</li>
+<li>Fast
+
+</li>
+<li>MIT licensed
+
+</li>
+</ul>
+<p>
+Request log analyzer was designed and built by Willem van Bergen and Bart
+ten Brinke.
+</p>
+<h2>Installation</h2>
+<p>
+Install request-log-analyzer as a Ruby gem:
+</p>
+<pre>
+  $ sudo gem install request-log-analyzer
+</pre>
+<p>
+Alternatively, use the gem from the GitHub gem server:
+</p>
+<pre>
+  $ sudo gem install wvanbergen-request-log-analyzer --source http://gems.github.com
+</pre>
+<p>
+To get the best results out of request-log-analyzer, make sure to set up
+logging correctly: <a
+href="http://wiki.github.com/wvanbergen/request-log-analyzer/configure-logging">wiki.github.com/wvanbergen/request-log-analyzer/configure-logging</a>
+for your application.
+</p>
+<h2>Usage</h2>
+<p>
+To analyze a log file and produce a performance report, run
+request-log-analyzer like this:
+</p>
+<pre>
+  $ request-log-analyzer log/production.log
+</pre>
+<p>
+For more details and available command line options, see the
+project&#8216;s wiki:<a
+href="http://wiki.github.com/wvanbergen/request-log-analyzer/basic-usage">wiki.github.com/wvanbergen/request-log-analyzer/basic-usage</a>
+</p>
+<h2>Additional information</h2>
+<ul>
+<li>Project wiki at GitHub: <a
+href="http://wiki.github.com/wvanbergen/request-log-analyzer">wiki.github.com/wvanbergen/request-log-analyzer</a>
+
+</li>
+<li>wvanbergen&#8216;s blog posts: <a
+href="http://techblog.floorplanner.com/tag/request-log-analyzer">techblog.floorplanner.com/tag/request-log-analyzer</a>
+
+</li>
+<li>bart ten brinke&#8216;s blog posts: <a
+href="http://movesonrails.com">movesonrails.com</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

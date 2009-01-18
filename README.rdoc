@@ -1,0 +1,4 @@
+= RDoc documentation for request-log-analyzer
+
+This branch contains the RDoc documentation of request-log-analyzer.
+It is hosted on http://wvanbergen.github.com/request-log-analyzer

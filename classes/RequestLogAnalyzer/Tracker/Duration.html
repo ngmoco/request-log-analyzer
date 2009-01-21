@@ -66,7 +66,7 @@
             <td><strong>Parent:</strong></td>
             <td>
                 <a href="Base.html">
-                RequestLogAnalyzer::Tracker::Base
+                Base
                </a>
             </td>
         </tr>
@@ -97,7 +97,7 @@ tracker.
 
 </li>
 <li><tt>:title</tt> Title do be displayed above the <a
-href="Duration.html#M000039">report</a>
+href="Duration.html#M000064">report</a>
 
 </li>
 <li><tt>:category</tt> Proc that handles request categorization for given
@@ -108,12 +108,12 @@ fileformat (REQUEST_CATEGORIZER)
 
 </li>
 <li><tt>:amount</tt> The amount of lines in the <a
-href="Duration.html#M000039">report</a>
+href="Duration.html#M000064">report</a>
 
 </li>
 </ul>
 <p>
-The items in the <a href="Duration.html#M000037">update</a> request hash
+The items in the <a href="Duration.html#M000062">update</a> request hash
 are set during the creation of the <a href="Duration.html">Duration</a>
 tracker.
 </p>
@@ -138,10 +138,10 @@ Example output:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000036">prepare</a>&nbsp;&nbsp;
-      <a href="#M000039">report</a>&nbsp;&nbsp;
-      <a href="#M000038">report_table</a>&nbsp;&nbsp;
-      <a href="#M000037">update</a>&nbsp;&nbsp;
+      <a href="#M000061">prepare</a>&nbsp;&nbsp;
+      <a href="#M000064">report</a>&nbsp;&nbsp;
+      <a href="#M000063">report_table</a>&nbsp;&nbsp;
+      <a href="#M000062">update</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -176,128 +176,130 @@ Example output:
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000036" class="method-detail">
-        <a name="M000036"></a>
+      <div id="method-M000061" class="method-detail">
+        <a name="M000061"></a>
 
         <div class="method-heading">
-          <a href="#M000036" class="method-signature">
+          <a href="#M000061" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000036-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000036-source">
+            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000061-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 25</span>
-25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
-26:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;No duration field set up for category tracker #{self.inspect}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>]
-27:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;No categorizer set up for duration tracker #{self.inspect}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>]
-28:     
-29:       <span class="ruby-ivar">@categories</span> = {}
-30:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 26</span>
+26:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
+27:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;No duration field set up for category tracker #{self.inspect}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>]
+28:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;No categorizer set up for duration tracker #{self.inspect}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>]
+29:   
+30:       <span class="ruby-ivar">@categories</span> = {}
+31:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000039" class="method-detail">
-        <a name="M000039"></a>
+      <div id="method-M000064" class="method-detail">
+        <a name="M000064"></a>
 
         <div class="method-heading">
-          <a href="#M000039" class="method-signature">
+          <a href="#M000064" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000039-source">
+            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000064-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 56</span>
-56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
-57: 
-58:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]  <span class="ruby-operator">||=</span> <span class="ruby-value str">'Request duration'</span>
-59:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:report</span>] <span class="ruby-operator">||=</span> [<span class="ruby-identifier">:total</span>, <span class="ruby-identifier">:average</span>]
-60:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>]    <span class="ruby-operator">||=</span> <span class="ruby-value">20</span>
-61:     
-62:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:report</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">report</span><span class="ruby-operator">|</span>
-63:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">report</span>
-64:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:average</span>
-65:           <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>], <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{options[:title]} - top #{options[:top]} by average time&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:total_duration</span>] <span class="ruby-operator">/</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:count</span>] }  
-66:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:total</span>
-67:           <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>], <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{options[:title]} - top #{options[:top]} by cumulative time&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:total_duration</span>] }
-68:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:hits</span>
-69:           <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>], <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{options[:title]} - top #{options[:top]} by hits&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:count</span>] }
-70:         <span class="ruby-keyword kw">else</span>
-71:           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;Unknown duration report specified\n&quot;</span>
-72:         <span class="ruby-keyword kw">end</span>
-73:       <span class="ruby-keyword kw">end</span>
-74:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 59</span>
+59:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
+60: 
+61:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]  <span class="ruby-operator">||=</span> <span class="ruby-value str">'Request duration'</span>
+62:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:report</span>] <span class="ruby-operator">||=</span> [<span class="ruby-identifier">:total</span>, <span class="ruby-identifier">:average</span>]
+63:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>]    <span class="ruby-operator">||=</span> <span class="ruby-value">20</span>
+64:   
+65:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:report</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">report</span><span class="ruby-operator">|</span>
+66:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">report</span>
+67:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:average</span>
+68:           <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>], <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{options[:title]} - top #{options[:top]} by average time&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:total_duration</span>] <span class="ruby-operator">/</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:count</span>] }  
+69:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:total</span>
+70:           <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>], <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{options[:title]} - top #{options[:top]} by cumulative time&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:total_duration</span>] }
+71:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:hits</span>
+72:           <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:top</span>], <span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{options[:title]} - top #{options[:top]} by hits&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">:count</span>] }
+73:         <span class="ruby-keyword kw">else</span>
+74:           <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;Unknown duration report specified\n&quot;</span>
+75:         <span class="ruby-keyword kw">end</span>
+76:       <span class="ruby-keyword kw">end</span>
+77:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000038" class="method-detail">
-        <a name="M000038"></a>
+      <div id="method-M000063" class="method-detail">
+        <a name="M000063"></a>
 
         <div class="method-heading">
-          <a href="#M000038" class="method-signature">
+          <a href="#M000063" class="method-signature">
           <span class="method-name">report_table</span><span class="method-args">(output, amount = 10, options = {}) {|b[1]| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000038-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000038-source">
+            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000063-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 43</span>
-43:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-value">10</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-44:       
-45:       <span class="ruby-identifier">top_categories</span> = <span class="ruby-ivar">@categories</span>.<span class="ruby-identifier">sort</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]) }.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">amount</span>)
-46:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">table</span>({<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]}, {<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Hits'</span>, <span class="ruby-identifier">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:right</span>, <span class="ruby-identifier">:min_width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>}, 
-47:             {<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Cumulative'</span>, <span class="ruby-identifier">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:right</span>, <span class="ruby-identifier">:min_width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>}, {<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Average'</span>, <span class="ruby-identifier">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:right</span>, <span class="ruby-identifier">:min_width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">8</span>}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rows</span><span class="ruby-operator">|</span>
-48:         
-49:         <span class="ruby-identifier">top_categories</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">cat</span>, <span class="ruby-identifier">info</span>)<span class="ruby-operator">|</span>
-50:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">cat</span>, <span class="ruby-identifier">info</span>[<span class="ruby-identifier">:count</span>], <span class="ruby-value str">&quot;%0.02fs&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">info</span>[<span class="ruby-identifier">:total_duration</span>], <span class="ruby-value str">&quot;%0.02fs&quot;</span> <span class="ruby-operator">%</span> (<span class="ruby-identifier">info</span>[<span class="ruby-identifier">:total_duration</span>] <span class="ruby-operator">/</span> <span class="ruby-identifier">info</span>[<span class="ruby-identifier">:count</span>])]
-51:         <span class="ruby-keyword kw">end</span>        
-52:       <span class="ruby-keyword kw">end</span>
-53: 
-54:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 44</span>
+44:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-value">10</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+45:     
+46:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>])
+47:     
+48:       <span class="ruby-identifier">top_categories</span> = <span class="ruby-ivar">@categories</span>.<span class="ruby-identifier">sort</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]) }.<span class="ruby-identifier">slice</span>(<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">amount</span>)
+49:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">table</span>({<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Action'</span>}, {<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Hits'</span>, <span class="ruby-identifier">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:right</span>, <span class="ruby-identifier">:min_width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>}, 
+50:             {<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Cumulative'</span>, <span class="ruby-identifier">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:right</span>, <span class="ruby-identifier">:min_width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>}, {<span class="ruby-identifier">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'Average'</span>, <span class="ruby-identifier">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:right</span>, <span class="ruby-identifier">:min_width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">8</span>}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rows</span><span class="ruby-operator">|</span>
+51:       
+52:         <span class="ruby-identifier">top_categories</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">cat</span>, <span class="ruby-identifier">info</span>)<span class="ruby-operator">|</span>
+53:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">cat</span>, <span class="ruby-identifier">info</span>[<span class="ruby-identifier">:count</span>], <span class="ruby-value str">&quot;%0.02fs&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">info</span>[<span class="ruby-identifier">:total_duration</span>], <span class="ruby-value str">&quot;%0.02fs&quot;</span> <span class="ruby-operator">%</span> (<span class="ruby-identifier">info</span>[<span class="ruby-identifier">:total_duration</span>] <span class="ruby-operator">/</span> <span class="ruby-identifier">info</span>[<span class="ruby-identifier">:count</span>])]
+54:         <span class="ruby-keyword kw">end</span>        
+55:       <span class="ruby-keyword kw">end</span>
+56: 
+57:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000037" class="method-detail">
-        <a name="M000037"></a>
+      <div id="method-M000062" class="method-detail">
+        <a name="M000062"></a>
 
         <div class="method-heading">
-          <a href="#M000037" class="method-signature">
+          <a href="#M000062" class="method-signature">
           <span class="method-name">update</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000037-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000037-source">
+            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000062-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 32</span>
-32:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)
-33:       <span class="ruby-identifier">category</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>]]
-34:       <span class="ruby-identifier">duration</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>]]
-35:     
-36:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">duration</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">category</span>.<span class="ruby-identifier">nil?</span>
-37:         <span class="ruby-ivar">@categories</span>[<span class="ruby-identifier">category</span>] <span class="ruby-operator">||=</span> {<span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">:total_duration</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.0</span>}
-38:         <span class="ruby-ivar">@categories</span>[<span class="ruby-identifier">category</span>][<span class="ruby-identifier">:count</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-39:         <span class="ruby-ivar">@categories</span>[<span class="ruby-identifier">category</span>][<span class="ruby-identifier">:total_duration</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">duration</span>
-40:       <span class="ruby-keyword kw">end</span>
-41:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 33</span>
+33:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)
+34:       <span class="ruby-identifier">category</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:category</span>]]
+35:       <span class="ruby-identifier">duration</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:duration</span>]]
+36:   
+37:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">duration</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">category</span>.<span class="ruby-identifier">nil?</span>
+38:         <span class="ruby-ivar">@categories</span>[<span class="ruby-identifier">category</span>] <span class="ruby-operator">||=</span> {<span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">:total_duration</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.0</span>}
+39:         <span class="ruby-ivar">@categories</span>[<span class="ruby-identifier">category</span>][<span class="ruby-identifier">:count</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+40:         <span class="ruby-ivar">@categories</span>[<span class="ruby-identifier">category</span>][<span class="ruby-identifier">:total_duration</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">duration</span>
+41:       <span class="ruby-keyword kw">end</span>
+42:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

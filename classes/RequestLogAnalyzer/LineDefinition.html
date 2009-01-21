@@ -82,8 +82,8 @@
       <p>
 The line definition class is used to specify what lines should be parsed
 from the log file. It contains functionality to match a line against the
-definition and parse the information from this line. This is used by the <a
-href="LogParser.html">LogParser</a> class when parsing a log file..
+definition and parse the information from this line. This is used by the
+LogParser class when parsing a log file..
 </p>
 
     </div>
@@ -95,14 +95,14 @@ href="LogParser.html">LogParser</a> class when parsing a log file..
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000111">=~</a>&nbsp;&nbsp;
-      <a href="#M000114">anonymize</a>&nbsp;&nbsp;
-      <a href="#M000113">anonymize_slightly</a>&nbsp;&nbsp;
-      <a href="#M000112">anonymize_value</a>&nbsp;&nbsp;
-      <a href="#M000109">convert_value</a>&nbsp;&nbsp;
-      <a href="#M000108">define</a>&nbsp;&nbsp;
-      <a href="#M000110">matches</a>&nbsp;&nbsp;
-      <a href="#M000107">new</a>&nbsp;&nbsp;
+      <a href="#M000140">=~</a>&nbsp;&nbsp;
+      <a href="#M000143">anonymize</a>&nbsp;&nbsp;
+      <a href="#M000142">anonymize_slightly</a>&nbsp;&nbsp;
+      <a href="#M000141">anonymize_value</a>&nbsp;&nbsp;
+      <a href="#M000138">convert_value</a>&nbsp;&nbsp;
+      <a href="#M000137">define</a>&nbsp;&nbsp;
+      <a href="#M000139">matches</a>&nbsp;&nbsp;
+      <a href="#M000136">new</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -175,19 +175,19 @@ href="LogParser.html">LogParser</a> class when parsing a log file..
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000108" class="method-detail">
-        <a name="M000108"></a>
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
 
         <div class="method-heading">
-          <a href="#M000108" class="method-signature">
+          <a href="#M000137" class="method-signature">
           <span class="method-name">define</span><span class="method-args">(name) {|definition| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000108-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000108-source">
+            onclick="toggleCode('M000137-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000137-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/line_definition.rb, line 49</span>
 49:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">define</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -200,11 +200,11 @@ href="LogParser.html">LogParser</a> class when parsing a log file..
         </div>
       </div>
 
-      <div id="method-M000107" class="method-detail">
-        <a name="M000107"></a>
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
 
         <div class="method-heading">
-          <a href="#M000107" class="method-signature">
+          <a href="#M000136" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(name, definition = {})</span>
           </a>
         </div>
@@ -215,8 +215,8 @@ Initializes the <a href="LineDefinition.html">LineDefinition</a> instance
 with a hash containing the different elements of the definition.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000107-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000107-source">
+            onclick="toggleCode('M000136-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000136-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/line_definition.rb, line 43</span>
 43:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span> = {})
@@ -231,8 +231,8 @@ with a hash containing the different elements of the definition.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000111" class="method-detail">
-        <a name="M000111"></a>
+      <div id="method-M000140" class="method-detail">
+        <a name="M000140"></a>
 
         <div class="method-heading">
           <span class="method-name">=~</span><span class="method-args">(line, lineno = nil, parser = nil)</span>
@@ -240,16 +240,16 @@ with a hash containing the different elements of the definition.
       
         <div class="method-description">
           <p>
-Alias for <a href="LineDefinition.html#M000110">matches</a>
+Alias for <a href="LineDefinition.html#M000139">matches</a>
 </p>
         </div>
       </div>
 
-      <div id="method-M000114" class="method-detail">
-        <a name="M000114"></a>
+      <div id="method-M000143" class="method-detail">
+        <a name="M000143"></a>
 
         <div class="method-heading">
-          <a href="#M000114" class="method-signature">
+          <a href="#M000143" class="method-signature">
           <span class="method-name">anonymize</span><span class="method-args">(line, options = {})</span>
           </a>
         </div>
@@ -259,8 +259,8 @@ Alias for <a href="LineDefinition.html#M000110">matches</a>
 Anonymize a log line
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000114-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000114-source">
+            onclick="toggleCode('M000143-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000143-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/line_definition.rb, line 136</span>
 136:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">anonymize</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">options</span> = {})
@@ -289,19 +289,19 @@ Anonymize a log line
         </div>
       </div>
 
-      <div id="method-M000113" class="method-detail">
-        <a name="M000113"></a>
+      <div id="method-M000142" class="method-detail">
+        <a name="M000142"></a>
 
         <div class="method-heading">
-          <a href="#M000113" class="method-signature">
+          <a href="#M000142" class="method-signature">
           <span class="method-name">anonymize_slightly</span><span class="method-args">(value, capture_definition)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000113-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000113-source">
+            onclick="toggleCode('M000142-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000142-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/line_definition.rb, line 117</span>
 117:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">anonymize_slightly</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">capture_definition</span>)  
@@ -326,19 +326,19 @@ Anonymize a log line
         </div>
       </div>
 
-      <div id="method-M000112" class="method-detail">
-        <a name="M000112"></a>
+      <div id="method-M000141" class="method-detail">
+        <a name="M000141"></a>
 
         <div class="method-heading">
-          <a href="#M000112" class="method-signature">
+          <a href="#M000141" class="method-signature">
           <span class="method-name">anonymize_value</span><span class="method-args">(value, capture_definition)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000112-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000112-source">
+            onclick="toggleCode('M000141-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000141-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/line_definition.rb, line 101</span>
 101:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">anonymize_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">capture_definition</span>)
@@ -361,11 +361,11 @@ Anonymize a log line
         </div>
       </div>
 
-      <div id="method-M000109" class="method-detail">
-        <a name="M000109"></a>
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
 
         <div class="method-heading">
-          <a href="#M000109" class="method-signature">
+          <a href="#M000138" class="method-signature">
           <span class="method-name">convert_value</span><span class="method-args">(value, type)</span>
           </a>
         </div>
@@ -376,8 +376,8 @@ Converts a parsed value (String) to the desired value using some
 heuristics.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000109-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000109-source">
+            onclick="toggleCode('M000138-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000138-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/line_definition.rb, line 56</span>
 56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">type</span>)
@@ -397,11 +397,11 @@ heuristics.
         </div>
       </div>
 
-      <div id="method-M000110" class="method-detail">
-        <a name="M000110"></a>
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
 
         <div class="method-heading">
-          <a href="#M000110" class="method-signature">
+          <a href="#M000139" class="method-signature">
           <span class="method-name">matches</span><span class="method-args">(line, lineno = nil, parser = nil)</span>
           </a>
         </div>
@@ -409,16 +409,16 @@ heuristics.
         <div class="method-description">
           <p>
 Checks whether a given line <a
-href="LineDefinition.html#M000110">matches</a> this definition. It will
+href="LineDefinition.html#M000139">matches</a> this definition. It will
 return false if a line does not match. If the line <a
-href="LineDefinition.html#M000110">matches</a>, a hash is returned with all
+href="LineDefinition.html#M000139">matches</a>, a hash is returned with all
 the fields parsed from that line as content. If the line definition has a
 teaser-check, a :teaser_check_failed warning will be emitted if this
 teaser-check is passed, but the full regular exprssion does not ,atch.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000110-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000110-source">
+            onclick="toggleCode('M000139-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000139-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/line_definition.rb, line 74</span>
 74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">matches</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">lineno</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">parser</span> = <span class="ruby-keyword kw">nil</span>)

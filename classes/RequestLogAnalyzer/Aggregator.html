@@ -55,10 +55,6 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/request_log_analyzer/aggregator/base_rb.html">
-                lib/request_log_analyzer/aggregator/base.rb
-                </a>
-        <br />
                 <a href="../../files/lib/request_log_analyzer/aggregator/database_rb.html">
                 lib/request_log_analyzer/aggregator/database.rb
                 </a>
@@ -69,6 +65,10 @@
         <br />
                 <a href="../../files/lib/request_log_analyzer/aggregator/summarizer_rb.html">
                 lib/request_log_analyzer/aggregator/summarizer.rb
+                </a>
+        <br />
+                <a href="../../files/lib/request_log_analyzer/aggregator_rb.html">
+                lib/request_log_analyzer/aggregator.rb
                 </a>
         <br />
             </td>
@@ -88,6 +88,13 @@
 
    </div>
 
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000065">const_missing</a>&nbsp;&nbsp;
+      </div>
+    </div>
 
   </div>
 
@@ -113,6 +120,34 @@ Class <a href="Aggregator/Summarizer.html" class="link">RequestLogAnalyzer::Aggr
 
 
     <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
+
+        <div class="method-heading">
+          <a href="#M000065" class="method-signature">
+          <span class="method-name">const_missing</span><span class="method-args">(const)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000065-source">
+<pre>
+   <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator.rb, line 3</span>
+3:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
+4:     <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">const</span>)
+5:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
 
 
   </div>

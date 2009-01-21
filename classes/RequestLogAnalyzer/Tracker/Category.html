@@ -66,7 +66,7 @@
             <td><strong>Parent:</strong></td>
             <td>
                 <a href="Base.html">
-                RequestLogAnalyzer::Tracker::Base
+                Base
                </a>
             </td>
         </tr>
@@ -97,19 +97,19 @@ tracker.
 
 </li>
 <li><tt>:title</tt> Title do be displayed above the <a
-href="Category.html#M000023">report</a>.
+href="Category.html#M000048">report</a>.
 
 </li>
 <li><tt>:category</tt> Proc that handles the request categorization.
 
 </li>
 <li><tt>:amount</tt> The amount of lines in the <a
-href="Category.html#M000023">report</a>
+href="Category.html#M000048">report</a>
 
 </li>
 </ul>
 <p>
-The items in the <a href="Category.html#M000022">update</a> request hash
+The items in the <a href="Category.html#M000047">update</a> request hash
 are set during the creation of the <a href="Duration.html">Duration</a>
 tracker.
 </p>
@@ -134,9 +134,9 @@ Example output:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000021">prepare</a>&nbsp;&nbsp;
-      <a href="#M000023">report</a>&nbsp;&nbsp;
-      <a href="#M000022">update</a>&nbsp;&nbsp;
+      <a href="#M000046">prepare</a>&nbsp;&nbsp;
+      <a href="#M000048">report</a>&nbsp;&nbsp;
+      <a href="#M000047">update</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -171,19 +171,19 @@ Example output:
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000021" class="method-detail">
-        <a name="M000021"></a>
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
 
         <div class="method-heading">
-          <a href="#M000021" class="method-signature">
+          <a href="#M000046" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000021-source">
+            onclick="toggleCode('M000046-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000046-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/category.rb, line 26</span>
 26:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
@@ -198,24 +198,24 @@ Example output:
         </div>
       </div>
 
-      <div id="method-M000023" class="method-detail">
-        <a name="M000023"></a>
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
 
         <div class="method-heading">
-          <a href="#M000023" class="method-signature">
+          <a href="#M000048" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000023-source">
+            onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000048-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/category.rb, line 42</span>
 42:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
 43:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]
-44:       
+44:     
 45:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@categories</span>.<span class="ruby-identifier">empty?</span>
 46:         <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;None found.\n&quot;</span> 
 47:       <span class="ruby-keyword kw">else</span>
@@ -236,19 +236,19 @@ Example output:
         </div>
       </div>
 
-      <div id="method-M000022" class="method-detail">
-        <a name="M000022"></a>
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
 
         <div class="method-heading">
-          <a href="#M000022" class="method-signature">
+          <a href="#M000047" class="method-signature">
           <span class="method-name">update</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000022-source">
+            onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000047-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/category.rb, line 34</span>
 34:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)

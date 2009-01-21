@@ -80,7 +80,7 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000020">colorize</a>&nbsp;&nbsp;
+      <a href="#M000031">colorize</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -120,44 +120,44 @@
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000020" class="method-detail">
-        <a name="M000020"></a>
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
 
         <div class="method-heading">
-          <a href="#M000020" class="method-signature">
+          <a href="#M000031" class="method-signature">
           <span class="method-name">colorize</span><span class="method-args">(text, *options)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000020-source">
+            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000031-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 14</span>
-14:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
-15:     
-16:       <span class="ruby-identifier">font_style</span>       = <span class="ruby-value str">''</span>
-17:       <span class="ruby-identifier">foreground_color</span> = <span class="ruby-value str">'0'</span>
-18:       <span class="ruby-identifier">background_color</span> = <span class="ruby-value str">''</span>
-19:       
-20:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span><span class="ruby-operator">|</span>
-21:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">option</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-22:           <span class="ruby-identifier">foreground_color</span> = <span class="ruby-node">&quot;3#{COLORS[option]}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">option</span>)
-23:           <span class="ruby-identifier">font_style</span>       = <span class="ruby-node">&quot;#{STYLES[option]};&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">STYLES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">option</span>)          
-24:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">option</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
-25:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-26:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">key</span>
-27:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:color</span>;      <span class="ruby-identifier">foreground_color</span> = <span class="ruby-node">&quot;3#{COLORS[value]}&quot;</span>  <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
-28:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:background</span>; <span class="ruby-identifier">background_color</span> = <span class="ruby-node">&quot;4#{COLORS[value]};&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
-29:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:on</span>;         <span class="ruby-identifier">background_color</span> = <span class="ruby-node">&quot;4#{COLORS[value]};&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
-30:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:style</span>;      <span class="ruby-identifier">font_style</span>       = <span class="ruby-node">&quot;#{STYLES[value]};&quot;</span>  <span class="ruby-keyword kw">if</span> <span class="ruby-constant">STYLES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
-31:             <span class="ruby-keyword kw">end</span>
-32:           <span class="ruby-keyword kw">end</span>
-33:         <span class="ruby-keyword kw">end</span>
-34:       <span class="ruby-keyword kw">end</span>
-35:       <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;\e[#{background_color}#{font_style}#{foreground_color}m#{text}\e[0m&quot;</span>
-36:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 16</span>
+16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
+17:     
+18:         <span class="ruby-identifier">font_style</span>       = <span class="ruby-value str">''</span>
+19:         <span class="ruby-identifier">foreground_color</span> = <span class="ruby-value str">'0'</span>
+20:         <span class="ruby-identifier">background_color</span> = <span class="ruby-value str">''</span>
+21:       
+22:         <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span><span class="ruby-operator">|</span>
+23:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">option</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+24:             <span class="ruby-identifier">foreground_color</span> = <span class="ruby-node">&quot;3#{COLORS[option]}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">option</span>)
+25:             <span class="ruby-identifier">font_style</span>       = <span class="ruby-node">&quot;#{STYLES[option]};&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">STYLES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">option</span>)          
+26:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">option</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
+27:             <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+28:               <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">key</span>
+29:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:color</span>;      <span class="ruby-identifier">foreground_color</span> = <span class="ruby-node">&quot;3#{COLORS[value]}&quot;</span>  <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
+30:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:background</span>; <span class="ruby-identifier">background_color</span> = <span class="ruby-node">&quot;4#{COLORS[value]};&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
+31:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:on</span>;         <span class="ruby-identifier">background_color</span> = <span class="ruby-node">&quot;4#{COLORS[value]};&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
+32:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:style</span>;      <span class="ruby-identifier">font_style</span>       = <span class="ruby-node">&quot;#{STYLES[value]};&quot;</span>  <span class="ruby-keyword kw">if</span> <span class="ruby-constant">STYLES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
+33:               <span class="ruby-keyword kw">end</span>
+34:             <span class="ruby-keyword kw">end</span>
+35:           <span class="ruby-keyword kw">end</span>
+36:         <span class="ruby-keyword kw">end</span>
+37:         <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;\e[#{background_color}#{font_style}#{foreground_color}m#{text}\e[0m&quot;</span>
+38:       <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

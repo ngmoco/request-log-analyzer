@@ -65,8 +65,8 @@
         <tr class="top-aligned-row">
             <td><strong>Parent:</strong></td>
             <td>
-                <a href="../Output.html">
-                RequestLogAnalyzer::Output
+                <a href="Base.html">
+                Base
                </a>
             </td>
         </tr>
@@ -88,14 +88,16 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000013">&lt;&lt;</a>&nbsp;&nbsp;
-      <a href="#M000016">line</a>&nbsp;&nbsp;
-      <a href="#M000017">link</a>&nbsp;&nbsp;
-      <a href="#M000011">new</a>&nbsp;&nbsp;
-      <a href="#M000012">print</a>&nbsp;&nbsp;
-      <a href="#M000014">puts</a>&nbsp;&nbsp;
-      <a href="#M000018">table</a>&nbsp;&nbsp;
-      <a href="#M000015">title</a>&nbsp;&nbsp;
+      <a href="#M000022">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000028">footer</a>&nbsp;&nbsp;
+      <a href="#M000027">header</a>&nbsp;&nbsp;
+      <a href="#M000025">line</a>&nbsp;&nbsp;
+      <a href="#M000026">link</a>&nbsp;&nbsp;
+      <a href="#M000020">new</a>&nbsp;&nbsp;
+      <a href="#M000021">print</a>&nbsp;&nbsp;
+      <a href="#M000023">puts</a>&nbsp;&nbsp;
+      <a href="#M000029">table</a>&nbsp;&nbsp;
+      <a href="#M000024">title</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -122,7 +124,7 @@ Module <a href="FixedWidth/Monochrome.html" class="link">RequestLogAnalyzer::Out
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">CHARACTERS</td>
           <td>=</td>
-          <td class="context-item-value">{     :ascii =&gt; { :horizontal_line =&gt; '-', :vertical_line =&gt; '|', :block =&gt; '=' },     :utf   =&gt; { :horizontal_line =&gt; '━', :vertical_line =&gt; '┃', :block =&gt; '░' }</td>
+          <td class="context-item-value">{       :ascii =&gt; { :horizontal_line =&gt; '-', :vertical_line =&gt; '|', :block =&gt; '=' },       :utf   =&gt; { :horizontal_line =&gt; '━', :vertical_line =&gt; '┃', :block =&gt; '░' }</td>
         </tr>
         </table>
       </div>
@@ -150,30 +152,30 @@ Module <a href="FixedWidth/Monochrome.html" class="link">RequestLogAnalyzer::Out
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000011" class="method-detail">
-        <a name="M000011"></a>
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
 
         <div class="method-heading">
-          <a href="#M000011" class="method-signature">
+          <a href="#M000020" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(io, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000011-source">
+            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000020-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 47</span>
-47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">options</span> = {})
-48:     <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">options</span>)
-49:     <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:width</span>]      <span class="ruby-operator">||=</span> <span class="ruby-value">80</span>
-50:     <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:characters</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">:utf</span>
-51:     <span class="ruby-ivar">@characters</span> = <span class="ruby-constant">CHARACTERS</span>[<span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:characters</span>]]
-52:     
-53:     <span class="ruby-identifier">color_module</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:color</span>] <span class="ruby-operator">?</span> <span class="ruby-constant">Color</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Monochrome</span>
-54:     (<span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">end</span>).<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:include</span>, <span class="ruby-identifier">color_module</span>) 
-55:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 49</span>
+49:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">options</span> = {})
+50:       <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">options</span>)
+51:       <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:width</span>]      <span class="ruby-operator">||=</span> <span class="ruby-value">80</span>
+52:       <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:characters</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">:utf</span>
+53:       <span class="ruby-ivar">@characters</span> = <span class="ruby-constant">CHARACTERS</span>[<span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:characters</span>]]
+54:     
+55:       <span class="ruby-identifier">color_module</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:color</span>] <span class="ruby-operator">?</span> <span class="ruby-constant">Color</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Monochrome</span>
+56:       (<span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">self</span>; <span class="ruby-keyword kw">end</span>).<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:include</span>, <span class="ruby-identifier">color_module</span>) 
+57:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -181,8 +183,8 @@ Module <a href="FixedWidth/Monochrome.html" class="link">RequestLogAnalyzer::Out
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
 
         <div class="method-heading">
           <span class="method-name">&lt;&lt;</span><span class="method-args">(str)</span>
@@ -190,219 +192,270 @@ Module <a href="FixedWidth/Monochrome.html" class="link">RequestLogAnalyzer::Out
       
         <div class="method-description">
           <p>
-Alias for <a href="FixedWidth.html#M000012">print</a>
+Alias for <a href="FixedWidth.html#M000021">print</a>
 </p>
         </div>
       </div>
 
-      <div id="method-M000016" class="method-detail">
-        <a name="M000016"></a>
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
 
         <div class="method-heading">
-          <a href="#M000016" class="method-signature">
+          <a href="#M000028" class="method-signature">
+          <span class="method-name">footer</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000028-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 96</span>
+96:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">footer</span>
+97:       <span class="ruby-identifier">puts</span>
+98:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Thanks for using request-log-analyzer!&quot;</span>
+99:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="#M000027" class="method-signature">
+          <span class="method-name">header</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000027-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 87</span>
+87:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">header</span>
+88:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">File</span>)
+89:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Request-log-analyzer summary report&quot;</span>
+90:         <span class="ruby-identifier">line</span>
+91:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Version #{RequestLogAnalyzer::VERSION} - written by Willem van Bergen and Bart ten Brinke&quot;</span>
+92:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Request-log-analyzer website: http://github.com/wvanbergen/request-log-analyzer&quot;</span>
+93:       <span class="ruby-keyword kw">end</span>
+94:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="#M000025" class="method-signature">
           <span class="method-name">line</span><span class="method-args">(*font)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000016-source">
+            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000025-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 73</span>
-73:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">line</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">font</span>)  
-74:     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:horizontal_line</span>] <span class="ruby-operator">*</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:width</span>], <span class="ruby-operator">*</span><span class="ruby-identifier">font</span>)
-75:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 75</span>
+75:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">line</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">font</span>)  
+76:       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:horizontal_line</span>] <span class="ruby-operator">*</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:width</span>], <span class="ruby-operator">*</span><span class="ruby-identifier">font</span>)
+77:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000017" class="method-detail">
-        <a name="M000017"></a>
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
 
         <div class="method-heading">
-          <a href="#M000017" class="method-signature">
+          <a href="#M000026" class="method-signature">
           <span class="method-name">link</span><span class="method-args">(text, url = nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000017-source">
+            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000026-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 77</span>
-77:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">link</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">url</span> = <span class="ruby-keyword kw">nil</span>)
-78:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">nil?</span>
-79:       <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">:blue</span>, <span class="ruby-identifier">:bold</span>)
-80:     <span class="ruby-keyword kw">else</span>
-81:       <span class="ruby-node">&quot;#{text} (#{colorize(url, :blue, :bold)})&quot;</span>
-82:     <span class="ruby-keyword kw">end</span>
-83:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 79</span>
+79:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">link</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">url</span> = <span class="ruby-keyword kw">nil</span>)
+80:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">nil?</span>
+81:         <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">:blue</span>, <span class="ruby-identifier">:bold</span>)
+82:       <span class="ruby-keyword kw">else</span>
+83:         <span class="ruby-node">&quot;#{text} (#{colorize(url, :blue, :bold)})&quot;</span>
+84:       <span class="ruby-keyword kw">end</span>
+85:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000012" class="method-detail">
-        <a name="M000012"></a>
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
 
         <div class="method-heading">
-          <a href="#M000012" class="method-signature">
+          <a href="#M000021" class="method-signature">
           <span class="method-name">print</span><span class="method-args">(str)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000012-source">
+            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000021-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 57</span>
-57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print</span>(<span class="ruby-identifier">str</span>)
-58:     <span class="ruby-ivar">@io</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">str</span>
-59:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 59</span>
+59:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print</span>(<span class="ruby-identifier">str</span>)
+60:       <span class="ruby-ivar">@io</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">str</span>
+61:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000014" class="method-detail">
-        <a name="M000014"></a>
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
 
         <div class="method-heading">
-          <a href="#M000014" class="method-signature">
+          <a href="#M000023" class="method-signature">
           <span class="method-name">puts</span><span class="method-args">(str = '')</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000014-source">
+            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000023-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 63</span>
-63:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-identifier">str</span> = <span class="ruby-value str">''</span>)
-64:     <span class="ruby-ivar">@io</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>
-65:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 65</span>
+65:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-identifier">str</span> = <span class="ruby-value str">''</span>)
+66:       <span class="ruby-ivar">@io</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>
+67:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000018" class="method-detail">
-        <a name="M000018"></a>
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
 
         <div class="method-heading">
-          <a href="#M000018" class="method-signature">
+          <a href="#M000029" class="method-signature">
           <span class="method-name">table</span><span class="method-args">(*columns) {|rows| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000018-source">
+            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000029-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 85</span>
- 85:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
- 86:     
- 87:     <span class="ruby-identifier">rows</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
- 88:     <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">rows</span>)
- 89: 
- 90:     <span class="ruby-comment cmt"># determine maximum cell widths</span>
- 91:     <span class="ruby-identifier">max_cell_widths</span> = <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">length</span>, <span class="ruby-value">0</span>)) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, <span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
- 92:       <span class="ruby-identifier">lengths</span> = <span class="ruby-identifier">row</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> }
- 93:       <span class="ruby-identifier">result</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">length</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span>[<span class="ruby-identifier">index</span>] = ([<span class="ruby-identifier">length</span>, <span class="ruby-identifier">lengths</span>[<span class="ruby-identifier">index</span>]].<span class="ruby-identifier">max</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">length</span>) }
- 94:     <span class="ruby-keyword kw">end</span>
- 95:     <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">col</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span> <span class="ruby-identifier">col</span>[<span class="ruby-identifier">:actual_width</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">max_cell_widths</span>[<span class="ruby-identifier">index</span>] }
- 96:     
- 97:     <span class="ruby-comment cmt"># determine actual column width</span>
- 98:     <span class="ruby-identifier">column_widths</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
- 99:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:width</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:rest</span>
-100:         <span class="ruby-keyword kw">nil</span>
-101:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:width</span>]
-102:         <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:width</span>]
-103:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:min_width</span>]
-104:         [<span class="ruby-identifier">column</span>[<span class="ruby-identifier">:min_width</span>], <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:actual_width</span>]].<span class="ruby-identifier">max</span>
-105:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:max_width</span>]
-106:         [<span class="ruby-identifier">column</span>[<span class="ruby-identifier">:max_width</span>], <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:actual_width</span>]].<span class="ruby-identifier">min</span>
-107:       <span class="ruby-keyword kw">else</span>
-108:         <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:actual_width</span>]
-109:       <span class="ruby-keyword kw">end</span>
-110:     <span class="ruby-keyword kw">end</span>
-111:      
-112:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column_widths</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">nil</span>)
-113:       <span class="ruby-identifier">width_left</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:width</span>] <span class="ruby-operator">-</span> ((<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> (<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>)) <span class="ruby-operator">-</span> <span class="ruby-identifier">column_widths</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">sum</span>, <span class="ruby-identifier">col</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">col</span>}
-114:       <span class="ruby-identifier">column_widths</span>[<span class="ruby-identifier">column_widths</span>.<span class="ruby-identifier">index</span>(<span class="ruby-keyword kw">nil</span>)] = <span class="ruby-identifier">width_left</span>
-115:     <span class="ruby-keyword kw">end</span>
-116:     
-117:     <span class="ruby-comment cmt"># Print table header</span>
-118:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table_has_header?</span>(<span class="ruby-identifier">columns</span>)
-119:       <span class="ruby-identifier">column_titles</span> = []
-120:       <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
-121:         <span class="ruby-identifier">width</span> = <span class="ruby-identifier">column_widths</span>[<span class="ruby-identifier">index</span>]        
-122:         <span class="ruby-identifier">alignment</span> = (<span class="ruby-identifier">column</span>[<span class="ruby-identifier">:align</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:right</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'-'</span>)
-123:         <span class="ruby-identifier">column_titles</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">colorize</span>(<span class="ruby-node">&quot;%#{alignment}#{width}s&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:title</span>].<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">width</span>], <span class="ruby-identifier">:bold</span>))
-124:       <span class="ruby-keyword kw">end</span>
-125:       
-126:       <span class="ruby-identifier">puts</span>
-127:       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">column_titles</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-node">&quot; #{characters[:vertical_line]} &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">' '</span>)
-128:       <span class="ruby-identifier">line</span>(<span class="ruby-identifier">:green</span>)
-129:     <span class="ruby-keyword kw">end</span>
-130:     
-131:     <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
-132:       <span class="ruby-identifier">row_values</span> = []
-133:       <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
-134:         <span class="ruby-identifier">width</span> = <span class="ruby-identifier">column_widths</span>[<span class="ruby-identifier">index</span>]
-135:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:type</span>]
-136:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:ratio</span>
-137:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">width</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
-138:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span>
-139:               <span class="ruby-identifier">bar</span> = <span class="ruby-value str">''</span>
-140:               <span class="ruby-identifier">bar</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>]).<span class="ruby-identifier">round</span> 
-141:               <span class="ruby-identifier">bar</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>])).<span class="ruby-identifier">round</span>, <span class="ruby-identifier">:red</span>) 
-142:               <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">bar</span>) 
-143:             <span class="ruby-keyword kw">else</span>
-144:               <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span>) 
-145:             <span class="ruby-keyword kw">end</span>
-146:           <span class="ruby-keyword kw">else</span>
-147:             <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">''</span>)
-148:           <span class="ruby-keyword kw">end</span>
-149:         <span class="ruby-keyword kw">else</span>
-150:           <span class="ruby-identifier">alignment</span> = (<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">index</span>][<span class="ruby-identifier">:align</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:right</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'-'</span>)        
-151:           <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;%#{alignment}#{width}s&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">width</span>])
-152:         <span class="ruby-keyword kw">end</span>
-153:       <span class="ruby-keyword kw">end</span>
-154:       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-node">&quot; #{characters[:vertical_line]} &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">' '</span>)      
-155:     <span class="ruby-keyword kw">end</span>
-156:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 101</span>
+101:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">columns</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+102:     
+103:       <span class="ruby-identifier">rows</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+104:       <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">rows</span>)
+105: 
+106:       <span class="ruby-comment cmt"># determine maximum cell widths</span>
+107:       <span class="ruby-identifier">max_cell_widths</span> = <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">length</span>, <span class="ruby-value">0</span>)) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, <span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+108:         <span class="ruby-identifier">lengths</span> = <span class="ruby-identifier">row</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> }
+109:         <span class="ruby-identifier">result</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">length</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span>[<span class="ruby-identifier">index</span>] = ([<span class="ruby-identifier">length</span>, <span class="ruby-identifier">lengths</span>[<span class="ruby-identifier">index</span>]].<span class="ruby-identifier">max</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">length</span>) }
+110:       <span class="ruby-keyword kw">end</span>
+111:       <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">col</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span> <span class="ruby-identifier">col</span>[<span class="ruby-identifier">:actual_width</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">max_cell_widths</span>[<span class="ruby-identifier">index</span>] }
+112:     
+113:       <span class="ruby-comment cmt"># determine actual column width</span>
+114:       <span class="ruby-identifier">column_widths</span> = <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
+115:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:width</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:rest</span>
+116:           <span class="ruby-keyword kw">nil</span>
+117:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:width</span>]
+118:           <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:width</span>]
+119:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:min_width</span>]
+120:           [<span class="ruby-identifier">column</span>[<span class="ruby-identifier">:min_width</span>], <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:actual_width</span>]].<span class="ruby-identifier">max</span>
+121:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:max_width</span>]
+122:           [<span class="ruby-identifier">column</span>[<span class="ruby-identifier">:max_width</span>], <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:actual_width</span>]].<span class="ruby-identifier">min</span>
+123:         <span class="ruby-keyword kw">else</span>
+124:           <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:actual_width</span>]
+125:         <span class="ruby-keyword kw">end</span>
+126:       <span class="ruby-keyword kw">end</span>
+127:      
+128:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column_widths</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">nil</span>)
+129:         <span class="ruby-identifier">width_left</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:width</span>] <span class="ruby-operator">-</span> ((<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> (<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>)) <span class="ruby-operator">-</span> <span class="ruby-identifier">column_widths</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">sum</span>, <span class="ruby-identifier">col</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">col</span>}
+130:         <span class="ruby-identifier">column_widths</span>[<span class="ruby-identifier">column_widths</span>.<span class="ruby-identifier">index</span>(<span class="ruby-keyword kw">nil</span>)] = <span class="ruby-identifier">width_left</span>
+131:       <span class="ruby-keyword kw">end</span>
+132:     
+133:       <span class="ruby-comment cmt"># Print table header</span>
+134:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">table_has_header?</span>(<span class="ruby-identifier">columns</span>)
+135:         <span class="ruby-identifier">column_titles</span> = []
+136:         <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+137:           <span class="ruby-identifier">width</span> = <span class="ruby-identifier">column_widths</span>[<span class="ruby-identifier">index</span>]        
+138:           <span class="ruby-identifier">alignment</span> = (<span class="ruby-identifier">column</span>[<span class="ruby-identifier">:align</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:right</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'-'</span>)
+139:           <span class="ruby-identifier">column_titles</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">colorize</span>(<span class="ruby-node">&quot;%#{alignment}#{width}s&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:title</span>].<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">width</span>], <span class="ruby-identifier">:bold</span>))
+140:         <span class="ruby-keyword kw">end</span>
+141:       
+142:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">column_titles</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-node">&quot; #{characters[:vertical_line]} &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">' '</span>)
+143:         <span class="ruby-identifier">line</span>(<span class="ruby-identifier">:green</span>)
+144:       <span class="ruby-keyword kw">end</span>
+145:     
+146:       <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+147:         <span class="ruby-identifier">row_values</span> = []
+148:         <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+149:           <span class="ruby-identifier">width</span> = <span class="ruby-identifier">column_widths</span>[<span class="ruby-identifier">index</span>]
+150:           <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:type</span>]
+151:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:ratio</span>
+152:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">width</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
+153:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span>
+154:                 <span class="ruby-identifier">bar</span> = <span class="ruby-value str">''</span>
+155:                 <span class="ruby-identifier">bar</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>]).<span class="ruby-identifier">round</span> 
+156:                 <span class="ruby-identifier">bar</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>])).<span class="ruby-identifier">round</span>, <span class="ruby-identifier">:red</span>) 
+157:                 <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">bar</span>) 
+158:               <span class="ruby-keyword kw">else</span>
+159:                 <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span>) 
+160:               <span class="ruby-keyword kw">end</span>
+161:             <span class="ruby-keyword kw">else</span>
+162:               <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">''</span>)
+163:             <span class="ruby-keyword kw">end</span>
+164:           <span class="ruby-keyword kw">else</span>
+165:             <span class="ruby-identifier">alignment</span> = (<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">index</span>][<span class="ruby-identifier">:align</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:right</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'-'</span>)        
+166:             <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;%#{alignment}#{width}s&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">width</span>])
+167:           <span class="ruby-keyword kw">end</span>
+168:         <span class="ruby-keyword kw">end</span>
+169:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-node">&quot; #{characters[:vertical_line]} &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">' '</span>)      
+170:       <span class="ruby-keyword kw">end</span>
+171:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000015" class="method-detail">
-        <a name="M000015"></a>
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
 
         <div class="method-heading">
-          <a href="#M000015" class="method-signature">
+          <a href="#M000024" class="method-signature">
           <span class="method-name">title</span><span class="method-args">(title)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000015-source">
+            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000024-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 67</span>
-67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">title</span>(<span class="ruby-identifier">title</span>)
-68:     <span class="ruby-identifier">puts</span>
-69:     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">:bold</span>, <span class="ruby-identifier">:white</span>)
-70:     <span class="ruby-identifier">line</span>(<span class="ruby-identifier">:green</span>)
-71:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/output/fixed_width.rb, line 69</span>
+69:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">title</span>(<span class="ruby-identifier">title</span>)
+70:       <span class="ruby-identifier">puts</span>
+71:       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">title</span>, <span class="ruby-identifier">:bold</span>, <span class="ruby-identifier">:white</span>)
+72:       <span class="ruby-identifier">line</span>(<span class="ruby-identifier">:green</span>)
+73:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

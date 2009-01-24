@@ -86,10 +86,10 @@ the different aggregators, so they can do their aggregating work.
 </p>
 <p>
 This class provides several methods to access the data that was parsed from
-the log files. <a href="Request.html#M000166">Request#first(field_name)</a>
-returns the <a href="Request.html#M000166">first</a> (only) value
+the log files. <a href="Request.html#M000168">Request#first(field_name)</a>
+returns the <a href="Request.html#M000168">first</a> (only) value
 corresponding to the given field <a
-href="Request.html#M000168">Request#every(field_name)</a> returns all
+href="Request.html#M000170">Request#every(field_name)</a> returns all
 values corresponding to the given field name as array.
 </p>
 
@@ -102,20 +102,22 @@ values corresponding to the given field name as array.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000163">&lt;&lt;</a>&nbsp;&nbsp;
-      <a href="#M000165">=~</a>&nbsp;&nbsp;
-      <a href="#M000167">[]</a>&nbsp;&nbsp;
-      <a href="#M000162">add_parsed_line</a>&nbsp;&nbsp;
-      <a href="#M000170">completed?</a>&nbsp;&nbsp;
-      <a href="#M000161">create</a>&nbsp;&nbsp;
-      <a href="#M000169">empty?</a>&nbsp;&nbsp;
-      <a href="#M000168">every</a>&nbsp;&nbsp;
-      <a href="#M000166">first</a>&nbsp;&nbsp;
-      <a href="#M000172">first_lineno</a>&nbsp;&nbsp;
-      <a href="#M000164">has_line_type?</a>&nbsp;&nbsp;
-      <a href="#M000173">last_lineno</a>&nbsp;&nbsp;
-      <a href="#M000160">new</a>&nbsp;&nbsp;
-      <a href="#M000171">timestamp</a>&nbsp;&nbsp;
+      <a href="#M000165">&lt;&lt;</a>&nbsp;&nbsp;
+      <a href="#M000167">=~</a>&nbsp;&nbsp;
+      <a href="#M000169">[]</a>&nbsp;&nbsp;
+      <a href="#M000164">add_line_hash</a>&nbsp;&nbsp;
+      <a href="#M000163">add_parsed_line</a>&nbsp;&nbsp;
+      <a href="#M000172">completed?</a>&nbsp;&nbsp;
+      <a href="#M000162">create</a>&nbsp;&nbsp;
+      <a href="#M000171">empty?</a>&nbsp;&nbsp;
+      <a href="#M000170">every</a>&nbsp;&nbsp;
+      <a href="#M000168">first</a>&nbsp;&nbsp;
+      <a href="#M000175">first_lineno</a>&nbsp;&nbsp;
+      <a href="#M000166">has_line_type?</a>&nbsp;&nbsp;
+      <a href="#M000176">last_lineno</a>&nbsp;&nbsp;
+      <a href="#M000161">new</a>&nbsp;&nbsp;
+      <a href="#M000174">timestamp</a>&nbsp;&nbsp;
+      <a href="#M000173">validate</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -128,11 +130,18 @@ values corresponding to the given field name as array.
 
       <div id="includes-list">
         <span class="include-name"><a href="FileFormat/Awareness.html">RequestLogAnalyzer::FileFormat::Awareness</a></span>
+        <span class="include-name"><a href="Request/Converters.html">Converters</a></span>
       </div>
     </div>
 
     <div id="section">
 
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Request/Converters.html" class="link">RequestLogAnalyzer::Request::Converters</a><br />
+
+    </div>
 
 
 
@@ -162,61 +171,61 @@ values corresponding to the given field name as array.
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000161" class="method-detail">
-        <a name="M000161"></a>
+      <div id="method-M000162" class="method-detail">
+        <a name="M000162"></a>
 
         <div class="method-heading">
-          <a href="#M000161" class="method-signature">
+          <a href="#M000162" class="method-signature">
           <span class="method-name">create</span><span class="method-args">(file_format, *hashes)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Creates a <a href="Request.html#M000160">new</a> request that was parsed
+Creates a <a href="Request.html#M000161">new</a> request that was parsed
 from the log with the given <a href="FileFormat.html">FileFormat</a>. The
 hashes that are passed to this function are added as lines to this request.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000161-source">
+            onclick="toggleCode('M000162-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000162-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 27</span>
-27:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">hashes</span>)
-28:       <span class="ruby-identifier">request</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file_format</span>)
-29:       <span class="ruby-identifier">hashes</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hash</span> }
-30:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>
-31:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 65</span>
+65:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">hashes</span>)
+66:       <span class="ruby-identifier">request</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file_format</span>)
+67:       <span class="ruby-identifier">hashes</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hash</span><span class="ruby-operator">|</span> <span class="ruby-identifier">request</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hash</span> }
+68:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>
+69:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000160" class="method-detail">
-        <a name="M000160"></a>
+      <div id="method-M000161" class="method-detail">
+        <a name="M000161"></a>
 
         <div class="method-heading">
-          <a href="#M000160" class="method-signature">
+          <a href="#M000161" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(file_format)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Initializes a <a href="Request.html#M000160">new</a> <a
+Initializes a <a href="Request.html#M000161">new</a> <a
 href="Request.html">Request</a> object. It will apply the the provided <a
 href="FileFormat.html">FileFormat</a> module to this instance.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000160-source">
+            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000161-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 19</span>
-19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">file_format</span>)
-20:       <span class="ruby-ivar">@lines</span> = []
-21:       <span class="ruby-ivar">@attributes</span> = {}
-22:       <span class="ruby-identifier">register_file_format</span>(<span class="ruby-identifier">file_format</span>)
-23:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 57</span>
+57:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">file_format</span>)
+58:       <span class="ruby-ivar">@lines</span> = []
+59:       <span class="ruby-ivar">@attributes</span> = {}
+60:       <span class="ruby-identifier">register_file_format</span>(<span class="ruby-identifier">file_format</span>)
+61:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -224,22 +233,31 @@ href="FileFormat.html">FileFormat</a> module to this instance.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000163" class="method-detail">
-        <a name="M000163"></a>
+      <div id="method-M000165" class="method-detail">
+        <a name="M000165"></a>
 
         <div class="method-heading">
-          <span class="method-name">&lt;&lt;</span><span class="method-args">(request_info_hash)</span>
+          <a href="#M000165" class="method-signature">
+          <span class="method-name">&lt;&lt;</span><span class="method-args">(hash)</span>
+          </a>
         </div>
       
         <div class="method-description">
-          <p>
-Alias for <a href="Request.html#M000162">add_parsed_line</a>
-</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000165-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000165-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 86</span>
+86:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-identifier">hash</span>)
+87:       <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">:line_definition</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">add_parsed_line</span>(<span class="ruby-identifier">hash</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">add_line_hash</span>(<span class="ruby-identifier">hash</span>)
+88:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
         </div>
       </div>
 
-      <div id="method-M000165" class="method-detail">
-        <a name="M000165"></a>
+      <div id="method-M000167" class="method-detail">
+        <a name="M000167"></a>
 
         <div class="method-heading">
           <span class="method-name">=~</span><span class="method-args">(line_type)</span>
@@ -252,8 +270,8 @@ Alias for has_line_type?
         </div>
       </div>
 
-      <div id="method-M000167" class="method-detail">
-        <a name="M000167"></a>
+      <div id="method-M000169" class="method-detail">
+        <a name="M000169"></a>
 
         <div class="method-heading">
           <span class="method-name">[]</span><span class="method-args">(field)</span>
@@ -261,17 +279,41 @@ Alias for has_line_type?
       
         <div class="method-description">
           <p>
-Alias for <a href="Request.html#M000166">first</a>
+Alias for <a href="Request.html#M000168">first</a>
 </p>
         </div>
       </div>
 
-      <div id="method-M000162" class="method-detail">
-        <a name="M000162"></a>
+      <div id="method-M000164" class="method-detail">
+        <a name="M000164"></a>
 
         <div class="method-heading">
-          <a href="#M000162" class="method-signature">
-          <span class="method-name">add_parsed_line</span><span class="method-args">(request_info_hash)</span>
+          <a href="#M000164" class="method-signature">
+          <span class="method-name">add_line_hash</span><span class="method-args">(value_hash)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000164-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000164-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 80</span>
+80:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_line_hash</span>(<span class="ruby-identifier">value_hash</span>)
+81:       <span class="ruby-ivar">@lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">value_hash</span>
+82:       <span class="ruby-ivar">@attributes</span> = <span class="ruby-identifier">value_hash</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-ivar">@attributes</span>)      
+83:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000163" class="method-detail">
+        <a name="M000163"></a>
+
+        <div class="method-heading">
+          <a href="#M000163" class="method-signature">
+          <span class="method-name">add_parsed_line</span><span class="method-args">(parsed_line)</span>
           </a>
         </div>
       
@@ -281,24 +323,26 @@ Adds another line to the request. The line should be provides as a hash of
 the fields parsed from the line.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000162-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000162-source">
+            onclick="toggleCode('M000163-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000163-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 35</span>
-35:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_parsed_line</span> (<span class="ruby-identifier">request_info_hash</span>)
-36:       <span class="ruby-ivar">@lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">request_info_hash</span>
-37:       <span class="ruby-ivar">@attributes</span> = <span class="ruby-identifier">request_info_hash</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-ivar">@attributes</span>)
-38:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 73</span>
+73:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_parsed_line</span> (<span class="ruby-identifier">parsed_line</span>)
+74:       <span class="ruby-identifier">value_hash</span> = <span class="ruby-identifier">parsed_line</span>[<span class="ruby-identifier">:line_definition</span>].<span class="ruby-identifier">convert_captured_values</span>(<span class="ruby-identifier">parsed_line</span>[<span class="ruby-identifier">:captures</span>], <span class="ruby-keyword kw">self</span>)
+75:       <span class="ruby-identifier">value_hash</span>[<span class="ruby-identifier">:line_type</span>] = <span class="ruby-identifier">parsed_line</span>[<span class="ruby-identifier">:line_definition</span>].<span class="ruby-identifier">name</span>
+76:       <span class="ruby-identifier">value_hash</span>[<span class="ruby-identifier">:lineno</span>] = <span class="ruby-identifier">parsed_line</span>[<span class="ruby-identifier">:lineno</span>]
+77:       <span class="ruby-identifier">add_line_hash</span>(<span class="ruby-identifier">value_hash</span>)
+78:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000170" class="method-detail">
-        <a name="M000170"></a>
+      <div id="method-M000172" class="method-detail">
+        <a name="M000172"></a>
 
         <div class="method-heading">
-          <a href="#M000170" class="method-signature">
+          <a href="#M000172" class="method-signature">
           <span class="method-name">completed?</span><span class="method-args">()</span>
           </a>
         </div>
@@ -310,29 +354,29 @@ a parsed header line and a parsed footer line. Not that calling this
 function in single line mode will always return false.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000170-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000170-source">
+            onclick="toggleCode('M000172-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000172-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 74</span>
-74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">completed?</span>
-75:       <span class="ruby-identifier">header_found</span>, <span class="ruby-identifier">footer_found</span> = <span class="ruby-keyword kw">false</span>, <span class="ruby-keyword kw">false</span>
-76:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> 
-77:         <span class="ruby-identifier">line_def</span> = <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">line_definitions</span>[<span class="ruby-identifier">line</span>[<span class="ruby-identifier">:line_type</span>]]
-78:         <span class="ruby-identifier">header_found</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line_def</span>.<span class="ruby-identifier">header</span>
-79:         <span class="ruby-identifier">footer_found</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line_def</span>.<span class="ruby-identifier">footer</span>        
-80:       <span class="ruby-keyword kw">end</span>
-81:       <span class="ruby-identifier">header_found</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">footer_found</span>      
-82:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 122</span>
+122:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">completed?</span>
+123:       <span class="ruby-identifier">header_found</span>, <span class="ruby-identifier">footer_found</span> = <span class="ruby-keyword kw">false</span>, <span class="ruby-keyword kw">false</span>
+124:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> 
+125:         <span class="ruby-identifier">line_def</span> = <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">line_definitions</span>[<span class="ruby-identifier">line</span>[<span class="ruby-identifier">:line_type</span>]]
+126:         <span class="ruby-identifier">header_found</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line_def</span>.<span class="ruby-identifier">header</span>
+127:         <span class="ruby-identifier">footer_found</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line_def</span>.<span class="ruby-identifier">footer</span>        
+128:       <span class="ruby-keyword kw">end</span>
+129:       <span class="ruby-identifier">header_found</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">footer_found</span>      
+130:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000169" class="method-detail">
-        <a name="M000169"></a>
+      <div id="method-M000171" class="method-detail">
+        <a name="M000171"></a>
 
         <div class="method-heading">
-          <a href="#M000169" class="method-signature">
+          <a href="#M000171" class="method-signature">
           <span class="method-name">empty?</span><span class="method-args">()</span>
           </a>
         </div>
@@ -344,23 +388,23 @@ should only occur during parsing. An empty request should never be sent to
 the aggregators
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000169-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000169-source">
+            onclick="toggleCode('M000171-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000171-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 67</span>
-67:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">empty?</span>
-68:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-69:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 115</span>
+115:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">empty?</span>
+116:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+117:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000168" class="method-detail">
-        <a name="M000168"></a>
+      <div id="method-M000170" class="method-detail">
+        <a name="M000170"></a>
 
         <div class="method-heading">
-          <a href="#M000168" class="method-signature">
+          <a href="#M000170" class="method-signature">
           <span class="method-name">every</span><span class="method-args">(field)</span>
           </a>
         </div>
@@ -371,13 +415,65 @@ Returns an array of all the &quot;field&quot; values that were captured for
 this request
 </p>
           <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000170-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000170-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 109</span>
+109:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">every</span>(<span class="ruby-identifier">field</span>)
+110:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">inject</span>([]) { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, <span class="ruby-identifier">fields</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">fields</span>[<span class="ruby-identifier">field</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">field</span>); <span class="ruby-identifier">result</span> }
+111:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000168" class="method-detail">
+        <a name="M000168"></a>
+
+        <div class="method-heading">
+          <a href="#M000168" class="method-signature">
+          <span class="method-name">first</span><span class="method-args">(field)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the value that was captured for the &quot;field&quot; of this
+request. This function will return the <a
+href="Request.html#M000168">first</a> value that was captured if the field
+was captured in multiple lines
+</p>
+          <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000168-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000168-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 61</span>
-61:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">every</span>(<span class="ruby-identifier">field</span>)
-62:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">inject</span>([]) { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, <span class="ruby-identifier">fields</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">fields</span>[<span class="ruby-identifier">field</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">field</span>); <span class="ruby-identifier">result</span> }
-63:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 102</span>
+102:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">first</span>(<span class="ruby-identifier">field</span>)
+103:       <span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">field</span>]
+104:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000175" class="method-detail">
+        <a name="M000175"></a>
+
+        <div class="method-heading">
+          <a href="#M000175" class="method-signature">
+          <span class="method-name">first_lineno</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000175-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000175-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 141</span>
+141:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">first_lineno</span>
+142:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:lineno</span>]
+143:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -388,58 +484,6 @@ this request
 
         <div class="method-heading">
           <a href="#M000166" class="method-signature">
-          <span class="method-name">first</span><span class="method-args">(field)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Returns the value that was captured for the &quot;field&quot; of this
-request. This function will return the <a
-href="Request.html#M000166">first</a> value that was captured if the field
-was captured in multiple lines
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000166-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000166-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 54</span>
-54:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">first</span>(<span class="ruby-identifier">field</span>)
-55:       <span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">field</span>]
-56:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000172" class="method-detail">
-        <a name="M000172"></a>
-
-        <div class="method-heading">
-          <a href="#M000172" class="method-signature">
-          <span class="method-name">first_lineno</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000172-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000172-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 89</span>
-89:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">first_lineno</span>
-90:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">first</span>[<span class="ruby-identifier">:lineno</span>]
-91:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000164" class="method-detail">
-        <a name="M000164"></a>
-
-        <div class="method-heading">
-          <a href="#M000164" class="method-signature">
           <span class="method-name">has_line_type?</span><span class="method-args">(line_type)</span>
           </a>
         </div>
@@ -450,15 +494,65 @@ Checks whether the given line type was parsed from the log file for this
 request
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000164-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000164-source">
+            onclick="toggleCode('M000166-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000166-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 43</span>
-43:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_line_type?</span>(<span class="ruby-identifier">line_type</span>)
-44:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@lines</span>[<span class="ruby-value">0</span>][<span class="ruby-identifier">:line_type</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">line_type</span>.<span class="ruby-identifier">to_sym</span>
-45:       
-46:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> <span class="ruby-identifier">l</span>[<span class="ruby-identifier">:line_type</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">line_type</span>.<span class="ruby-identifier">to_sym</span> }
-47:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 91</span>
+91:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_line_type?</span>(<span class="ruby-identifier">line_type</span>)
+92:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@lines</span>[<span class="ruby-value">0</span>][<span class="ruby-identifier">:line_type</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">line_type</span>.<span class="ruby-identifier">to_sym</span>
+93:       
+94:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> <span class="ruby-identifier">l</span>[<span class="ruby-identifier">:line_type</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">line_type</span>.<span class="ruby-identifier">to_sym</span> }
+95:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000176" class="method-detail">
+        <a name="M000176"></a>
+
+        <div class="method-heading">
+          <a href="#M000176" class="method-signature">
+          <span class="method-name">last_lineno</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000176-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000176-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 145</span>
+145:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">last_lineno</span>
+146:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">last</span>[<span class="ruby-identifier">:lineno</span>]
+147:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000174" class="method-detail">
+        <a name="M000174"></a>
+
+        <div class="method-heading">
+          <a href="#M000174" class="method-signature">
+          <span class="method-name">timestamp</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Request.html#M000168">first</a> <a
+href="Request.html#M000174">timestamp</a> encountered in a request.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000174-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000174-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 137</span>
+137:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">timestamp</span>
+138:       <span class="ruby-identifier">first</span>(<span class="ruby-identifier">:timestamp</span>)
+139:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -469,46 +563,21 @@ request
 
         <div class="method-heading">
           <a href="#M000173" class="method-signature">
-          <span class="method-name">last_lineno</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000173-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000173-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 93</span>
-93:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">last_lineno</span>
-94:       <span class="ruby-ivar">@lines</span>.<span class="ruby-identifier">last</span>[<span class="ruby-identifier">:lineno</span>]
-95:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000171" class="method-detail">
-        <a name="M000171"></a>
-
-        <div class="method-heading">
-          <a href="#M000171" class="method-signature">
-          <span class="method-name">timestamp</span><span class="method-args">()</span>
+          <span class="method-name">validate</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Returns the <a href="Request.html#M000166">first</a> <a
-href="Request.html#M000171">timestamp</a> encountered in a request.
+This function is called before a Requests is yielded.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000171-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000171-source">
+            onclick="toggleCode('M000173-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000173-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 85</span>
-85:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">timestamp</span>
-86:       <span class="ruby-identifier">first</span>(<span class="ruby-identifier">:timestamp</span>)
-87:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/request.rb, line 133</span>
+133:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate</span>
+134:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

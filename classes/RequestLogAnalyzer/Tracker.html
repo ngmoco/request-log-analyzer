@@ -55,12 +55,12 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/request_log_analyzer/tracker/category_rb.html">
-                lib/request_log_analyzer/tracker/category.rb
-                </a>
-        <br />
                 <a href="../../files/lib/request_log_analyzer/tracker/duration_rb.html">
                 lib/request_log_analyzer/tracker/duration.rb
+                </a>
+        <br />
+                <a href="../../files/lib/request_log_analyzer/tracker/frequency_rb.html">
+                lib/request_log_analyzer/tracker/frequency.rb
                 </a>
         <br />
                 <a href="../../files/lib/request_log_analyzer/tracker/hourly_spread_rb.html">
@@ -96,7 +96,7 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000045">const_missing</a>&nbsp;&nbsp;
+      <a href="#M000048">const_missing</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -111,8 +111,8 @@
       <h3 class="section-bar">Classes and Modules</h3>
 
       Class <a href="Tracker/Base.html" class="link">RequestLogAnalyzer::Tracker::Base</a><br />
-Class <a href="Tracker/Category.html" class="link">RequestLogAnalyzer::Tracker::Category</a><br />
 Class <a href="Tracker/Duration.html" class="link">RequestLogAnalyzer::Tracker::Duration</a><br />
+Class <a href="Tracker/Frequency.html" class="link">RequestLogAnalyzer::Tracker::Frequency</a><br />
 Class <a href="Tracker/HourlySpread.html" class="link">RequestLogAnalyzer::Tracker::HourlySpread</a><br />
 Class <a href="Tracker/Timespan.html" class="link">RequestLogAnalyzer::Tracker::Timespan</a><br />
 
@@ -128,24 +128,24 @@ Class <a href="Tracker/Timespan.html" class="link">RequestLogAnalyzer::Tracker::
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000045" class="method-detail">
-        <a name="M000045"></a>
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
 
         <div class="method-heading">
-          <a href="#M000045" class="method-signature">
+          <a href="#M000048" class="method-signature">
           <span class="method-name">const_missing</span><span class="method-args">(const)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-<a href="Tracker.html#M000045">const_missing</a>: this function is used to
+<a href="Tracker.html#M000048">const_missing</a>: this function is used to
 load subclasses in the RequestLogAnalyzer::Track namespace. It will
 automatically load the required file based on the class name
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000045-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000045-source">
+            onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000048-source">
 <pre>
    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 5</span>
 5:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)

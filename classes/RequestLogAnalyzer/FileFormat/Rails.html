@@ -125,7 +125,7 @@ href="http://floorplanner.local/demo">floorplanner.local/demo</a>]
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">REQUEST_CATEGORIZER</td>
           <td>=</td>
-          <td class="context-item-value">Proc.new do |request|       format = request[:format] || 'html'</td>
+          <td class="context-item-value">Proc.new do |request|       &quot;#{request[:controller]}##{request[:action]}.#{request[:format]} [#{request[:method]}]&quot;</td>
         </tr>
         </table>
       </div>

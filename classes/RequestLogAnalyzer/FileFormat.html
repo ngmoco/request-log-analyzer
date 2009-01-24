@@ -112,6 +112,7 @@ Class <a href="FileFormat/Base.html" class="link">RequestLogAnalyzer::FileFormat
 Class <a href="FileFormat/Merb.html" class="link">RequestLogAnalyzer::FileFormat::Merb</a><br />
 Class <a href="FileFormat/Rails.html" class="link">RequestLogAnalyzer::FileFormat::Rails</a><br />
 Class <a href="FileFormat/RailsDevelopment.html" class="link">RequestLogAnalyzer::FileFormat::RailsDevelopment</a><br />
+Class <a href="FileFormat/Request.html" class="link">RequestLogAnalyzer::FileFormat::Request</a><br />
 
     </div>
 
@@ -139,10 +140,10 @@ Class <a href="FileFormat/RailsDevelopment.html" class="link">RequestLogAnalyzer
             onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000032-source">
 <pre>
-   <span class="ruby-comment cmt"># File lib/request_log_analyzer/file_format.rb, line 4</span>
-4:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
-5:     <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">const</span>)
-6:   <span class="ruby-keyword kw">end</span>
+   <span class="ruby-comment cmt"># File lib/request_log_analyzer/file_format.rb, line 3</span>
+3:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
+4:     <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">const</span>)
+5:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -183,30 +184,40 @@ is loaded)
             onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000033-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/file_format.rb, line 14</span>
-14:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">file_format</span>)
-15:     <span class="ruby-identifier">klass</span> = <span class="ruby-keyword kw">nil</span>
-16:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)
-17:       <span class="ruby-comment cmt"># this already is a file format! return itself</span>
-18:       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@current_file_format</span> = <span class="ruby-identifier">file_format</span>
-19: 
-20:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Class</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)
-21:       <span class="ruby-comment cmt"># a usable class is provided. Use this format class.</span>
-22:       <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">file_format</span>
-23: 
-24:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file_format</span>)
-25:       <span class="ruby-comment cmt"># load a format from a ruby file</span>
-26:       <span class="ruby-identifier">require</span> <span class="ruby-identifier">file_format</span>
-27:       <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-value str">'.rb'</span>)))
-28: 
-29:     <span class="ruby-keyword kw">else</span>
-30:       <span class="ruby-comment cmt"># load a provided file format</span>
-31:       <span class="ruby-identifier">klass</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">file_format</span>))      
-32:     <span class="ruby-keyword kw">end</span>
-33:     
-34:     <span class="ruby-identifier">raise</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">nil?</span>
-35:     <span class="ruby-ivar">@current_file_format</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span> <span class="ruby-comment cmt"># return an instance of the class</span>
-36:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/file_format.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">file_format</span>)
+14:     <span class="ruby-identifier">klass</span> = <span class="ruby-keyword kw">nil</span>
+15:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)
+16:       <span class="ruby-comment cmt"># this already is a file format! return itself</span>
+17:       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@current_file_format</span> = <span class="ruby-identifier">file_format</span>
+18: 
+19:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Class</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)
+20:       <span class="ruby-comment cmt"># a usable class is provided. Use this format class.</span>
+21:       <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">file_format</span>
+22: 
+23:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file_format</span>)
+24:       <span class="ruby-comment cmt"># load a format from a ruby file</span>
+25:       <span class="ruby-identifier">require</span> <span class="ruby-identifier">file_format</span>
+26:       <span class="ruby-identifier">const</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-value str">'.rb'</span>))
+27:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">const</span>)
+28:         <span class="ruby-identifier">klass</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>)
+29:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">const</span>)
+30:         <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>)
+31:       <span class="ruby-keyword kw">else</span>
+32:         <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Cannot load class #{const} from #{file_format}!&quot;</span>
+33:       <span class="ruby-keyword kw">end</span>
+34: 
+35:     <span class="ruby-keyword kw">else</span>
+36:       <span class="ruby-comment cmt"># load a provided file format</span>
+37:       <span class="ruby-identifier">klass</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">file_format</span>))      
+38:     <span class="ruby-keyword kw">end</span>
+39:     
+40:     <span class="ruby-comment cmt"># check the returned klass to see if it can be used</span>
+41:     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Could not load a file format from #{file_format.inspect}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">nil?</span>
+42:     <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Invalid FileFormat class&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Class</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)
+43:     
+44:     <span class="ruby-ivar">@current_file_format</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span> <span class="ruby-comment cmt"># return an instance of the class</span>
+45:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -97,7 +97,7 @@ tracker.
 
 </li>
 <li><tt>:title</tt> Title do be displayed above the <a
-href="Duration.html#M000064">report</a>
+href="Duration.html#M000067">report</a>
 
 </li>
 <li><tt>:category</tt> Proc that handles request categorization for given
@@ -108,12 +108,12 @@ fileformat (REQUEST_CATEGORIZER)
 
 </li>
 <li><tt>:amount</tt> The amount of lines in the <a
-href="Duration.html#M000064">report</a>
+href="Duration.html#M000067">report</a>
 
 </li>
 </ul>
 <p>
-The items in the <a href="Duration.html#M000062">update</a> request hash
+The items in the <a href="Duration.html#M000065">update</a> request hash
 are set during the creation of the <a href="Duration.html">Duration</a>
 tracker.
 </p>
@@ -138,10 +138,10 @@ Example output:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000061">prepare</a>&nbsp;&nbsp;
-      <a href="#M000064">report</a>&nbsp;&nbsp;
-      <a href="#M000063">report_table</a>&nbsp;&nbsp;
-      <a href="#M000062">update</a>&nbsp;&nbsp;
+      <a href="#M000064">prepare</a>&nbsp;&nbsp;
+      <a href="#M000067">report</a>&nbsp;&nbsp;
+      <a href="#M000066">report_table</a>&nbsp;&nbsp;
+      <a href="#M000065">update</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -176,19 +176,19 @@ Example output:
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000061" class="method-detail">
-        <a name="M000061"></a>
+      <div id="method-M000064" class="method-detail">
+        <a name="M000064"></a>
 
         <div class="method-heading">
-          <a href="#M000061" class="method-signature">
+          <a href="#M000064" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000061-source">
+            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000064-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 26</span>
 26:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
@@ -202,19 +202,19 @@ Example output:
         </div>
       </div>
 
-      <div id="method-M000064" class="method-detail">
-        <a name="M000064"></a>
+      <div id="method-M000067" class="method-detail">
+        <a name="M000067"></a>
 
         <div class="method-heading">
-          <a href="#M000064" class="method-signature">
+          <a href="#M000067" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000064-source">
+            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000067-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 59</span>
 59:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
@@ -241,19 +241,19 @@ Example output:
         </div>
       </div>
 
-      <div id="method-M000063" class="method-detail">
-        <a name="M000063"></a>
+      <div id="method-M000066" class="method-detail">
+        <a name="M000066"></a>
 
         <div class="method-heading">
-          <a href="#M000063" class="method-signature">
+          <a href="#M000066" class="method-signature">
           <span class="method-name">report_table</span><span class="method-args">(output, amount = 10, options = {}) {|b[1]| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000063-source">
+            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000066-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 44</span>
 44:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_table</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-value">10</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -275,19 +275,19 @@ Example output:
         </div>
       </div>
 
-      <div id="method-M000062" class="method-detail">
-        <a name="M000062"></a>
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
 
         <div class="method-heading">
-          <a href="#M000062" class="method-signature">
+          <a href="#M000065" class="method-signature">
           <span class="method-name">update</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000062-source">
+            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000065-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/duration.rb, line 33</span>
 33:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)

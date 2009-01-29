@@ -96,9 +96,10 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000001">load_default_class_file</a>&nbsp;&nbsp;
-      <a href="#M000003">to_camelcase</a>&nbsp;&nbsp;
-      <a href="#M000002">to_underscore</a>&nbsp;&nbsp;
+      <a href="#M000003">const_missing</a>&nbsp;&nbsp;
+      <a href="#M000004">load_default_class_file</a>&nbsp;&nbsp;
+      <a href="#M000006">to_camelcase</a>&nbsp;&nbsp;
+      <a href="#M000005">to_underscore</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -148,11 +149,34 @@ Class <a href="RequestLogAnalyzer/Request.html" class="link">RequestLogAnalyzer:
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000001" class="method-detail">
-        <a name="M000001"></a>
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
 
         <div class="method-heading">
-          <a href="#M000001" class="method-signature">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">const_missing</span><span class="method-args">(const)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 8</span>
+ 8:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
+ 9:     <span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-constant">RequestLogAnalyzer</span>, <span class="ruby-identifier">const</span>)
+10:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
           <span class="method-name">load_default_class_file</span><span class="method-args">(base, const)</span>
           </a>
         </div>
@@ -162,27 +186,27 @@ Class <a href="RequestLogAnalyzer/Request.html" class="link">RequestLogAnalyzer:
 Function to implement
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000001-source">
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 9</span>
- 9:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">const</span>)
-10:     <span class="ruby-identifier">path</span>     = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">base</span>.<span class="ruby-identifier">to_s</span>)
-11:     <span class="ruby-identifier">basename</span> = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">const</span>.<span class="ruby-identifier">to_s</span>)
-12:     <span class="ruby-identifier">filename</span> = <span class="ruby-node">&quot;#{File.dirname(__FILE__)}/#{path}/#{basename}&quot;</span>
-13:     <span class="ruby-identifier">require</span> <span class="ruby-identifier">filename</span>
-14:     <span class="ruby-identifier">base</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>)
-15:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 13</span>
+13:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">const</span>)
+14:     <span class="ruby-identifier">path</span>     = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">base</span>.<span class="ruby-identifier">to_s</span>)
+15:     <span class="ruby-identifier">basename</span> = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">const</span>.<span class="ruby-identifier">to_s</span>)
+16:     <span class="ruby-identifier">filename</span> = <span class="ruby-node">&quot;#{File.dirname(__FILE__)}/#{path}/#{basename}&quot;</span>
+17:     <span class="ruby-identifier">require</span> <span class="ruby-identifier">filename</span>
+18:     <span class="ruby-identifier">base</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>)
+19:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000003" class="method-detail">
-        <a name="M000003"></a>
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
 
         <div class="method-heading">
-          <a href="#M000003" class="method-signature">
+          <a href="#M000006" class="method-signature">
           <span class="method-name">to_camelcase</span><span class="method-args">(str)</span>
           </a>
         </div>
@@ -194,23 +218,23 @@ camelcase (<a
 href="RequestLogAnalyzer/Controller.html">RequestLogAnalyzer::Controller</a>)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000003-source">
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 23</span>
-23:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">str</span>)
-24:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\/(.?)/</span>) { <span class="ruby-value str">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">upcase</span> }.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(^|_)(.)/</span>) { <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">upcase</span> }
-25:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 27</span>
+27:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">str</span>)
+28:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\/(.?)/</span>) { <span class="ruby-value str">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">upcase</span> }.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(^|_)(.)/</span>) { <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">upcase</span> }
+29:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000002" class="method-detail">
-        <a name="M000002"></a>
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
 
         <div class="method-heading">
-          <a href="#M000002" class="method-signature">
+          <a href="#M000005" class="method-signature">
           <span class="method-name">to_underscore</span><span class="method-args">(str)</span>
           </a>
         </div>
@@ -222,13 +246,13 @@ href="RequestLogAnalyzer/Controller.html">RequestLogAnalyzer::Controller</a>)
 to underscores (request_log_analyzer/controller)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000002-source">
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 18</span>
-18:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">str</span>)
-19:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/::/</span>, <span class="ruby-value str">'/'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([A-Z]+)([A-Z][a-z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([a-z\d])([A-Z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">&quot;-&quot;</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">downcase</span>
-20:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 22</span>
+22:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">str</span>)
+23:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/::/</span>, <span class="ruby-value str">'/'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([A-Z]+)([A-Z][a-z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([a-z\d])([A-Z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">&quot;-&quot;</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">downcase</span>
+24:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -86,17 +86,17 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000217">clear</a>&nbsp;&nbsp;
-      <a href="#M000220">file_transfer_mode</a>&nbsp;&nbsp;
-      <a href="#M000218">finish</a>&nbsp;&nbsp;
-      <a href="#M000219">finished?</a>&nbsp;&nbsp;
-      <a href="#M000221">format=</a>&nbsp;&nbsp;
-      <a href="#M000222">format_arguments=</a>&nbsp;&nbsp;
-      <a href="#M000223">halt</a>&nbsp;&nbsp;
-      <a href="#M000224">inc</a>&nbsp;&nbsp;
-      <a href="#M000226">inspect</a>&nbsp;&nbsp;
-      <a href="#M000216">new</a>&nbsp;&nbsp;
-      <a href="#M000225">set</a>&nbsp;&nbsp;
+      <a href="#M000244">clear</a>&nbsp;&nbsp;
+      <a href="#M000247">file_transfer_mode</a>&nbsp;&nbsp;
+      <a href="#M000245">finish</a>&nbsp;&nbsp;
+      <a href="#M000246">finished?</a>&nbsp;&nbsp;
+      <a href="#M000248">format=</a>&nbsp;&nbsp;
+      <a href="#M000249">format_arguments=</a>&nbsp;&nbsp;
+      <a href="#M000250">halt</a>&nbsp;&nbsp;
+      <a href="#M000251">inc</a>&nbsp;&nbsp;
+      <a href="#M000253">inspect</a>&nbsp;&nbsp;
+      <a href="#M000243">new</a>&nbsp;&nbsp;
+      <a href="#M000252">set</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -159,19 +159,19 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000216" class="method-detail">
-        <a name="M000216"></a>
+      <div id="method-M000243" class="method-detail">
+        <a name="M000243"></a>
 
         <div class="method-heading">
-          <a href="#M000216" class="method-signature">
+          <a href="#M000243" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(title, total, out = STDERR)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000216-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000216-source">
+            onclick="toggleCode('M000243-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000243-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 15</span>
 15:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span> (<span class="ruby-identifier">title</span>, <span class="ruby-identifier">total</span>, <span class="ruby-identifier">out</span> = <span class="ruby-constant">STDERR</span>)
@@ -198,244 +198,244 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000217" class="method-detail">
-        <a name="M000217"></a>
+      <div id="method-M000244" class="method-detail">
+        <a name="M000244"></a>
 
         <div class="method-heading">
-          <a href="#M000217" class="method-signature">
+          <a href="#M000244" class="method-signature">
           <span class="method-name">clear</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000217-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000217-source">
+            onclick="toggleCode('M000244-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000244-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 177</span>
-177:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>
-178:       <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;\r&quot;</span>
-179:       <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">print</span>(<span class="ruby-value str">&quot; &quot;</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">get_width</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>))
-180:       <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;\r&quot;</span>
-181:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 160</span>
+160:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>
+161:       <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;\r&quot;</span>
+162:       <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">print</span>(<span class="ruby-value str">&quot; &quot;</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">terminal_width</span>(<span class="ruby-value">80</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>))
+163:       <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">print</span> <span class="ruby-value str">&quot;\r&quot;</span>
+164:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000220" class="method-detail">
-        <a name="M000220"></a>
+      <div id="method-M000247" class="method-detail">
+        <a name="M000247"></a>
 
         <div class="method-heading">
-          <a href="#M000220" class="method-signature">
+          <a href="#M000247" class="method-signature">
           <span class="method-name">file_transfer_mode</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000220-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000220-source">
+            onclick="toggleCode('M000247-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000247-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 193</span>
-193:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file_transfer_mode</span>
-194:       <span class="ruby-ivar">@format_arguments</span> = [<span class="ruby-identifier">:title</span>, <span class="ruby-identifier">:percentage</span>, <span class="ruby-identifier">:bar</span>, <span class="ruby-identifier">:stat_for_file_transfer</span>]
-195:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 176</span>
+176:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file_transfer_mode</span>
+177:       <span class="ruby-ivar">@format_arguments</span> = [<span class="ruby-identifier">:title</span>, <span class="ruby-identifier">:percentage</span>, <span class="ruby-identifier">:bar</span>, <span class="ruby-identifier">:stat_for_file_transfer</span>]
+178:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000218" class="method-detail">
-        <a name="M000218"></a>
+      <div id="method-M000245" class="method-detail">
+        <a name="M000245"></a>
 
         <div class="method-heading">
-          <a href="#M000218" class="method-signature">
+          <a href="#M000245" class="method-signature">
           <span class="method-name">finish</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000218-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000218-source">
+            onclick="toggleCode('M000245-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000245-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 183</span>
-183:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finish</span>
-184:       <span class="ruby-ivar">@current</span> = <span class="ruby-ivar">@total</span>
-185:       <span class="ruby-ivar">@finished_p</span> = <span class="ruby-keyword kw">true</span>
-186:       <span class="ruby-identifier">show</span>
-187:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 166</span>
+166:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finish</span>
+167:       <span class="ruby-ivar">@current</span> = <span class="ruby-ivar">@total</span>
+168:       <span class="ruby-ivar">@finished_p</span> = <span class="ruby-keyword kw">true</span>
+169:       <span class="ruby-identifier">show</span>
+170:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000219" class="method-detail">
-        <a name="M000219"></a>
+      <div id="method-M000246" class="method-detail">
+        <a name="M000246"></a>
 
         <div class="method-heading">
-          <a href="#M000219" class="method-signature">
+          <a href="#M000246" class="method-signature">
           <span class="method-name">finished?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000219-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000219-source">
+            onclick="toggleCode('M000246-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000246-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 189</span>
-189:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finished?</span>
-190:       <span class="ruby-ivar">@finished_p</span>
-191:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 172</span>
+172:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finished?</span>
+173:       <span class="ruby-ivar">@finished_p</span>
+174:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000221" class="method-detail">
-        <a name="M000221"></a>
+      <div id="method-M000248" class="method-detail">
+        <a name="M000248"></a>
 
         <div class="method-heading">
-          <a href="#M000221" class="method-signature">
+          <a href="#M000248" class="method-signature">
           <span class="method-name">format=</span><span class="method-args">(format)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000221-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000221-source">
+            onclick="toggleCode('M000248-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000248-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 197</span>
-197:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format=</span> (<span class="ruby-identifier">format</span>)
-198:       <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">format</span>
-199:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 180</span>
+180:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format=</span> (<span class="ruby-identifier">format</span>)
+181:       <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">format</span>
+182:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000222" class="method-detail">
-        <a name="M000222"></a>
+      <div id="method-M000249" class="method-detail">
+        <a name="M000249"></a>
 
         <div class="method-heading">
-          <a href="#M000222" class="method-signature">
+          <a href="#M000249" class="method-signature">
           <span class="method-name">format_arguments=</span><span class="method-args">(arguments)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000222-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000222-source">
+            onclick="toggleCode('M000249-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000249-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 201</span>
-201:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_arguments=</span> (<span class="ruby-identifier">arguments</span>)
-202:       <span class="ruby-ivar">@format_arguments</span> = <span class="ruby-identifier">arguments</span>
-203:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 184</span>
+184:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_arguments=</span> (<span class="ruby-identifier">arguments</span>)
+185:       <span class="ruby-ivar">@format_arguments</span> = <span class="ruby-identifier">arguments</span>
+186:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000223" class="method-detail">
-        <a name="M000223"></a>
+      <div id="method-M000250" class="method-detail">
+        <a name="M000250"></a>
 
         <div class="method-heading">
-          <a href="#M000223" class="method-signature">
+          <a href="#M000250" class="method-signature">
           <span class="method-name">halt</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000223-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000223-source">
+            onclick="toggleCode('M000250-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000250-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 205</span>
-205:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">halt</span>
-206:       <span class="ruby-ivar">@finished_p</span> = <span class="ruby-keyword kw">true</span>
-207:       <span class="ruby-identifier">show</span>
-208:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 188</span>
+188:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">halt</span>
+189:       <span class="ruby-ivar">@finished_p</span> = <span class="ruby-keyword kw">true</span>
+190:       <span class="ruby-identifier">show</span>
+191:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000224" class="method-detail">
-        <a name="M000224"></a>
+      <div id="method-M000251" class="method-detail">
+        <a name="M000251"></a>
 
         <div class="method-heading">
-          <a href="#M000224" class="method-signature">
+          <a href="#M000251" class="method-signature">
           <span class="method-name">inc</span><span class="method-args">(step = 1)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000224-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000224-source">
+            onclick="toggleCode('M000251-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000251-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 210</span>
-210:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inc</span> (<span class="ruby-identifier">step</span> = <span class="ruby-value">1</span>)
-211:       <span class="ruby-ivar">@current</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">step</span>
-212:       <span class="ruby-ivar">@current</span> = <span class="ruby-ivar">@total</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@current</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@total</span>
-213:       <span class="ruby-identifier">show_if_needed</span>
-214:       <span class="ruby-ivar">@previous</span> = <span class="ruby-ivar">@current</span>
-215:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 193</span>
+193:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inc</span> (<span class="ruby-identifier">step</span> = <span class="ruby-value">1</span>)
+194:       <span class="ruby-ivar">@current</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">step</span>
+195:       <span class="ruby-ivar">@current</span> = <span class="ruby-ivar">@total</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@current</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@total</span>
+196:       <span class="ruby-identifier">show_if_needed</span>
+197:       <span class="ruby-ivar">@previous</span> = <span class="ruby-ivar">@current</span>
+198:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000226" class="method-detail">
-        <a name="M000226"></a>
+      <div id="method-M000253" class="method-detail">
+        <a name="M000253"></a>
 
         <div class="method-heading">
-          <a href="#M000226" class="method-signature">
+          <a href="#M000253" class="method-signature">
           <span class="method-name">inspect</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000226-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000226-source">
+            onclick="toggleCode('M000253-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000253-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 226</span>
-226:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
-227:       <span class="ruby-node">&quot;#&lt;ProgressBar:#{@current}/#{@total}&gt;&quot;</span>
-228:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 209</span>
+209:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+210:       <span class="ruby-node">&quot;#&lt;ProgressBar:#{@current}/#{@total}&gt;&quot;</span>
+211:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000225" class="method-detail">
-        <a name="M000225"></a>
+      <div id="method-M000252" class="method-detail">
+        <a name="M000252"></a>
 
         <div class="method-heading">
-          <a href="#M000225" class="method-signature">
+          <a href="#M000252" class="method-signature">
           <span class="method-name">set</span><span class="method-args">(count)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000225-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000225-source">
+            onclick="toggleCode('M000252-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000252-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 217</span>
-217:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set</span> (<span class="ruby-identifier">count</span>)
-218:       <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> 
-219:       <span class="ruby-identifier">count</span> = <span class="ruby-ivar">@total</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@total</span>
-220:     
-221:       <span class="ruby-ivar">@current</span> = <span class="ruby-identifier">count</span>
-222:       <span class="ruby-identifier">show_if_needed</span>
-223:       <span class="ruby-ivar">@previous</span> = <span class="ruby-ivar">@current</span>
-224:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/cli/progressbar.rb, line 200</span>
+200:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set</span> (<span class="ruby-identifier">count</span>)
+201:       <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> 
+202:       <span class="ruby-identifier">count</span> = <span class="ruby-ivar">@total</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@total</span>
+203:     
+204:       <span class="ruby-ivar">@current</span> = <span class="ruby-identifier">count</span>
+205:       <span class="ruby-identifier">show_if_needed</span>
+206:       <span class="ruby-ivar">@previous</span> = <span class="ruby-ivar">@current</span>
+207:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

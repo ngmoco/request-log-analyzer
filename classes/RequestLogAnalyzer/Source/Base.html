@@ -78,6 +78,13 @@
 
   <div id="contextContent">
 
+    <div id="description">
+      <p>
+<a href="Base.html">Base</a> <a href="../Source.html">Source</a> class. All
+other sources inherit from this class
+</p>
+
+    </div>
 
 
    </div>
@@ -86,10 +93,10 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000124">finalize</a>&nbsp;&nbsp;
-      <a href="#M000121">new</a>&nbsp;&nbsp;
-      <a href="#M000122">prepare</a>&nbsp;&nbsp;
-      <a href="#M000123">requests</a>&nbsp;&nbsp;
+      <a href="#M000148">each_request</a>&nbsp;&nbsp;
+      <a href="#M000149">finalize</a>&nbsp;&nbsp;
+      <a href="#M000146">new</a>&nbsp;&nbsp;
+      <a href="#M000147">prepare</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -145,7 +152,7 @@ The total number of parsed lines
           <td class="context-item-name">parsed_requests</td>
           <td class="context-item-value">&nbsp;[R]&nbsp;</td>
           <td class="context-item-desc">
-The total number of parsed <a href="Base.html#M000123">requests</a>.
+The total number of parsed requests.
 
 </td>
         </tr>
@@ -167,11 +174,11 @@ The number of skipped lines because of warnings
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000121" class="method-detail">
-        <a name="M000121"></a>
+      <div id="method-M000146" class="method-detail">
+        <a name="M000146"></a>
 
         <div class="method-heading">
-          <a href="#M000121" class="method-signature">
+          <a href="#M000146" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(format, options = {})</span>
           </a>
         </div>
@@ -182,14 +189,14 @@ Initializer <tt>format</tt> The file format <tt>options</tt> Are passed to
 the filters.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000121-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000121-source">
+            onclick="toggleCode('M000146-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000146-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 31</span>
-31:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">format</span>, <span class="ruby-identifier">options</span> = {})
-32:       <span class="ruby-ivar">@options</span>    = <span class="ruby-identifier">options</span>
-33:       <span class="ruby-identifier">register_file_format</span>(<span class="ruby-identifier">format</span>)
-34:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 32</span>
+32:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">format</span>, <span class="ruby-identifier">options</span> = {})
+33:       <span class="ruby-ivar">@options</span>    = <span class="ruby-identifier">options</span>
+34:       <span class="ruby-identifier">register_file_format</span>(<span class="ruby-identifier">format</span>)
+35:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -197,68 +204,68 @@ the filters.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000124" class="method-detail">
-        <a name="M000124"></a>
+      <div id="method-M000148" class="method-detail">
+        <a name="M000148"></a>
 
         <div class="method-heading">
-          <a href="#M000124" class="method-signature">
+          <a href="#M000148" class="method-signature">
+          <span class="method-name">each_request</span><span class="method-args">(&amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000148-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000148-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 40</span>
+40:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_request</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+41:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+42:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000149" class="method-detail">
+        <a name="M000149"></a>
+
+        <div class="method-heading">
+          <a href="#M000149" class="method-signature">
           <span class="method-name">finalize</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000124-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000124-source">
+            onclick="toggleCode('M000149-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000149-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 43</span>
-43:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize</span>
-44:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 44</span>
+44:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize</span>
+45:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000122" class="method-detail">
-        <a name="M000122"></a>
+      <div id="method-M000147" class="method-detail">
+        <a name="M000147"></a>
 
         <div class="method-heading">
-          <a href="#M000122" class="method-signature">
+          <a href="#M000147" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000122-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000122-source">
+            onclick="toggleCode('M000147-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000147-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 36</span>
-36:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
-37:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000123" class="method-detail">
-        <a name="M000123"></a>
-
-        <div class="method-heading">
-          <a href="#M000123" class="method-signature">
-          <span class="method-name">requests</span><span class="method-args">(&amp;block)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000123-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000123-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 39</span>
-39:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">requests</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-40:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
-41:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 37</span>
+37:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
+38:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

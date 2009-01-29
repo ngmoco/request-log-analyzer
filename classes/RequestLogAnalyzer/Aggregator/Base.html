@@ -93,12 +93,12 @@ every aggregator should comply (by simply subclassing this class).
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000082">aggregate</a>&nbsp;&nbsp;
-      <a href="#M000083">finalize</a>&nbsp;&nbsp;
-      <a href="#M000080">new</a>&nbsp;&nbsp;
-      <a href="#M000081">prepare</a>&nbsp;&nbsp;
-      <a href="#M000085">report</a>&nbsp;&nbsp;
-      <a href="#M000084">warning</a>&nbsp;&nbsp;
+      <a href="#M000106">aggregate</a>&nbsp;&nbsp;
+      <a href="#M000107">finalize</a>&nbsp;&nbsp;
+      <a href="#M000104">new</a>&nbsp;&nbsp;
+      <a href="#M000105">prepare</a>&nbsp;&nbsp;
+      <a href="#M000109">report</a>&nbsp;&nbsp;
+      <a href="#M000108">warning</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -145,24 +145,24 @@ every aggregator should comply (by simply subclassing this class).
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000080" class="method-detail">
-        <a name="M000080"></a>
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
 
         <div class="method-heading">
-          <a href="#M000080" class="method-signature">
+          <a href="#M000104" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(source, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Intializes a <a href="Base.html#M000080">new</a> <a
+Intializes a <a href="Base.html#M000104">new</a> <a
 href="Base.html">RequestLogAnalyzer::Aggregator::Base</a> instance It will
 include the specific file format module.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000080-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000080-source">
+            onclick="toggleCode('M000104-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000104-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator.rb, line 18</span>
 18:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
@@ -177,23 +177,23 @@ include the specific file format module.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000082" class="method-detail">
-        <a name="M000082"></a>
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
 
         <div class="method-heading">
-          <a href="#M000082" class="method-signature">
+          <a href="#M000106" class="method-signature">
           <span class="method-name">aggregate</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The <a href="Base.html#M000082">aggregate</a> function is called for every
+The <a href="Base.html#M000106">aggregate</a> function is called for every
 request. Implement the aggregating functionality in this method
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000082-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000082-source">
+            onclick="toggleCode('M000106-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000106-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator.rb, line 31</span>
 31:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aggregate</span>(<span class="ruby-identifier">request</span>)
@@ -203,23 +203,23 @@ request. Implement the aggregating functionality in this method
         </div>
       </div>
 
-      <div id="method-M000083" class="method-detail">
-        <a name="M000083"></a>
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
 
         <div class="method-heading">
-          <a href="#M000083" class="method-signature">
+          <a href="#M000107" class="method-signature">
           <span class="method-name">finalize</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The <a href="Base.html#M000083">finalize</a> function is called after all
+The <a href="Base.html#M000107">finalize</a> function is called after all
 sources are parsed and no more requests will be passed to the aggregator
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000083-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000083-source">
+            onclick="toggleCode('M000107-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000107-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator.rb, line 36</span>
 36:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize</span>
@@ -229,23 +229,23 @@ sources are parsed and no more requests will be passed to the aggregator
         </div>
       </div>
 
-      <div id="method-M000081" class="method-detail">
-        <a name="M000081"></a>
+      <div id="method-M000105" class="method-detail">
+        <a name="M000105"></a>
 
         <div class="method-heading">
-          <a href="#M000081" class="method-signature">
+          <a href="#M000105" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The <a href="Base.html#M000081">prepare</a> function is called just before
+The <a href="Base.html#M000105">prepare</a> function is called just before
 parsing starts. This function can be used to initialie variables, etc.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000081-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000081-source">
+            onclick="toggleCode('M000105-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000105-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator.rb, line 26</span>
 26:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
@@ -255,23 +255,23 @@ parsing starts. This function can be used to initialie variables, etc.
         </div>
       </div>
 
-      <div id="method-M000085" class="method-detail">
-        <a name="M000085"></a>
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
 
         <div class="method-heading">
-          <a href="#M000085" class="method-signature">
+          <a href="#M000109" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The <a href="Base.html#M000085">report</a> function is called at the end.
+The <a href="Base.html#M000109">report</a> function is called at the end.
 Implement any result reporting in this function.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000085-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000085-source">
+            onclick="toggleCode('M000109-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000109-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator.rb, line 45</span>
 45:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
@@ -281,23 +281,23 @@ Implement any result reporting in this function.
         </div>
       </div>
 
-      <div id="method-M000084" class="method-detail">
-        <a name="M000084"></a>
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
 
         <div class="method-heading">
-          <a href="#M000084" class="method-signature">
+          <a href="#M000108" class="method-signature">
           <span class="method-name">warning</span><span class="method-args">(type, message, lineno)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The <a href="Base.html#M000084">warning</a> method is called if the parser
-eits a <a href="Base.html#M000084">warning</a>.
+The <a href="Base.html#M000108">warning</a> method is called if the parser
+eits a <a href="Base.html#M000108">warning</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000084-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000084-source">
+            onclick="toggleCode('M000108-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000108-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator.rb, line 40</span>
 40:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">warning</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span>)

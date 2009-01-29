@@ -65,8 +65,8 @@
         <tr class="top-aligned-row">
             <td><strong>Parent:</strong></td>
             <td>
-                <a href="Base.html">
-                Base
+                <a href="Rails.html">
+                Rails
                </a>
             </td>
         </tr>
@@ -80,6 +80,16 @@
 
   <div id="contextContent">
 
+    <div id="description">
+      <p>
+The <a href="RailsDevelopment.html">RailsDevelopment</a> <a
+href="../FileFormat.html">FileFormat</a> is an extention to the default <a
+href="Rails.html">Rails</a> file format. It includes all lines of the
+normal <a href="Rails.html">Rails</a> file format, but parses SQL queries
+and partial rendering lines as well.
+</p>
+
+    </div>
 
 
    </div>
@@ -92,44 +102,13 @@
 
     <div id="section">
 
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
 
-    <div id="constants-list">
-      <h3 class="section-bar">Constants</h3>
+      Class <a href="RailsDevelopment/Request.html" class="link">RequestLogAnalyzer::FileFormat::RailsDevelopment::Request</a><br />
 
-      <div class="name-list">
-        <table summary="Constants">
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">RAILS_21_COMPLETED</td>
-          <td>=</td>
-          <td class="context-item-value">/Completed in (\d+\.\d{5}) \(\d+ reqs\/sec\) (?:\| Rendering: (\d+\.\d{5}) \(\d+\%\) )?(?:\| DB: (\d+\.\d{5}) \(\d+\%\) )?\| (\d\d\d).+\[(http.+)\]/</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-<a href="Rails.html">Rails</a> &lt; 2.1 completed line example Completed in
-0.21665 (4 reqs/sec) | Rendering: 0.00926 (4%) | DB: 0.00000 (0%) | 200 OK
-[<a href="http://demo.nu/employees">demo.nu/employees</a>]
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">RAILS_22_COMPLETED</td>
-          <td>=</td>
-          <td class="context-item-value">/Completed in (\d+)ms \((?:View: (\d+), )?DB: (\d+)\) \| (\d\d\d).+\[(http.+)\]/</td>
-          <td width="3em">&nbsp;</td>
-          <td class="context-item-desc">
-<a href="Rails.html">Rails</a> &gt; 2.1 completed line example Completed in
-614ms (View: 120, DB: 31) | 200 OK [<a
-href="http://floorplanner.local/demo">floorplanner.local/demo</a>]
-
-</td>
-        </tr>
-        <tr class="top-aligned-row context-row">
-          <td class="context-item-name">REQUEST_CATEGORIZER</td>
-          <td>=</td>
-          <td class="context-item-value">Proc.new do |request|       format = request[:format] || 'html'</td>
-        </tr>
-        </table>
-      </div>
     </div>
+
 
 
 

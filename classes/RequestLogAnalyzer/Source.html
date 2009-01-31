@@ -76,6 +76,33 @@
 
   <div id="contextContent">
 
+    <div id="description">
+      <p>
+The <a href="Source.html">RequestLogAnalyzer::Source</a> module contains
+all functionality that loads requests from a given source and feed them to
+the pipeline for further processing. The requests (see <a
+href="Request.html">RequestLogAnalyzer::Request</a>) that will be parsed
+from a source, will be piped throug filters (see <a
+href="Filter.html">RequestLogAnalyzer::Filter</a>) and are then fed to an
+aggregator (see <a
+href="Aggregator.html">RequestLogAnalyzer::Aggregator</a>). The source
+instance is thus the beginning of the <a
+href="../RequestLogAnalyzer.html">RequestLogAnalyzer</a> chain.
+</p>
+<ul>
+<li>The base class for all sources is <a
+href="Source/Base.html">RequestLogAnalyzer::Source::Base</a>. All source
+classes should inherit from this class.
+
+</li>
+<li>Currently, <a
+href="Source/LogParser.html">RequestLogAnalyzer::Source::LogParser</a> is
+the only implemented source.
+
+</li>
+</ul>
+
+    </div>
 
 
    </div>
@@ -123,14 +150,26 @@ Class <a href="Source/LogParser.html" class="link">RequestLogAnalyzer::Source::L
         </div>
       
         <div class="method-description">
+          <p>
+Loads constants that reside in the <a
+href="Source.html">RequestLogAnalyzer::Source</a> namespace. This function
+uses RequestLogAnalyzer::load_default_class_file to load the file in which
+the constant is declared.
+</p>
+<table>
+<tr><td valign="top"><tt>const</tt>:</td><td>The constant to load in the <a
+href="Source.html">RequestLogAnalyzer::Source</a> namespace.
+
+</td></tr>
+</table>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000132-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000132-source">
 <pre>
-   <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 3</span>
-3:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
-4:     <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">const</span>)
-5:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/source.rb, line 14</span>
+14:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
+15:     <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">const</span>)
+16:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

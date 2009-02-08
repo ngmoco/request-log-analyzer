@@ -428,19 +428,23 @@ Alias for <a href="FixedWidth.html#M000024">print</a>
 162:                 <span class="ruby-identifier">bar</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">:treshold</span>])).<span class="ruby-identifier">round</span>, <span class="ruby-identifier">:red</span>) 
 163:                 <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">bar</span>) 
 164:               <span class="ruby-keyword kw">else</span>
-165:                 <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span>) 
-166:               <span class="ruby-keyword kw">end</span>
-167:             <span class="ruby-keyword kw">else</span>
-168:               <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">''</span>)
-169:             <span class="ruby-keyword kw">end</span>
-170:           <span class="ruby-keyword kw">else</span>
-171:             <span class="ruby-identifier">alignment</span> = (<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">index</span>][<span class="ruby-identifier">:align</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:right</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'-'</span>)        
-172:             <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;%#{alignment}#{width}s&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">width</span>])
-173:           <span class="ruby-keyword kw">end</span>
-174:         <span class="ruby-keyword kw">end</span>
-175:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-node">&quot; #{characters[:vertical_line]} &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">' '</span>)      
-176:       <span class="ruby-keyword kw">end</span>
-177:     <span class="ruby-keyword kw">end</span>
+165:                 <span class="ruby-comment cmt"># Create a bar by combining block characters</span>
+166:                 <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">characters</span>[<span class="ruby-identifier">:block</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">width</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_f</span>).<span class="ruby-identifier">round</span>) 
+167:               <span class="ruby-keyword kw">end</span>
+168:             <span class="ruby-keyword kw">else</span>
+169:               <span class="ruby-comment cmt"># Too few characters for a ratio bar. Display nothing</span>
+170:               <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-value str">''</span>)
+171:             <span class="ruby-keyword kw">end</span>
+172:           <span class="ruby-keyword kw">else</span>
+173:             <span class="ruby-identifier">alignment</span> = (<span class="ruby-identifier">columns</span>[<span class="ruby-identifier">index</span>][<span class="ruby-identifier">:align</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:right</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'-'</span>)
+174:             <span class="ruby-identifier">cell_value</span> = <span class="ruby-node">&quot;%#{alignment}#{width}s&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">width</span>]
+175:             <span class="ruby-identifier">cell_value</span> = <span class="ruby-identifier">colorize</span>(<span class="ruby-identifier">cell_value</span>, <span class="ruby-identifier">:bold</span>, <span class="ruby-identifier">:brown</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">columns</span>[<span class="ruby-identifier">index</span>][<span class="ruby-identifier">:highlight</span>]
+176:             <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">cell_value</span>)
+177:           <span class="ruby-keyword kw">end</span>
+178:         <span class="ruby-keyword kw">end</span>
+179:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row_values</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">style</span>[<span class="ruby-identifier">:cell_separator</span>] <span class="ruby-operator">?</span> <span class="ruby-node">&quot; #{characters[:vertical_line]} &quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">' '</span>)      
+180:       <span class="ruby-keyword kw">end</span>
+181:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

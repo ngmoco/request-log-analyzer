@@ -313,16 +313,25 @@ include in file-format definition
             onclick="toggleCode('M000105-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000105-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 149</span>
-149:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_type</span>(<span class="ruby-identifier">type_indicator</span>)
-150:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type_indicator</span>
-151:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:eval</span>;  <span class="ruby-identifier">:text</span>
-152:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:sec</span>;   <span class="ruby-identifier">:double</span>
-153:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:msec</span>;  <span class="ruby-identifier">:double</span>
-154:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:float</span>; <span class="ruby-identifier">:double</span>
-155:       <span class="ruby-keyword kw">else</span>         <span class="ruby-identifier">type_indicator</span>
-156:       <span class="ruby-keyword kw">end</span>
-157:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 154</span>
+154:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_type</span>(<span class="ruby-identifier">type_indicator</span>)
+155:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type_indicator</span>
+156:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:eval</span>;      <span class="ruby-identifier">:text</span>
+157:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:text</span>;      <span class="ruby-identifier">:text</span>
+158:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:string</span>;    <span class="ruby-identifier">:string</span>
+159:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:sec</span>;       <span class="ruby-identifier">:double</span>
+160:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:msec</span>;      <span class="ruby-identifier">:double</span>
+161:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:duration</span>;  <span class="ruby-identifier">:double</span>
+162:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:float</span>;     <span class="ruby-identifier">:double</span>
+163:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:double</span>;    <span class="ruby-identifier">:double</span>
+164:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:integer</span>;   <span class="ruby-identifier">:integer</span>
+165:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:int</span>;       <span class="ruby-identifier">:int</span>
+166:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:timestamp</span>; <span class="ruby-identifier">:datetime</span>
+167:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:datetime</span>;  <span class="ruby-identifier">:datetime</span>
+168:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:date</span>;      <span class="ruby-identifier">:date</span>
+169:       <span class="ruby-keyword kw">else</span>             <span class="ruby-identifier">:string</span>
+170:       <span class="ruby-keyword kw">end</span>
+171:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -355,9 +364,14 @@ method is called.
  96:       <span class="ruby-identifier">class_name</span> = <span class="ruby-node">&quot;#{name}_line&quot;</span>.<span class="ruby-identifier">camelize</span>
  97:       <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)
  98:       <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:belongs_to</span>, <span class="ruby-identifier">:request</span>)
- 99:       <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-identifier">class_name</span>, <span class="ruby-identifier">klass</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">class_name</span>)
-100:       <span class="ruby-ivar">@request_class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:has_many</span>, <span class="ruby-node">&quot;#{name}_lines&quot;</span>.<span class="ruby-identifier">to_sym</span>)
-101:     <span class="ruby-keyword kw">end</span>
+ 99:       
+100:       <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">captures</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">capture</span><span class="ruby-operator">|</span>
+101:         <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:serialize</span>, <span class="ruby-identifier">capture</span>[<span class="ruby-identifier">:name</span>], <span class="ruby-constant">Hash</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">capture</span>[<span class="ruby-identifier">:provides</span>]
+102:       <span class="ruby-keyword kw">end</span>
+103:       
+104:       <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-identifier">class_name</span>, <span class="ruby-identifier">klass</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">class_name</span>)
+105:       <span class="ruby-ivar">@request_class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:has_many</span>, <span class="ruby-node">&quot;#{name}_lines&quot;</span>.<span class="ruby-identifier">to_sym</span>)
+106:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -382,23 +396,23 @@ used to create records in the database.
             onclick="toggleCode('M000104-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000104-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 130</span>
-130:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_database_schema!</span>
-131:       
-132:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">'Database'</span>)
-133:         <span class="ruby-ivar">@orm_module</span> = <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-value str">'Database'</span>)
-134:       <span class="ruby-keyword kw">else</span>
-135:         <span class="ruby-ivar">@orm_module</span> = <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-value str">'Database'</span>, <span class="ruby-constant">Module</span>.<span class="ruby-identifier">new</span>)
-136:       <span class="ruby-keyword kw">end</span>
-137: 
-138:       <span class="ruby-identifier">create_request_table_and_class</span>
-139:       <span class="ruby-identifier">create_warning_table_and_class</span>
-140:       
-141:       <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">line_definitions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span><span class="ruby-operator">|</span>
-142:         <span class="ruby-identifier">create_database_table</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span>)
-143:         <span class="ruby-identifier">create_activerecord_class</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span>)
-144:       <span class="ruby-keyword kw">end</span>
-145:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 135</span>
+135:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_database_schema!</span>
+136:       
+137:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">'Database'</span>)
+138:         <span class="ruby-ivar">@orm_module</span> = <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-value str">'Database'</span>)
+139:       <span class="ruby-keyword kw">else</span>
+140:         <span class="ruby-ivar">@orm_module</span> = <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-value str">'Database'</span>, <span class="ruby-constant">Module</span>.<span class="ruby-identifier">new</span>)
+141:       <span class="ruby-keyword kw">end</span>
+142: 
+143:       <span class="ruby-identifier">create_request_table_and_class</span>
+144:       <span class="ruby-identifier">create_warning_table_and_class</span>
+145:       
+146:       <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">line_definitions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span><span class="ruby-operator">|</span>
+147:         <span class="ruby-identifier">create_database_table</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span>)
+148:         <span class="ruby-identifier">create_activerecord_class</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">definition</span>)
+149:       <span class="ruby-keyword kw">end</span>
+150:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -469,17 +483,17 @@ It also creates an ActiveRecord::Base class to communicate with this table.
             onclick="toggleCode('M000102-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000102-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 105</span>
-105:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_request_table_and_class</span>
-106:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:debug</span>]
-107:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">create_table</span>(<span class="ruby-value str">&quot;requests&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
-108:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> <span class="ruby-identifier">:first_lineno</span>
-109:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> <span class="ruby-identifier">:last_lineno</span>
-110:       <span class="ruby-keyword kw">end</span>    
-111:       
-112:       <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-value str">'Request'</span>, <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">'Request'</span>)     
-113:       <span class="ruby-ivar">@request_class</span> = <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-value str">'Request'</span>)
-114:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 110</span>
+110:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_request_table_and_class</span>
+111:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:debug</span>]
+112:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">create_table</span>(<span class="ruby-value str">&quot;requests&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+113:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> <span class="ruby-identifier">:first_lineno</span>
+114:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> <span class="ruby-identifier">:last_lineno</span>
+115:       <span class="ruby-keyword kw">end</span>    
+116:       
+117:       <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-value str">'Request'</span>, <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">'Request'</span>)     
+118:       <span class="ruby-ivar">@request_class</span> = <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-value str">'Request'</span>)
+119:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -503,17 +517,17 @@ with this table using ActiveRecord.
             onclick="toggleCode('M000103-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000103-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 117</span>
-117:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_warning_table_and_class</span>
-118:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:debug</span>]
-119:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">create_table</span>(<span class="ruby-value str">&quot;warnings&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
-120:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  <span class="ruby-identifier">:warning_type</span>, <span class="ruby-identifier">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">30</span>, <span class="ruby-identifier">:null</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
-121:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  <span class="ruby-identifier">:message</span>
-122:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> <span class="ruby-identifier">:lineno</span>          
-123:       <span class="ruby-keyword kw">end</span>    
-124:       
-125:       <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-value str">'Warning'</span>, <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">'Warning'</span>)
-126:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/database.rb, line 122</span>
+122:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_warning_table_and_class</span>
+123:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:debug</span>]
+124:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>.<span class="ruby-identifier">create_table</span>(<span class="ruby-value str">&quot;warnings&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+125:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  <span class="ruby-identifier">:warning_type</span>, <span class="ruby-identifier">:limit</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">30</span>, <span class="ruby-identifier">:null</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+126:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  <span class="ruby-identifier">:message</span>
+127:         <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> <span class="ruby-identifier">:lineno</span>          
+128:       <span class="ruby-keyword kw">end</span>    
+129:       
+130:       <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-value str">'Warning'</span>, <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@orm_module</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">'Warning'</span>)
+131:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

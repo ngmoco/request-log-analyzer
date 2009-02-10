@@ -285,12 +285,11 @@ Example output:
 72:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">table</span>({}, {<span class="ruby-identifier">:align</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:right</span>}, {<span class="ruby-identifier">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:ratio</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:rest</span>, <span class="ruby-identifier">:treshold</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.15</span>}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rows</span><span class="ruby-operator">|</span>
 73:         <span class="ruby-ivar">@request_time_graph</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">requests</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
 74:           <span class="ruby-identifier">ratio</span> = <span class="ruby-identifier">requests</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total_requests</span>.<span class="ruby-identifier">to_f</span>
-75:           <span class="ruby-identifier">requests_per_day</span> = <span class="ruby-identifier">requests</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">days</span>
-76:     
-77:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;#{index.to_s.rjust(3)}:00&quot;</span>, <span class="ruby-node">&quot;#{requests_per_day} hits&quot;</span>, <span class="ruby-identifier">ratio</span>]
-78:         <span class="ruby-keyword kw">end</span>
-79:       <span class="ruby-keyword kw">end</span>
-80:     <span class="ruby-keyword kw">end</span>
+75:           <span class="ruby-identifier">requests_per_day</span> = (<span class="ruby-identifier">requests</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">days</span>).<span class="ruby-identifier">ceil</span>
+76:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-node">&quot;#{index.to_s.rjust(3)}:00&quot;</span>, <span class="ruby-value str">&quot;%d hits&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">requests_per_day</span>, <span class="ruby-identifier">ratio</span>]
+77:         <span class="ruby-keyword kw">end</span>
+78:       <span class="ruby-keyword kw">end</span>
+79:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

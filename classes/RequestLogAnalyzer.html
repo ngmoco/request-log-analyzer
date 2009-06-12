@@ -153,7 +153,7 @@ Class <a href="RequestLogAnalyzer/Request.html" class="link">RequestLogAnalyzer:
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">VERSION</td>
           <td>=</td>
-          <td class="context-item-value">'1.1'</td>
+          <td class="context-item-value">'1.1.7'</td>
           <td width="3em">&nbsp;</td>
           <td class="context-item-desc">
 The current version of request-log-analyzer. This will be diplayed in
@@ -200,10 +200,10 @@ should be passed as a string or symbol.
             onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000003-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 15</span>
-15:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
-16:     <span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-constant">RequestLogAnalyzer</span>, <span class="ruby-identifier">const</span>)
-17:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 20</span>
+20:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
+21:     <span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-constant">RequestLogAnalyzer</span>, <span class="ruby-identifier">const</span>)
+22:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -239,14 +239,14 @@ loaded.
             onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000004-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 23</span>
-23:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">const</span>)
-24:     <span class="ruby-identifier">path</span>     = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">base</span>.<span class="ruby-identifier">to_s</span>)
-25:     <span class="ruby-identifier">basename</span> = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">const</span>.<span class="ruby-identifier">to_s</span>)
-26:     <span class="ruby-identifier">filename</span> = <span class="ruby-node">&quot;#{File.dirname(__FILE__)}/#{path}/#{basename}&quot;</span>
-27:     <span class="ruby-identifier">require</span> <span class="ruby-identifier">filename</span>
-28:     <span class="ruby-identifier">base</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>)
-29:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 28</span>
+28:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load_default_class_file</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">const</span>)
+29:     <span class="ruby-identifier">path</span>     = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">base</span>.<span class="ruby-identifier">to_s</span>)
+30:     <span class="ruby-identifier">basename</span> = <span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">const</span>.<span class="ruby-identifier">to_s</span>)
+31:     <span class="ruby-identifier">filename</span> = <span class="ruby-node">&quot;#{File.dirname(__FILE__)}/#{path}/#{basename}&quot;</span>
+32:     <span class="ruby-identifier">require</span> <span class="ruby-identifier">filename</span>
+33:     <span class="ruby-identifier">base</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>)
+34:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -278,10 +278,10 @@ This can be used to find the class that is defined in a given filename.
             onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000006-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 41</span>
-41:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">str</span>)
-42:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\/(.?)/</span>) { <span class="ruby-value str">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">upcase</span> }.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(^|_)(.)/</span>) { <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">upcase</span> }
-43:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 46</span>
+46:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">str</span>)
+47:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\/(.?)/</span>) { <span class="ruby-value str">&quot;::&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">upcase</span> }.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(^|_)(.)/</span>) { <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">upcase</span> }
+48:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -313,10 +313,10 @@ to load the file (using require) in which the given constant is defined.
             onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000005-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 34</span>
-34:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">str</span>)
-35:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/::/</span>, <span class="ruby-value str">'/'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([A-Z]+)([A-Z][a-z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([a-z\d])([A-Z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">&quot;-&quot;</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">downcase</span>
-36:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer.rb, line 39</span>
+39:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">to_underscore</span>(<span class="ruby-identifier">str</span>)
+40:     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/::/</span>, <span class="ruby-value str">'/'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([A-Z]+)([A-Z][a-z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/([a-z\d])([A-Z])/</span>,<span class="ruby-value str">'\1_\2'</span>).<span class="ruby-identifier">tr</span>(<span class="ruby-value str">&quot;-&quot;</span>, <span class="ruby-value str">&quot;_&quot;</span>).<span class="ruby-identifier">downcase</span>
+41:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

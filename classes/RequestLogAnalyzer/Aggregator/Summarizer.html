@@ -88,17 +88,19 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000119">aggregate</a>&nbsp;&nbsp;
-      <a href="#M000120">finalize</a>&nbsp;&nbsp;
-      <a href="#M000125">has_log_ordering_warnings?</a>&nbsp;&nbsp;
-      <a href="#M000124">has_warnings?</a>&nbsp;&nbsp;
-      <a href="#M000116">new</a>&nbsp;&nbsp;
-      <a href="#M000118">prepare</a>&nbsp;&nbsp;
-      <a href="#M000121">report</a>&nbsp;&nbsp;
-      <a href="#M000123">report_footer</a>&nbsp;&nbsp;
-      <a href="#M000122">report_header</a>&nbsp;&nbsp;
-      <a href="#M000117">setup</a>&nbsp;&nbsp;
-      <a href="#M000126">warning</a>&nbsp;&nbsp;
+      <a href="#M000130">aggregate</a>&nbsp;&nbsp;
+      <a href="#M000131">finalize</a>&nbsp;&nbsp;
+      <a href="#M000138">has_log_ordering_warnings?</a>&nbsp;&nbsp;
+      <a href="#M000137">has_warnings?</a>&nbsp;&nbsp;
+      <a href="#M000127">new</a>&nbsp;&nbsp;
+      <a href="#M000129">prepare</a>&nbsp;&nbsp;
+      <a href="#M000134">report</a>&nbsp;&nbsp;
+      <a href="#M000136">report_footer</a>&nbsp;&nbsp;
+      <a href="#M000135">report_header</a>&nbsp;&nbsp;
+      <a href="#M000132">save_results_dump</a>&nbsp;&nbsp;
+      <a href="#M000128">setup</a>&nbsp;&nbsp;
+      <a href="#M000133">to_yaml</a>&nbsp;&nbsp;
+      <a href="#M000139">warning</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -144,27 +146,31 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000116" class="method-detail">
-        <a name="M000116"></a>
+      <div id="method-M000127" class="method-detail">
+        <a name="M000127"></a>
 
         <div class="method-heading">
-          <a href="#M000116" class="method-signature">
+          <a href="#M000127" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(source, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Initialize summarizer. Generate trackers from speciefied
+source.file_format.report_trackers and set them up
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000116-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000116-source">
+            onclick="toggleCode('M000127-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000127-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 50</span>
-50:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
-51:       <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>)
-52:       <span class="ruby-ivar">@warnings_encountered</span> = {}
-53:       <span class="ruby-ivar">@trackers</span> = <span class="ruby-identifier">source</span>.<span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">report_trackers</span>
-54:       <span class="ruby-identifier">setup</span>
-55:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 66</span>
+66:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
+67:       <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>)
+68:       <span class="ruby-ivar">@warnings_encountered</span> = {}
+69:       <span class="ruby-ivar">@trackers</span> = <span class="ruby-identifier">source</span>.<span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">report_trackers</span>
+70:       <span class="ruby-identifier">setup</span>
+71:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -172,260 +178,357 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000119" class="method-detail">
-        <a name="M000119"></a>
+      <div id="method-M000130" class="method-detail">
+        <a name="M000130"></a>
 
         <div class="method-heading">
-          <a href="#M000119" class="method-signature">
+          <a href="#M000130" class="method-signature">
           <span class="method-name">aggregate</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Pass all requests to trackers and let them update if necessary.
+<tt>request</tt> The request to pass.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000119-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000119-source">
+            onclick="toggleCode('M000130-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000130-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 65</span>
-65:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aggregate</span>(<span class="ruby-identifier">request</span>)
-66:       <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span>
-67:         <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">should_update?</span>(<span class="ruby-identifier">request</span>)
-68:       <span class="ruby-keyword kw">end</span>
-69:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 84</span>
+84:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aggregate</span>(<span class="ruby-identifier">request</span>)
+85:       <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span>
+86:         <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">should_update?</span>(<span class="ruby-identifier">request</span>)
+87:       <span class="ruby-keyword kw">end</span>
+88:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000120" class="method-detail">
-        <a name="M000120"></a>
+      <div id="method-M000131" class="method-detail">
+        <a name="M000131"></a>
 
         <div class="method-heading">
-          <a href="#M000120" class="method-signature">
+          <a href="#M000131" class="method-signature">
           <span class="method-name">finalize</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Call <a href="Summarizer.html#M000131">finalize</a> on all trackers. Saves
+a YAML dump if this is set in the options.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000120-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000120-source">
+            onclick="toggleCode('M000131-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000131-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 71</span>
-71:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize</span>
-72:       <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">finalize</span> }
-73:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 91</span>
+91:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize</span>
+92:       <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">finalize</span> }
+93:       <span class="ruby-identifier">save_results_dump</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dump</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dump</span>]
+94:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000125" class="method-detail">
-        <a name="M000125"></a>
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
 
         <div class="method-heading">
-          <a href="#M000125" class="method-signature">
+          <a href="#M000138" class="method-signature">
           <span class="method-name">has_log_ordering_warnings?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Returns true if there were any log ordering warnings
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000125-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000125-source">
+            onclick="toggleCode('M000138-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000138-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 117</span>
-117:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_log_ordering_warnings?</span>
-118:       <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">:no_current_request</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">:no_current_request</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-119:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 162</span>
+162:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_log_ordering_warnings?</span>
+163:       <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">:no_current_request</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">:no_current_request</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+164:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000124" class="method-detail">
-        <a name="M000124"></a>
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
 
         <div class="method-heading">
-          <a href="#M000124" class="method-signature">
+          <a href="#M000137" class="method-signature">
           <span class="method-name">has_warnings?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Returns true if there were any warnings generated by the trackers
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000124-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000124-source">
+            onclick="toggleCode('M000137-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000137-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 113</span>
-113:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_warnings?</span>
-114:        <span class="ruby-ivar">@warnings_encountered</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, (<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">value</span> } <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-115:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 157</span>
+157:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_warnings?</span>
+158:       <span class="ruby-ivar">@warnings_encountered</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span>, (<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">value</span> } <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+159:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000118" class="method-detail">
-        <a name="M000118"></a>
+      <div id="method-M000129" class="method-detail">
+        <a name="M000129"></a>
 
         <div class="method-heading">
-          <a href="#M000118" class="method-signature">
+          <a href="#M000129" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Call <a href="Summarizer.html#M000129">prepare</a> on all trackers.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000118-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000118-source">
+            onclick="toggleCode('M000129-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000129-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 60</span>
-60:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
-61:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;No trackers set up in Summarizer!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">empty?</span>
-62:       <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">prepare</span> }
-63:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 77</span>
+77:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
+78:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;No trackers set up in Summarizer!&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">empty?</span>
+79:       <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">prepare</span> }
+80:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000121" class="method-detail">
-        <a name="M000121"></a>
+      <div id="method-M000134" class="method-detail">
+        <a name="M000134"></a>
 
         <div class="method-heading">
-          <a href="#M000121" class="method-signature">
+          <a href="#M000134" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Call <a href="Summarizer.html#M000134">report</a> on all trackers.
+<tt>output</tt> <a href="../Output.html">RequestLogAnalyzer::Output</a>
+object to output to
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000121-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000121-source">
+            onclick="toggleCode('M000134-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000134-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 75</span>
-75:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
-76:       <span class="ruby-identifier">report_header</span>(<span class="ruby-identifier">output</span>)
-77:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">parsed_requests</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-78:         <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>) }
-79:       <span class="ruby-keyword kw">else</span>
-80:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span>
-81:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-value str">'There were no requests analyzed.'</span>)
-82:       <span class="ruby-keyword kw">end</span>
-83:       <span class="ruby-identifier">report_footer</span>(<span class="ruby-identifier">output</span>)
-84:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 114</span>
+114:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
+115:       <span class="ruby-identifier">report_header</span>(<span class="ruby-identifier">output</span>)
+116:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">parsed_requests</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+117:         <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>) }
+118:       <span class="ruby-keyword kw">else</span>
+119:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span>
+120:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-value str">'There were no requests analyzed.'</span>)
+121:       <span class="ruby-keyword kw">end</span>
+122:       <span class="ruby-identifier">report_footer</span>(<span class="ruby-identifier">output</span>)
+123:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000123" class="method-detail">
-        <a name="M000123"></a>
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
 
         <div class="method-heading">
-          <a href="#M000123" class="method-signature">
+          <a href="#M000136" class="method-signature">
           <span class="method-name">report_footer</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Generate <a href="Summarizer.html#M000134">report</a> footer.
+<tt>output</tt> <a href="../Output.html">RequestLogAnalyzer::Output</a>
+object to output to
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000123-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000123-source">
+            onclick="toggleCode('M000136-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000136-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 101</span>
-101:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_footer</span>(<span class="ruby-identifier">output</span>)
-102:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">has_log_ordering_warnings?</span>
-103:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-value str">&quot;Parse warnings&quot;</span>)
-104:         
-105:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Parseable lines were ancountered without a header line before it. It&quot;</span>
-106:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;could be that logging is not setup correctly for your application.&quot;</span>
-107:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Visit this website for logging configuration tips:&quot;</span>
-108:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value str">&quot;http://github.com/wvanbergen/request-log-analyzer/wikis/configure-logging&quot;</span>)
-109:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span>
-110:       <span class="ruby-keyword kw">end</span>
-111:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 144</span>
+144:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_footer</span>(<span class="ruby-identifier">output</span>)
+145:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">has_log_ordering_warnings?</span>
+146:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-value str">&quot;Parse warnings&quot;</span>)
+147:         
+148:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Parseable lines were ancountered without a header line before it. It&quot;</span>
+149:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;could be that logging is not setup correctly for your application.&quot;</span>
+150:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Visit this website for logging configuration tips:&quot;</span>
+151:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">output</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value str">&quot;http://github.com/wvanbergen/request-log-analyzer/wikis/configure-logging&quot;</span>)
+152:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">puts</span>
+153:       <span class="ruby-keyword kw">end</span>
+154:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000122" class="method-detail">
-        <a name="M000122"></a>
+      <div id="method-M000135" class="method-detail">
+        <a name="M000135"></a>
 
         <div class="method-heading">
-          <a href="#M000122" class="method-signature">
+          <a href="#M000135" class="method-signature">
           <span class="method-name">report_header</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Generate <a href="Summarizer.html#M000134">report</a> header.
+<tt>output</tt> <a href="../Output.html">RequestLogAnalyzer::Output</a>
+object to output to
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000122-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000122-source">
+            onclick="toggleCode('M000135-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000135-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 86</span>
-86:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_header</span>(<span class="ruby-identifier">output</span>)
-87:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-value str">&quot;Request summary&quot;</span>)
-88:   
-89:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">with_style</span>(<span class="ruby-identifier">:cell_separator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>) <span class="ruby-keyword kw">do</span> 
-90:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">table</span>({<span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span>}, {<span class="ruby-identifier">:font</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:bold</span>}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rows</span><span class="ruby-operator">|</span>
-91:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Parsed lines:'</span>,    <span class="ruby-identifier">source</span>.<span class="ruby-identifier">parsed_lines</span>]
-92:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Parsed requests:'</span>, <span class="ruby-identifier">source</span>.<span class="ruby-identifier">parsed_requests</span>]
-93:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Skipped lines:'</span>,   <span class="ruby-identifier">source</span>.<span class="ruby-identifier">skipped_lines</span>]
-94:         
-95:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">&quot;Warnings:&quot;</span>, <span class="ruby-ivar">@warnings_encountered</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{key}: #{value}&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">has_warnings?</span>
-96:         <span class="ruby-keyword kw">end</span>
-97:       <span class="ruby-keyword kw">end</span>
-98:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>
-99:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 127</span>
+127:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report_header</span>(<span class="ruby-identifier">output</span>)
+128:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-value str">&quot;Request summary&quot;</span>)
+129:   
+130:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">with_style</span>(<span class="ruby-identifier">:cell_separator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>) <span class="ruby-keyword kw">do</span> 
+131:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">table</span>({<span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span>}, {<span class="ruby-identifier">:font</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:bold</span>}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rows</span><span class="ruby-operator">|</span>
+132:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Parsed lines:'</span>,    <span class="ruby-identifier">source</span>.<span class="ruby-identifier">parsed_lines</span>]
+133:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Parsed requests:'</span>, <span class="ruby-identifier">source</span>.<span class="ruby-identifier">parsed_requests</span>]
+134:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Skipped lines:'</span>,   <span class="ruby-identifier">source</span>.<span class="ruby-identifier">skipped_lines</span>]
+135:         
+136:           <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">&quot;Warnings:&quot;</span>, <span class="ruby-ivar">@warnings_encountered</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{key}: #{value}&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">has_warnings?</span>
+137:         <span class="ruby-keyword kw">end</span>
+138:       <span class="ruby-keyword kw">end</span>
+139:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>
+140:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000117" class="method-detail">
-        <a name="M000117"></a>
+      <div id="method-M000132" class="method-detail">
+        <a name="M000132"></a>
 
         <div class="method-heading">
-          <a href="#M000117" class="method-signature">
+          <a href="#M000132" class="method-signature">
+          <span class="method-name">save_results_dump</span><span class="method-args">(filename)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Saves the results of all the trackers in YAML format to a file.
+<tt>filename</tt> The file to store the YAML dump in.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000132-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000132-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 98</span>
+ 98:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_results_dump</span>(<span class="ruby-identifier">filename</span>)
+ 99:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-value str">'w'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">to_yaml</span>) }
+100:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000128" class="method-detail">
+        <a name="M000128"></a>
+
+        <div class="method-heading">
+          <a href="#M000128" class="method-signature">
           <span class="method-name">setup</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000117-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000117-source">
+            onclick="toggleCode('M000128-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000128-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 57</span>
-57:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
-58:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 73</span>
+73:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
+74:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000126" class="method-detail">
-        <a name="M000126"></a>
+      <div id="method-M000133" class="method-detail">
+        <a name="M000133"></a>
 
         <div class="method-heading">
-          <a href="#M000126" class="method-signature">
+          <a href="#M000133" class="method-signature">
+          <span class="method-name">to_yaml</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Exports all the tracker results to YAML. It will call the to_yaml_object
+method for every tracker and combines these into a single YAML export.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000133-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000133-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 104</span>
+104:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_yaml</span>
+105:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'yaml'</span>
+106:       <span class="ruby-identifier">trackers_export</span> = <span class="ruby-ivar">@trackers</span>.<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">export</span>, <span class="ruby-identifier">tracker</span><span class="ruby-operator">|</span>
+107:         <span class="ruby-identifier">export</span>[<span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">title</span>] = <span class="ruby-identifier">tracker</span>.<span class="ruby-identifier">to_yaml_object</span>; <span class="ruby-identifier">export</span>
+108:       <span class="ruby-keyword kw">end</span>
+109:       <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">dump</span>(<span class="ruby-identifier">trackers_export</span>)
+110:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
+
+        <div class="method-heading">
+          <a href="#M000139" class="method-signature">
           <span class="method-name">warning</span><span class="method-args">(type, message, lineno)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Store an encountered <a href="Summarizer.html#M000139">warning</a>
+<tt>type</tt> Type of <a href="Summarizer.html#M000139">warning</a>
+<tt>message</tt> Warning message <tt>lineno</tt> The line on which the
+error was encountered
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000126-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000126-source">
+            onclick="toggleCode('M000139-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000139-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 121</span>
-121:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">warning</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span>)
-122:       <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
-123:       <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-124:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 170</span>
+170:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">warning</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span>)
+171:       <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+172:       <span class="ruby-ivar">@warnings_encountered</span>[<span class="ruby-identifier">type</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+173:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

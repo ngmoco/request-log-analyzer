@@ -87,15 +87,19 @@ All other trackers inherit from this class
 Accepts the following options:
 </p>
 <ul>
-<li><tt>:line_type</tt> The line type that contains the duration field
-(determined by the category proc).
-
-</li>
 <li><tt>:if</tt> Proc that has to return !nil for a request to be passed to the
 tracker.
 
 </li>
+<li><tt>:line_type</tt> The line type that contains the duration field
+(determined by the category proc).
+
+</li>
 <li><tt>:output</tt> Direct output here (defaults to STDOUT)
+
+</li>
+<li><tt>:unless</tt> Proc that has to return nil for a request to be passed to
+the tracker.
 
 </li>
 </ul>
@@ -113,12 +117,14 @@ request[:duration] &gt; 1.0 }
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000069">finalize</a>&nbsp;&nbsp;
-      <a href="#M000066">new</a>&nbsp;&nbsp;
-      <a href="#M000067">prepare</a>&nbsp;&nbsp;
-      <a href="#M000071">report</a>&nbsp;&nbsp;
-      <a href="#M000070">should_update?</a>&nbsp;&nbsp;
-      <a href="#M000068">update</a>&nbsp;&nbsp;
+      <a href="#M000074">finalize</a>&nbsp;&nbsp;
+      <a href="#M000071">new</a>&nbsp;&nbsp;
+      <a href="#M000072">prepare</a>&nbsp;&nbsp;
+      <a href="#M000076">report</a>&nbsp;&nbsp;
+      <a href="#M000075">should_update?</a>&nbsp;&nbsp;
+      <a href="#M000077">title</a>&nbsp;&nbsp;
+      <a href="#M000078">to_yaml_object</a>&nbsp;&nbsp;
+      <a href="#M000073">update</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -153,24 +159,42 @@ request[:duration] &gt; 1.0 }
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000066" class="method-detail">
-        <a name="M000066"></a>
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
 
         <div class="method-heading">
-          <a href="#M000066" class="method-signature">
+          <a href="#M000071" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(options ={})</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Initialize the class Note that the options are only applicable if <a
+href="Base.html#M000075">should_update?</a> is not overwritten by the
+inheriting class.
+</p>
+<h3>Options</h3>
+<ul>
+<li><tt>:if</tt> Handle request if this proc is true for the handled request.
+
+</li>
+<li><tt>:unless</tt> Handle request if this proc is false for the handled
+request.
+
+</li>
+<li><tt>:line_type</tt> Line type this tracker will accept.
+
+</li>
+</ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000066-source">
+            onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000071-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 21</span>
-21:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> ={})
-22:       <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
-23:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 30</span>
+30:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> ={})
+31:       <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+32:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -178,128 +202,216 @@ request[:duration] &gt; 1.0 }
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000069" class="method-detail">
-        <a name="M000069"></a>
+      <div id="method-M000074" class="method-detail">
+        <a name="M000074"></a>
 
         <div class="method-heading">
-          <a href="#M000069" class="method-signature">
+          <a href="#M000074" class="method-signature">
           <span class="method-name">finalize</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Hook things that need to be done after running here.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000069-source">
+            onclick="toggleCode('M000074-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000074-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 31</span>
-31:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize</span>
-32:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 44</span>
+44:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize</span>
+45:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000067" class="method-detail">
-        <a name="M000067"></a>
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
 
         <div class="method-heading">
-          <a href="#M000067" class="method-signature">
+          <a href="#M000072" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Hook things that need to be done before running here.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000067-source">
+            onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000072-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 25</span>
-25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
-26:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 35</span>
+35:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
+36:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000071" class="method-detail">
-        <a name="M000071"></a>
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
 
         <div class="method-heading">
-          <a href="#M000071" class="method-signature">
+          <a href="#M000076" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Hook <a href="Base.html#M000076">report</a> generation here. Defaults to
+self.inspect <tt>output</tt> The output object the <a
+href="Base.html#M000076">report</a> will be passed to.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000071-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000071-source">
+            onclick="toggleCode('M000076-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000076-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 52</span>
-52:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
-53:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inspect</span>
-54:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>  
-55:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 78</span>
+78:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
+79:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inspect</span>
+80:       <span class="ruby-identifier">output</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;\n&quot;</span>  
+81:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000070" class="method-detail">
-        <a name="M000070"></a>
+      <div id="method-M000075" class="method-detail">
+        <a name="M000075"></a>
 
         <div class="method-heading">
-          <a href="#M000070" class="method-signature">
+          <a href="#M000075" class="method-signature">
           <span class="method-name">should_update?</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000070-source">
+          <p>
+Determine if we should run the <a href="Base.html#M000073">update</a>
+function at all. Usually the <a href="Base.html#M000073">update</a>
+function will be heavy, so a light check is done here determining if we
+need to call <a href="Base.html#M000073">update</a> at all.
+</p>
+<p>
+Default this checks if defined:
+</p>
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 34</span>
-34:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">should_update?</span>(<span class="ruby-identifier">request</span>)
-35:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:line_type</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">request</span>.<span class="ruby-identifier">has_line_type?</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:line_type</span>])
-36:       
-37:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-38:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>]]
-39:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>)
-40:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>)
-41:       <span class="ruby-keyword kw">end</span>
-42:       
-43:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-44:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>]]
-45:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>)
-46:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>)
-47:       <span class="ruby-keyword kw">end</span>
-48:       
-49:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
-50:     <span class="ruby-keyword kw">end</span>
+ * :line_type is also in the request hash.
+ * :if is true for this request.
+ * :unless if false for this request
+</pre>
+<p>
+<tt>request</tt> The request object.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000075-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000075-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 57</span>
+57:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">should_update?</span>(<span class="ruby-identifier">request</span>)
+58:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:line_type</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">request</span>.<span class="ruby-identifier">has_line_type?</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:line_type</span>])
+59:       
+60:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+61:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>]]
+62:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>)
+63:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:if</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>)
+64:       <span class="ruby-keyword kw">end</span>
+65:       
+66:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+67:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>]]
+68:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>)
+69:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unless</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">request</span>)
+70:       <span class="ruby-keyword kw">end</span>
+71:       
+72:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+73:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000068" class="method-detail">
-        <a name="M000068"></a>
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
 
         <div class="method-heading">
-          <a href="#M000068" class="method-signature">
+          <a href="#M000077" class="method-signature">
+          <span class="method-name">title</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The <a href="Base.html#M000077">title</a> of this tracker. Used for
+reporting.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000077-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000077-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 84</span>
+84:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">title</span>
+85:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>
+86:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="#M000078" class="method-signature">
+          <span class="method-name">to_yaml_object</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method is called by <a
+href="../Aggregator.html">RequestLogAnalyzer::Aggregator</a>:Summarizer to
+retrieve an object with all the results of this tracker, that can be dumped
+to YAML format.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000078-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000078-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 90</span>
+90:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_yaml_object</span>
+91:       <span class="ruby-keyword kw">nil</span>
+92:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000073" class="method-detail">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+          <a href="#M000073" class="method-signature">
           <span class="method-name">update</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Will be called with each request. <tt>request</tt> The request to track
+data in.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000068-source">
+            onclick="toggleCode('M000073-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000073-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 28</span>
-28:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)
-29:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker.rb, line 40</span>
+40:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)
+41:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

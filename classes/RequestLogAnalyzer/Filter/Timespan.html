@@ -102,9 +102,9 @@ Reject all requests not in given timespan Options
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000161">filter</a>&nbsp;&nbsp;
-      <a href="#M000159">new</a>&nbsp;&nbsp;
-      <a href="#M000160">setup_filter</a>&nbsp;&nbsp;
+      <a href="#M000175">filter</a>&nbsp;&nbsp;
+      <a href="#M000173">new</a>&nbsp;&nbsp;
+      <a href="#M000174">setup_filter</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -144,19 +144,19 @@ Reject all requests not in given timespan Options
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000159" class="method-detail">
-        <a name="M000159"></a>
+      <div id="method-M000173" class="method-detail">
+        <a name="M000173"></a>
 
         <div class="method-heading">
-          <a href="#M000159" class="method-signature">
+          <a href="#M000173" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(file_format, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000159-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000159-source">
+            onclick="toggleCode('M000173-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000173-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/filter/timespan.rb, line 11</span>
 11:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-identifier">options</span> = {})
@@ -170,11 +170,11 @@ Reject all requests not in given timespan Options
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000161" class="method-detail">
-        <a name="M000161"></a>
+      <div id="method-M000175" class="method-detail">
+        <a name="M000175"></a>
 
         <div class="method-heading">
-          <a href="#M000161" class="method-signature">
+          <a href="#M000175" class="method-signature">
           <span class="method-name">filter</span><span class="method-args">(request)</span>
           </a>
         </div>
@@ -193,8 +193,8 @@ Returns nil otherwise <tt>request</tt> <a
 href="../Request.html">Request</a> object.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000161-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000161-source">
+            onclick="toggleCode('M000175-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000175-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/filter/timespan.rb, line 30</span>
 30:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter</span>(<span class="ruby-identifier">request</span>)
@@ -213,11 +213,11 @@ href="../Request.html">Request</a> object.
         </div>
       </div>
 
-      <div id="method-M000160" class="method-detail">
-        <a name="M000160"></a>
+      <div id="method-M000174" class="method-detail">
+        <a name="M000174"></a>
 
         <div class="method-heading">
-          <a href="#M000160" class="method-signature">
+          <a href="#M000174" class="method-signature">
           <span class="method-name">setup_filter</span><span class="method-args">()</span>
           </a>
         </div>
@@ -228,8 +228,8 @@ Convert the timestamp to the correct formats for quick timestamp
 comparisons. These are stored in the before and after attr_reader fields.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000160-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000160-source">
+            onclick="toggleCode('M000174-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000174-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/filter/timespan.rb, line 19</span>
 19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_filter</span>

@@ -89,26 +89,30 @@ determines the amount of days inbetween these.
 Accepts the following options:
 </p>
 <ul>
-<li><tt>:line_type</tt> The line type that contains the duration field
-(determined by the category proc).
+<li><tt>:field</tt> The timestamp field that is looked at. Defaults to
+:timestamp.
 
 </li>
 <li><tt>:if</tt> Proc that has to return !nil for a request to be passed to the
 tracker.
 
 </li>
-<li><tt>:field</tt> The timestamp field that is looked at. Defaults to
-:timestamp.
+<li><tt>:line_type</tt> The line type that contains the duration field
+(determined by the category proc).
 
 </li>
-<li><tt>:title</tt> Title do be displayed above the <a
-href="Timespan.html#M000065">report</a>.
+<li><tt>:<a href="Timespan.html#M000069">title</a></tt> Title do be displayed
+above the <a href="Timespan.html#M000068">report</a>.
+
+</li>
+<li><tt>:unless</tt> Proc that has to return nil for a request to be passed to
+the tracker.
 
 </li>
 </ul>
 <p>
 Expects the following items in the <a
-href="Timespan.html#M000061">update</a> request hash
+href="Timespan.html#M000064">update</a> request hash
 </p>
 <ul>
 <li><tt>:timestamp</tt> in YYYYMMDDHHMMSS format.
@@ -133,12 +137,14 @@ Example output:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000062">first_timestamp</a>&nbsp;&nbsp;
-      <a href="#M000063">last_timestamp</a>&nbsp;&nbsp;
-      <a href="#M000060">prepare</a>&nbsp;&nbsp;
-      <a href="#M000065">report</a>&nbsp;&nbsp;
-      <a href="#M000064">timespan</a>&nbsp;&nbsp;
-      <a href="#M000061">update</a>&nbsp;&nbsp;
+      <a href="#M000065">first_timestamp</a>&nbsp;&nbsp;
+      <a href="#M000066">last_timestamp</a>&nbsp;&nbsp;
+      <a href="#M000063">prepare</a>&nbsp;&nbsp;
+      <a href="#M000068">report</a>&nbsp;&nbsp;
+      <a href="#M000067">timespan</a>&nbsp;&nbsp;
+      <a href="#M000069">title</a>&nbsp;&nbsp;
+      <a href="#M000070">to_yaml_object</a>&nbsp;&nbsp;
+      <a href="#M000064">update</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -183,24 +189,53 @@ Example output:
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000062" class="method-detail">
-        <a name="M000062"></a>
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
 
         <div class="method-heading">
-          <a href="#M000062" class="method-signature">
+          <a href="#M000065" class="method-signature">
           <span class="method-name">first_timestamp</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+First timestamp encountered
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000062-source">
+            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000065-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 34</span>
-34:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">first_timestamp</span>
-35:       <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@first</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value str">'%Y%m%d%H%M%S'</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
-36:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 39</span>
+39:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">first_timestamp</span>
+40:       <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@first</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value str">'%Y%m%d%H%M%S'</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+41:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000066" class="method-detail">
+        <a name="M000066"></a>
+
+        <div class="method-heading">
+          <a href="#M000066" class="method-signature">
+          <span class="method-name">last_timestamp</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Last timestamp encountered
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000066-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000066-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 44</span>
+44:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">last_timestamp</span>
+45:       <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@last</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value str">'%Y%m%d%H%M%S'</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>      
+46:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -211,76 +246,141 @@ Example output:
 
         <div class="method-heading">
           <a href="#M000063" class="method-signature">
-          <span class="method-name">last_timestamp</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000063-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 38</span>
-38:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">last_timestamp</span>
-39:       <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-ivar">@last</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value str">'%Y%m%d%H%M%S'</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>      
-40:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000060" class="method-detail">
-        <a name="M000060"></a>
-
-        <div class="method-heading">
-          <a href="#M000060" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Check if timestamp field is set in the options.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000060-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000060-source">
+            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000063-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 23</span>
-23:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
-24:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:field</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">:timestamp</span>
-25:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 25</span>
+25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
+26:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:field</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">:timestamp</span>
+27:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000065" class="method-detail">
-        <a name="M000065"></a>
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
 
         <div class="method-heading">
-          <a href="#M000065" class="method-signature">
+          <a href="#M000068" class="method-signature">
           <span class="method-name">report</span><span class="method-args">(output)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Generate an hourly spread <a href="Timespan.html#M000068">report</a> to the
+given output object. Any options for the <a
+href="Timespan.html#M000068">report</a> should have been set during
+initialize. <tt>output</tt> The output object
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000065-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000065-source">
+            onclick="toggleCode('M000068-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000068-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 46</span>
-46:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
-47:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]
-48:     
-49:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@last</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@first</span>
-50:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">with_style</span>(<span class="ruby-identifier">:cell_separator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>) <span class="ruby-keyword kw">do</span>         
-51:           <span class="ruby-identifier">output</span>.<span class="ruby-identifier">table</span>({<span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span>}, {}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rows</span><span class="ruby-operator">|</span>
-52:             <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'First request:'</span>, <span class="ruby-identifier">first_timestamp</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d %H:%M:%I'</span>)]
-53:             <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Last request:'</span>, <span class="ruby-identifier">last_timestamp</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d %H:%M:%I'</span>)]
-54:             <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Total time analyzed:'</span>, <span class="ruby-node">&quot;#{timespan.ceil} days&quot;</span>]                    
-55:           <span class="ruby-keyword kw">end</span>
-56:         <span class="ruby-keyword kw">end</span>
-57:       <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 56</span>
+56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">report</span>(<span class="ruby-identifier">output</span>)
+57:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>]
 58:     
-59:     <span class="ruby-keyword kw">end</span>
+59:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@last</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@first</span>
+60:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">with_style</span>(<span class="ruby-identifier">:cell_separator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>) <span class="ruby-keyword kw">do</span>         
+61:           <span class="ruby-identifier">output</span>.<span class="ruby-identifier">table</span>({<span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">20</span>}, {}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rows</span><span class="ruby-operator">|</span>
+62:             <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'First request:'</span>, <span class="ruby-identifier">first_timestamp</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d %H:%M:%I'</span>)]
+63:             <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Last request:'</span>, <span class="ruby-identifier">last_timestamp</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y-%m-%d %H:%M:%I'</span>)]
+64:             <span class="ruby-identifier">rows</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-value str">'Total time analyzed:'</span>, <span class="ruby-node">&quot;#{timespan.ceil} days&quot;</span>]                    
+65:           <span class="ruby-keyword kw">end</span>
+66:         <span class="ruby-keyword kw">end</span>
+67:       <span class="ruby-keyword kw">end</span>
+68:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000067" class="method-detail">
+        <a name="M000067"></a>
+
+        <div class="method-heading">
+          <a href="#M000067" class="method-signature">
+          <span class="method-name">timespan</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Difference between last and first timestamp.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000067-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000067-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 49</span>
+49:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">timespan</span>
+50:       <span class="ruby-identifier">last_timestamp</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">first_timestamp</span>
+51:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
+
+        <div class="method-heading">
+          <a href="#M000069" class="method-signature">
+          <span class="method-name">title</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="Timespan.html#M000069">title</a> of this tracker for
+reports
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000069-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000069-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 71</span>
+71:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">title</span>
+72:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:title</span>] <span class="ruby-operator">||</span> <span class="ruby-value str">'Request timespan'</span>
+73:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
+
+        <div class="method-heading">
+          <a href="#M000070" class="method-signature">
+          <span class="method-name">to_yaml_object</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A hash that can be exported to YAML with the first and last timestamp
+encountered.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000070-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000070-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 76</span>
+76:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_yaml_object</span>
+77:       { <span class="ruby-identifier">:first</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">first_timestamp</span>, <span class="ruby-identifier">:last</span>  =<span class="ruby-operator">&gt;</span><span class="ruby-identifier">last_timestamp</span> }
+78:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -291,45 +391,26 @@ Example output:
 
         <div class="method-heading">
           <a href="#M000064" class="method-signature">
-          <span class="method-name">timespan</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000064-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 42</span>
-42:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">timespan</span>
-43:       <span class="ruby-identifier">last_timestamp</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">first_timestamp</span>
-44:     <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000061" class="method-detail">
-        <a name="M000061"></a>
-
-        <div class="method-heading">
-          <a href="#M000061" class="method-signature">
           <span class="method-name">update</span><span class="method-args">(request)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Check if the timestamp in the request and store it. <tt>request</tt> The
+request.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000061-source">
+            onclick="toggleCode('M000064-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000064-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 27</span>
-27:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)
-28:       <span class="ruby-identifier">timestamp</span> = <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:field</span>]]
-29: 
-30:       <span class="ruby-ivar">@first</span> = <span class="ruby-identifier">timestamp</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@first</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">timestamp</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@first</span>
-31:       <span class="ruby-ivar">@last</span>  = <span class="ruby-identifier">timestamp</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@last</span>.<span class="ruby-identifier">nil?</span>  <span class="ruby-operator">||</span> <span class="ruby-identifier">timestamp</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@last</span>
-32:     <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/tracker/timespan.rb, line 31</span>
+31:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">request</span>)
+32:       <span class="ruby-identifier">timestamp</span> = <span class="ruby-identifier">request</span>[<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:field</span>]]
+33: 
+34:       <span class="ruby-ivar">@first</span> = <span class="ruby-identifier">timestamp</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@first</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">timestamp</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@first</span>
+35:       <span class="ruby-ivar">@last</span>  = <span class="ruby-identifier">timestamp</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@last</span>.<span class="ruby-identifier">nil?</span>  <span class="ruby-operator">||</span> <span class="ruby-identifier">timestamp</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@last</span>
+36:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

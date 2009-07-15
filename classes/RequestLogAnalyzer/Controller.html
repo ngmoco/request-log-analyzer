@@ -90,20 +90,20 @@ Aggregators will handle every passed request to yield a meaningfull
 results.
 </p>
 <ul>
-<li>Use the <a href="Controller.html#M000180">build</a>-function to <a
-href="Controller.html#M000180">build</a> a controller instance using
+<li>Use the <a href="Controller.html#M000194">build</a>-function to <a
+href="Controller.html#M000194">build</a> a controller instance using
 command line arguments.
 
 </li>
-<li>Use <a href="Controller.html#M000183">add_aggregator</a> to register a <a
-href="Controller.html#M000181">new</a> aggregator
+<li>Use <a href="Controller.html#M000197">add_aggregator</a> to register a <a
+href="Controller.html#M000195">new</a> aggregator
 
 </li>
-<li>Use add_source to register a <a href="Controller.html#M000181">new</a>
+<li>Use add_source to register a <a href="Controller.html#M000195">new</a>
 aggregator
 
 </li>
-<li>Use the <a href="Controller.html#M000188">run!</a> method to start the
+<li>Use the <a href="Controller.html#M000202">run!</a> method to start the
 parser and send the requests to the aggregators.
 
 </li>
@@ -124,15 +124,15 @@ helpful to parse requests from several logrotated log files.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000184">&gt;&gt;</a>&nbsp;&nbsp;
-      <a href="#M000183">add_aggregator</a>&nbsp;&nbsp;
-      <a href="#M000185">add_filter</a>&nbsp;&nbsp;
-      <a href="#M000187">aggregate_request</a>&nbsp;&nbsp;
-      <a href="#M000180">build</a>&nbsp;&nbsp;
-      <a href="#M000186">filter_request</a>&nbsp;&nbsp;
-      <a href="#M000182">handle_progress</a>&nbsp;&nbsp;
-      <a href="#M000181">new</a>&nbsp;&nbsp;
-      <a href="#M000188">run!</a>&nbsp;&nbsp;
+      <a href="#M000198">&gt;&gt;</a>&nbsp;&nbsp;
+      <a href="#M000197">add_aggregator</a>&nbsp;&nbsp;
+      <a href="#M000199">add_filter</a>&nbsp;&nbsp;
+      <a href="#M000201">aggregate_request</a>&nbsp;&nbsp;
+      <a href="#M000194">build</a>&nbsp;&nbsp;
+      <a href="#M000200">filter_request</a>&nbsp;&nbsp;
+      <a href="#M000196">handle_progress</a>&nbsp;&nbsp;
+      <a href="#M000195">new</a>&nbsp;&nbsp;
+      <a href="#M000202">run!</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -199,11 +199,11 @@ helpful to parse requests from several logrotated log files.
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000180" class="method-detail">
-        <a name="M000180"></a>
+      <div id="method-M000194" class="method-detail">
+        <a name="M000194"></a>
 
         <div class="method-heading">
-          <a href="#M000180" class="method-signature">
+          <a href="#M000194" class="method-signature">
           <span class="method-name">build</span><span class="method-args">(arguments)</span>
           </a>
         </div>
@@ -217,94 +217,96 @@ containing parsed commandline parameters. &lt;rr&gt;report_with</tt> Width
 of the report. Defaults to 80.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000180-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000180-source">
+            onclick="toggleCode('M000194-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000194-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 32</span>
-32:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">arguments</span>)
-33:       <span class="ruby-identifier">options</span> = { }
-34: 
-35:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:database</span>] = <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:database</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:database</span>]
-36:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:debug</span>]    = <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:debug</span>]
-37: 
-38:       <span class="ruby-identifier">output_class</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Output</span><span class="ruby-operator">::</span><span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:output</span>])
-39:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:file</span>]
-40:         <span class="ruby-identifier">output_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:file</span>], <span class="ruby-value str">&quot;w+&quot;</span>)
-41:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:output</span>] = <span class="ruby-identifier">output_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">output_file</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">80</span>, <span class="ruby-identifier">:color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:characters</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:ascii</span>)
-42:       <span class="ruby-keyword kw">else</span>
-43:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:output</span>] = <span class="ruby-identifier">output_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">STDOUT</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:report_width</span>].<span class="ruby-identifier">to_i</span>, 
-44:             <span class="ruby-identifier">:color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:boring</span>], <span class="ruby-identifier">:characters</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:boring</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">:ascii</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:utf</span>))
-45:       <span class="ruby-keyword kw">end</span>
-46:                 
-47:       <span class="ruby-comment cmt"># Create the controller with the correct file format</span>
-48:       <span class="ruby-identifier">file_format</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:format</span>])
-49: 
-50:       <span class="ruby-comment cmt"># register sources</span>
-51:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-52:         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">parameters</span>[<span class="ruby-value">0</span>]
-53:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'STDIN'</span>
-54:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">:source_files</span>, <span class="ruby-identifier">$stdin</span>)
-55:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file</span>)
-56:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">:source_files</span>, <span class="ruby-identifier">file</span>)
-57:         <span class="ruby-keyword kw">else</span>
-58:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;File not found: #{file}&quot;</span>
-59:           <span class="ruby-identifier">exit</span>(<span class="ruby-value">0</span>)
-60:         <span class="ruby-keyword kw">end</span>
-61:       <span class="ruby-keyword kw">else</span>
-62:         <span class="ruby-identifier">options</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">:source_files</span>, <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">parameters</span>)
-63:       <span class="ruby-keyword kw">end</span>
-64:       
-65:       <span class="ruby-identifier">controller</span> = <span class="ruby-constant">Controller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Source</span><span class="ruby-operator">::</span><span class="ruby-constant">LogParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">options</span>)
-66: 
-67:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:parse_strategy</span>] = <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:parse_strategy</span>]
-68:       
-69:       <span class="ruby-comment cmt"># register filters        </span>
-70:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:after</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:before</span>]
-71:         <span class="ruby-identifier">filter_options</span> = {}
-72:         <span class="ruby-identifier">filter_options</span>[<span class="ruby-identifier">:after</span>]  = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:after</span>])  
-73:         <span class="ruby-identifier">filter_options</span>[<span class="ruby-identifier">:before</span>] = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:before</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:before</span>]
-74:         <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">:timespan</span>, <span class="ruby-identifier">filter_options</span>)
-75:       <span class="ruby-keyword kw">end</span>
-76:       
-77:       <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:reject</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">field</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span>
-78:         <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">:field</span>, <span class="ruby-identifier">:mode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:reject</span>, <span class="ruby-identifier">:field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">field</span>, <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>)
-79:       <span class="ruby-keyword kw">end</span>
-80:       
-81:       <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:select</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">field</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span>
-82:         <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">:field</span>, <span class="ruby-identifier">:mode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:select</span>, <span class="ruby-identifier">:field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">field</span>, <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>)
-83:       <span class="ruby-keyword kw">end</span>
-84: 
-85:       <span class="ruby-comment cmt"># register aggregators</span>
-86:       <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:aggregator</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">agg</span>.<span class="ruby-identifier">to_sym</span>) }
-87: 
-88:       <span class="ruby-comment cmt"># register the database </span>
-89:       <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">:database</span>)   <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:database</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:aggregator</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-value str">'database'</span>)
-90:       <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">:summarizer</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:aggregator</span>].<span class="ruby-identifier">empty?</span>
-91:     
-92:       <span class="ruby-comment cmt"># register the echo aggregator in debug mode</span>
-93:       <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">:echo</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:debug</span>]
-94:       
-95:       <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">setup_environment</span>(<span class="ruby-identifier">controller</span>)
-96:           
-97:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">controller</span>
-98:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 32</span>
+ 32:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">arguments</span>)
+ 33:       <span class="ruby-identifier">options</span> = { }
+ 34: 
+ 35:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:database</span>] = <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:database</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:database</span>]
+ 36:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:debug</span>]    = <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:debug</span>]
+ 37:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dump</span>]     = <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:dump</span>]
+ 38: 
+ 39:       <span class="ruby-identifier">output_class</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Output</span><span class="ruby-operator">::</span><span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:output</span>])
+ 40:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:file</span>]
+ 41:         <span class="ruby-identifier">output_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:file</span>], <span class="ruby-value str">&quot;w+&quot;</span>)
+ 42:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:output</span>] = <span class="ruby-identifier">output_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">output_file</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">80</span>, <span class="ruby-identifier">:color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:characters</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:ascii</span>)
+ 43:       <span class="ruby-keyword kw">else</span>
+ 44:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:output</span>] = <span class="ruby-identifier">output_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">STDOUT</span>, <span class="ruby-identifier">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:report_width</span>].<span class="ruby-identifier">to_i</span>, 
+ 45:             <span class="ruby-identifier">:color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:boring</span>], <span class="ruby-identifier">:characters</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:boring</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">:ascii</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:utf</span>))
+ 46:       <span class="ruby-keyword kw">end</span>
+ 47:                 
+ 48:       <span class="ruby-comment cmt"># Create the controller with the correct file format</span>
+ 49:       <span class="ruby-identifier">file_format</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">FileFormat</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:format</span>])
+ 50: 
+ 51:       <span class="ruby-comment cmt"># register sources</span>
+ 52:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+ 53:         <span class="ruby-identifier">file</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">parameters</span>[<span class="ruby-value">0</span>]
+ 54:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">file</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'STDIN'</span>
+ 55:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">:source_files</span>, <span class="ruby-identifier">$stdin</span>)
+ 56:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file</span>)
+ 57:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">:source_files</span>, <span class="ruby-identifier">file</span>)
+ 58:         <span class="ruby-keyword kw">else</span>
+ 59:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;File not found: #{file}&quot;</span>
+ 60:           <span class="ruby-identifier">exit</span>(<span class="ruby-value">0</span>)
+ 61:         <span class="ruby-keyword kw">end</span>
+ 62:       <span class="ruby-keyword kw">else</span>
+ 63:         <span class="ruby-identifier">options</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">:source_files</span>, <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">parameters</span>)
+ 64:       <span class="ruby-keyword kw">end</span>
+ 65:       
+ 66:       <span class="ruby-identifier">controller</span> = <span class="ruby-constant">Controller</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Source</span><span class="ruby-operator">::</span><span class="ruby-constant">LogParser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">options</span>)
+ 67:       <span class="ruby-comment cmt">#controller = Controller.new(RequestLogAnalyzer::Source::Database.new(file_format, options), options)</span>
+ 68: 
+ 69:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:parse_strategy</span>] = <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:parse_strategy</span>]
+ 70:       
+ 71:       <span class="ruby-comment cmt"># register filters        </span>
+ 72:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:after</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:before</span>]
+ 73:         <span class="ruby-identifier">filter_options</span> = {}
+ 74:         <span class="ruby-identifier">filter_options</span>[<span class="ruby-identifier">:after</span>]  = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:after</span>])  
+ 75:         <span class="ruby-identifier">filter_options</span>[<span class="ruby-identifier">:before</span>] = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:before</span>]) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:before</span>]
+ 76:         <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">:timespan</span>, <span class="ruby-identifier">filter_options</span>)
+ 77:       <span class="ruby-keyword kw">end</span>
+ 78:       
+ 79:       <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:reject</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">field</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span>
+ 80:         <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">:field</span>, <span class="ruby-identifier">:mode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:reject</span>, <span class="ruby-identifier">:field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">field</span>, <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>)
+ 81:       <span class="ruby-keyword kw">end</span>
+ 82:       
+ 83:       <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:select</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">field</span>, <span class="ruby-identifier">value</span>)<span class="ruby-operator">|</span>
+ 84:         <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">:field</span>, <span class="ruby-identifier">:mode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:select</span>, <span class="ruby-identifier">:field</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">field</span>, <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>)
+ 85:       <span class="ruby-keyword kw">end</span>
+ 86: 
+ 87:       <span class="ruby-comment cmt"># register aggregators</span>
+ 88:       <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:aggregator</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">agg</span>.<span class="ruby-identifier">to_sym</span>) }
+ 89: 
+ 90:       <span class="ruby-comment cmt"># register the database </span>
+ 91:       <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">:database</span>)   <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:database</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:aggregator</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-value str">'database'</span>)
+ 92:       <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">:summarizer</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:aggregator</span>].<span class="ruby-identifier">empty?</span>
+ 93:     
+ 94:       <span class="ruby-comment cmt"># register the echo aggregator in debug mode</span>
+ 95:       <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">:echo</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arguments</span>[<span class="ruby-identifier">:debug</span>]
+ 96:       
+ 97:       <span class="ruby-identifier">file_format</span>.<span class="ruby-identifier">setup_environment</span>(<span class="ruby-identifier">controller</span>)
+ 98:           
+ 99:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">controller</span>
+100:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000181" class="method-detail">
-        <a name="M000181"></a>
+      <div id="method-M000195" class="method-detail">
+        <a name="M000195"></a>
 
         <div class="method-heading">
-          <a href="#M000181" class="method-signature">
+          <a href="#M000195" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(source, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Builds a <a href="Controller.html#M000181">new</a> <a
+Builds a <a href="Controller.html#M000195">new</a> <a
 href="Controller.html">Controller</a> for the given log file format.
 <tt>format</tt> Logfile format. Defaults to :rails Options are passd on to
 the LogParser.
@@ -330,27 +332,27 @@ the LogParser.
 </li>
 </ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000181-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000181-source">
+            onclick="toggleCode('M000195-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000195-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 109</span>
-109:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
-110: 
-111:       <span class="ruby-ivar">@source</span>      = <span class="ruby-identifier">source</span>
-112:       <span class="ruby-ivar">@options</span>     = <span class="ruby-identifier">options</span>
-113:       <span class="ruby-ivar">@aggregators</span> = []
-114:       <span class="ruby-ivar">@filters</span>     = []
-115:       <span class="ruby-ivar">@output</span>      = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:output</span>]
-116:       
-117:       <span class="ruby-comment cmt"># Requester format through RequestLogAnalyzer::FileFormat and construct the parser</span>
-118:       <span class="ruby-identifier">register_file_format</span>(<span class="ruby-ivar">@source</span>.<span class="ruby-identifier">file_format</span>) 
-119:       
-120:       <span class="ruby-comment cmt"># Pass all warnings to every aggregator so they can do something useful with them.</span>
-121:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">warning</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span><span class="ruby-operator">|</span>  <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">warning</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span>) } } <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@source</span>
-122: 
-123:       <span class="ruby-comment cmt"># Handle progress messagess</span>
-124:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">progress</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">message</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">value</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@source</span>
-125:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 111</span>
+111:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
+112: 
+113:       <span class="ruby-ivar">@source</span>      = <span class="ruby-identifier">source</span>
+114:       <span class="ruby-ivar">@options</span>     = <span class="ruby-identifier">options</span>
+115:       <span class="ruby-ivar">@aggregators</span> = []
+116:       <span class="ruby-ivar">@filters</span>     = []
+117:       <span class="ruby-ivar">@output</span>      = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:output</span>]
+118:       
+119:       <span class="ruby-comment cmt"># Requester format through RequestLogAnalyzer::FileFormat and construct the parser</span>
+120:       <span class="ruby-identifier">register_file_format</span>(<span class="ruby-ivar">@source</span>.<span class="ruby-identifier">file_format</span>) 
+121:       
+122:       <span class="ruby-comment cmt"># Pass all warnings to every aggregator so they can do something useful with them.</span>
+123:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">warning</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span><span class="ruby-operator">|</span>  <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">warning</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">lineno</span>) } } <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@source</span>
+124: 
+125:       <span class="ruby-comment cmt"># Handle progress messagess</span>
+126:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">progress</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">message</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">value</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@source</span>
+127:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -358,8 +360,8 @@ the LogParser.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000184" class="method-detail">
-        <a name="M000184"></a>
+      <div id="method-M000198" class="method-detail">
+        <a name="M000198"></a>
 
         <div class="method-heading">
           <span class="method-name">&gt;&gt;</span><span class="method-args">(agg)</span>
@@ -367,16 +369,16 @@ the LogParser.
       
         <div class="method-description">
           <p>
-Alias for <a href="Controller.html#M000183">add_aggregator</a>
+Alias for <a href="Controller.html#M000197">add_aggregator</a>
 </p>
         </div>
       </div>
 
-      <div id="method-M000183" class="method-detail">
-        <a name="M000183"></a>
+      <div id="method-M000197" class="method-detail">
+        <a name="M000197"></a>
 
         <div class="method-heading">
-          <a href="#M000183" class="method-signature">
+          <a href="#M000197" class="method-signature">
           <span class="method-name">add_aggregator</span><span class="method-args">(agg)</span>
           </a>
         </div>
@@ -387,24 +389,24 @@ Adds an aggregator to the controller. The aggregator will be called for
 every request that is parsed from the provided sources (see add_source)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000183-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000183-source">
+            onclick="toggleCode('M000197-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000197-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 150</span>
-150:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">agg</span>)      
-151:       <span class="ruby-identifier">agg</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Aggregator</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">agg</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-152:       <span class="ruby-ivar">@aggregators</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@source</span>, <span class="ruby-ivar">@options</span>)
-153:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 152</span>
+152:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">agg</span>)      
+153:       <span class="ruby-identifier">agg</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Aggregator</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">agg</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+154:       <span class="ruby-ivar">@aggregators</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@source</span>, <span class="ruby-ivar">@options</span>)
+155:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000185" class="method-detail">
-        <a name="M000185"></a>
+      <div id="method-M000199" class="method-detail">
+        <a name="M000199"></a>
 
         <div class="method-heading">
-          <a href="#M000185" class="method-signature">
+          <a href="#M000199" class="method-signature">
           <span class="method-name">add_filter</span><span class="method-args">(filter, filter_options = {})</span>
           </a>
         </div>
@@ -414,24 +416,24 @@ every request that is parsed from the provided sources (see add_source)
 Adds a request filter to the controller.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000185-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000185-source">
+            onclick="toggleCode('M000199-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000199-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 158</span>
-158:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">filter</span>, <span class="ruby-identifier">filter_options</span> = {})
-159:       <span class="ruby-identifier">filter</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Filter</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">filter</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-160:       <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">filter_options</span>))
-161:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 160</span>
+160:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">filter</span>, <span class="ruby-identifier">filter_options</span> = {})
+161:       <span class="ruby-identifier">filter</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Filter</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">filter</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+162:       <span class="ruby-ivar">@filters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file_format</span>, <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">filter_options</span>))
+163:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000187" class="method-detail">
-        <a name="M000187"></a>
+      <div id="method-M000201" class="method-detail">
+        <a name="M000201"></a>
 
         <div class="method-heading">
-          <a href="#M000187" class="method-signature">
+          <a href="#M000201" class="method-signature">
           <span class="method-name">aggregate_request</span><span class="method-args">(request)</span>
           </a>
         </div>
@@ -442,24 +444,24 @@ Push a request to all the aggregators (@aggregators). <tt>request</tt> The
 request to push to the aggregators.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000187-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000187-source">
+            onclick="toggleCode('M000201-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000201-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 176</span>
-176:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aggregate_request</span>(<span class="ruby-identifier">request</span>)
-177:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">request</span>
-178:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">aggregate</span>(<span class="ruby-identifier">request</span>) }
-179:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 178</span>
+178:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aggregate_request</span>(<span class="ruby-identifier">request</span>)
+179:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">request</span>
+180:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">aggregate</span>(<span class="ruby-identifier">request</span>) }
+181:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000186" class="method-detail">
-        <a name="M000186"></a>
+      <div id="method-M000200" class="method-detail">
+        <a name="M000200"></a>
 
         <div class="method-heading">
-          <a href="#M000186" class="method-signature">
+          <a href="#M000200" class="method-signature">
           <span class="method-name">filter_request</span><span class="method-args">(request)</span>
           </a>
         </div>
@@ -470,27 +472,27 @@ Push a request through the entire filterchain (@filters). <tt>request</tt>
 The request to filter. Returns the filtered request or nil.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000186-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000186-source">
+            onclick="toggleCode('M000200-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000200-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 166</span>
-166:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_request</span>(<span class="ruby-identifier">request</span>)
-167:       <span class="ruby-ivar">@filters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span> 
-168:         <span class="ruby-identifier">request</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">request</span>)
-169:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">nil?</span>
-170:       <span class="ruby-keyword kw">end</span>
-171:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>
-172:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 168</span>
+168:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_request</span>(<span class="ruby-identifier">request</span>)
+169:       <span class="ruby-ivar">@filters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span> 
+170:         <span class="ruby-identifier">request</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">filter</span>(<span class="ruby-identifier">request</span>)
+171:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">nil?</span>
+172:       <span class="ruby-keyword kw">end</span>
+173:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">request</span>
+174:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000182" class="method-detail">
-        <a name="M000182"></a>
+      <div id="method-M000196" class="method-detail">
+        <a name="M000196"></a>
 
         <div class="method-heading">
-          <a href="#M000182" class="method-signature">
+          <a href="#M000196" class="method-signature">
           <span class="method-name">handle_progress</span><span class="method-args">(message, value = nil)</span>
           </a>
         </div>
@@ -503,36 +505,36 @@ and :finished or :interrupted when done. <tt>message</tt> Current state
 current line.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000182-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000182-source">
+            onclick="toggleCode('M000196-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000196-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 131</span>
-131:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">nil</span>)
-132:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">message</span>
-133:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:started</span>
-134:         <span class="ruby-ivar">@progress_bar</span> = <span class="ruby-constant">CommandLine</span><span class="ruby-operator">::</span><span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">value</span>), <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">value</span>), <span class="ruby-constant">STDOUT</span>)
-135:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:finished</span>
-136:         <span class="ruby-ivar">@progress_bar</span>.<span class="ruby-identifier">finish</span>
-137:         <span class="ruby-ivar">@progress_bar</span> = <span class="ruby-keyword kw">nil</span>
-138:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:interrupted</span>
-139:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@progress_bar</span>
-140:           <span class="ruby-ivar">@progress_bar</span>.<span class="ruby-identifier">halt</span>
-141:           <span class="ruby-ivar">@progress_bar</span> = <span class="ruby-keyword kw">nil</span>
-142:         <span class="ruby-keyword kw">end</span>
-143:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:progress</span>
-144:         <span class="ruby-ivar">@progress_bar</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">value</span>)
-145:       <span class="ruby-keyword kw">end</span>
-146:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 133</span>
+133:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">nil</span>)
+134:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">message</span>
+135:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:started</span>
+136:         <span class="ruby-ivar">@progress_bar</span> = <span class="ruby-constant">CommandLine</span><span class="ruby-operator">::</span><span class="ruby-constant">ProgressBar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">value</span>), <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">value</span>), <span class="ruby-constant">STDOUT</span>)
+137:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:finished</span>
+138:         <span class="ruby-ivar">@progress_bar</span>.<span class="ruby-identifier">finish</span>
+139:         <span class="ruby-ivar">@progress_bar</span> = <span class="ruby-keyword kw">nil</span>
+140:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:interrupted</span>
+141:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@progress_bar</span>
+142:           <span class="ruby-ivar">@progress_bar</span>.<span class="ruby-identifier">halt</span>
+143:           <span class="ruby-ivar">@progress_bar</span> = <span class="ruby-keyword kw">nil</span>
+144:         <span class="ruby-keyword kw">end</span>
+145:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:progress</span>
+146:         <span class="ruby-ivar">@progress_bar</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">value</span>)
+147:       <span class="ruby-keyword kw">end</span>
+148:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000188" class="method-detail">
-        <a name="M000188"></a>
+      <div id="method-M000202" class="method-detail">
+        <a name="M000202"></a>
 
         <div class="method-heading">
-          <a href="#M000188" class="method-signature">
+          <a href="#M000202" class="method-signature">
           <span class="method-name">run!</span><span class="method-args">()</span>
           </a>
         </div>
@@ -565,38 +567,40 @@ Runs <a href="../RequestLogAnalyzer.html">RequestLogAnalyzer</a>
 </li>
 </ol>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000188-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000188-source">
+            onclick="toggleCode('M000202-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000202-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 189</span>
-189:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>
-190:       
-191:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">prepare</span> }
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 191</span>
+191:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>
 192:       
-193:       <span class="ruby-keyword kw">begin</span>
-194:         <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">each_request</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
-195:           <span class="ruby-identifier">aggregate_request</span>(<span class="ruby-identifier">filter_request</span>(<span class="ruby-identifier">request</span>))
-196:         <span class="ruby-keyword kw">end</span>
-197:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Interrupt</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
-198:         <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">:interrupted</span>)
-199:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Caught interrupt! Stopped parsing.&quot;</span>
-200:       <span class="ruby-keyword kw">end</span>
-201: 
-202:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">finalize</span> }
+193:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">prepare</span> }
+194:       
+195:       <span class="ruby-keyword kw">begin</span>
+196:         <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">each_request</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
+197:           <span class="ruby-identifier">aggregate_request</span>(<span class="ruby-identifier">filter_request</span>(<span class="ruby-identifier">request</span>))
+198:         <span class="ruby-keyword kw">end</span>
+199:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Interrupt</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+200:         <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">:interrupted</span>)
+201:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Caught interrupt! Stopped parsing.&quot;</span>
+202:       <span class="ruby-keyword kw">end</span>
 203: 
-204:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">header</span>
-205:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">report</span>(<span class="ruby-ivar">@output</span>) }
-206:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">footer</span>
-207:             
-208:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">finalize</span>
-209:       
-210:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">File</span>)
-211:         <span class="ruby-identifier">puts</span>
-212:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Report written to: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">path</span>)
-213:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Thanks for using request-log-analyzer!&quot;</span>
-214:         <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">close</span>
-215:       <span class="ruby-keyword kw">end</span>
-216:     <span class="ruby-keyword kw">end</span>
+204:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">finalize</span> }
+205: 
+206:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">header</span>
+207:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">report</span>(<span class="ruby-ivar">@output</span>) }
+208:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">footer</span>
+209:             
+210:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">finalize</span>
+211:       
+212:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">File</span>)
+213:         <span class="ruby-identifier">puts</span>
+214:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Report written to: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">path</span>)
+215:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Need an expert to analyze your application?&quot;</span>
+216:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Mail to contact@railsdoctors.com or visit us at http://railsdoctors.com&quot;</span>
+217:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Thanks for using request-log-analyzer!&quot;</span>
+218:         <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">close</span>
+219:       <span class="ruby-keyword kw">end</span>
+220:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

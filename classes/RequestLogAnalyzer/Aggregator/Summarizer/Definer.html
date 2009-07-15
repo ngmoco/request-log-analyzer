@@ -86,13 +86,13 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000132">duration</a>&nbsp;&nbsp;
-      <a href="#M000131">frequency</a>&nbsp;&nbsp;
-      <a href="#M000128">initialize_copy</a>&nbsp;&nbsp;
-      <a href="#M000130">method_missing</a>&nbsp;&nbsp;
-      <a href="#M000127">new</a>&nbsp;&nbsp;
-      <a href="#M000129">reset!</a>&nbsp;&nbsp;
-      <a href="#M000133">track</a>&nbsp;&nbsp;
+      <a href="#M000145">duration</a>&nbsp;&nbsp;
+      <a href="#M000144">frequency</a>&nbsp;&nbsp;
+      <a href="#M000141">initialize_copy</a>&nbsp;&nbsp;
+      <a href="#M000143">method_missing</a>&nbsp;&nbsp;
+      <a href="#M000140">new</a>&nbsp;&nbsp;
+      <a href="#M000142">reset!</a>&nbsp;&nbsp;
+      <a href="#M000146">track</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -127,24 +127,27 @@
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000127" class="method-detail">
-        <a name="M000127"></a>
+      <div id="method-M000140" class="method-detail">
+        <a name="M000140"></a>
 
         <div class="method-heading">
-          <a href="#M000127" class="method-signature">
+          <a href="#M000140" class="method-signature">
           <span class="method-name">new</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Initialize tracker array
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000127-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000127-source">
+            onclick="toggleCode('M000140-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000140-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 9</span>
- 9:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
-10:         <span class="ruby-ivar">@trackers</span> = []
-11:       <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 10</span>
+10:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+11:         <span class="ruby-ivar">@trackers</span> = []
+12:       <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -152,26 +155,67 @@
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000132" class="method-detail">
-        <a name="M000132"></a>
+      <div id="method-M000145" class="method-detail">
+        <a name="M000145"></a>
 
         <div class="method-heading">
-          <a href="#M000132" class="method-signature">
+          <a href="#M000145" class="method-signature">
           <span class="method-name">duration</span><span class="method-args">(duration_field, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Track the <a href="Definer.html#M000145">duration</a> of a specific
+category <tt>duration_field</tt> Field to <a
+href="Definer.html#M000146">track</a> <tt>options</tt> options are passed
+to <a href="Definer.html#M000140">new</a> <a
+href="Definer.html#M000144">frequency</a> tracker
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000132-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000132-source">
+            onclick="toggleCode('M000145-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000145-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 44</span>
+44:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">duration</span>(<span class="ruby-identifier">duration_field</span>, <span class="ruby-identifier">options</span> = {})
+45:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">duration_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+46:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:duration</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:duration</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">duration_field</span>))
+47:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">duration_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
+48:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:duration</span>, <span class="ruby-identifier">duration_field</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>))        
+49:         <span class="ruby-keyword kw">end</span>
+50:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000144" class="method-detail">
+        <a name="M000144"></a>
+
+        <div class="method-heading">
+          <a href="#M000144" class="method-signature">
+          <span class="method-name">frequency</span><span class="method-args">(category_field, options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Track the <a href="Definer.html#M000144">frequency</a> of a specific
+category <tt>category_field</tt> Field to <a
+href="Definer.html#M000146">track</a> <tt>options</tt> options are passed
+to <a href="Definer.html#M000140">new</a> <a
+href="Definer.html#M000144">frequency</a> tracker
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000144-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000144-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 33</span>
-33:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">duration</span>(<span class="ruby-identifier">duration_field</span>, <span class="ruby-identifier">options</span> = {})
-34:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">duration_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-35:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:duration</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:duration</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">duration_field</span>))
-36:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">duration_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
-37:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:duration</span>, <span class="ruby-identifier">duration_field</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>))        
+33:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">frequency</span>(<span class="ruby-identifier">category_field</span>, <span class="ruby-identifier">options</span> = {})
+34:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">category_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+35:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:frequency</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:category</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">category_field</span>))
+36:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">category_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
+37:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:frequency</span>, <span class="ruby-identifier">category_field</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>))
 38:         <span class="ruby-keyword kw">end</span>
 39:       <span class="ruby-keyword kw">end</span>
 </pre>
@@ -179,121 +223,109 @@
         </div>
       </div>
 
-      <div id="method-M000131" class="method-detail">
-        <a name="M000131"></a>
+      <div id="method-M000141" class="method-detail">
+        <a name="M000141"></a>
 
         <div class="method-heading">
-          <a href="#M000131" class="method-signature">
-          <span class="method-name">frequency</span><span class="method-args">(category_field, options = {})</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000131-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000131-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 25</span>
-25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">frequency</span>(<span class="ruby-identifier">category_field</span>, <span class="ruby-identifier">options</span> = {})
-26:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">category_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-27:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:frequency</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:category</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">category_field</span>))
-28:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">category_field</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Hash</span>)
-29:           <span class="ruby-identifier">track</span>(<span class="ruby-identifier">:frequency</span>, <span class="ruby-identifier">category_field</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>))
-30:         <span class="ruby-keyword kw">end</span>
-31:       <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000128" class="method-detail">
-        <a name="M000128"></a>
-
-        <div class="method-heading">
-          <a href="#M000128" class="method-signature">
+          <a href="#M000141" class="method-signature">
           <span class="method-name">initialize_copy</span><span class="method-args">(other)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Initialize tracker summarizer by duping the trackers of another summarizer
+<tt>other</tt> The other <a href="../Summarizer.html">Summarizer</a>
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000128-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000128-source">
+            onclick="toggleCode('M000141-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000141-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 13</span>
-13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_copy</span>(<span class="ruby-identifier">other</span>)
-14:         <span class="ruby-ivar">@trackers</span> = <span class="ruby-identifier">other</span>.<span class="ruby-identifier">trackers</span>.<span class="ruby-identifier">dup</span>
-15:       <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 16</span>
+16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_copy</span>(<span class="ruby-identifier">other</span>)
+17:         <span class="ruby-ivar">@trackers</span> = <span class="ruby-identifier">other</span>.<span class="ruby-identifier">trackers</span>.<span class="ruby-identifier">dup</span>
+18:       <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000130" class="method-detail">
-        <a name="M000130"></a>
+      <div id="method-M000143" class="method-detail">
+        <a name="M000143"></a>
 
         <div class="method-heading">
-          <a href="#M000130" class="method-signature">
+          <a href="#M000143" class="method-signature">
           <span class="method-name">method_missing</span><span class="method-args">(tracker_method, *args)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Include missing trackers through method missing.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000130-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000130-source">
+            onclick="toggleCode('M000143-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000143-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 26</span>
+26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">tracker_method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+27:         <span class="ruby-identifier">track</span>(<span class="ruby-identifier">tracker_method</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>)
+28:       <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000142" class="method-detail">
+        <a name="M000142"></a>
+
+        <div class="method-heading">
+          <a href="#M000142" class="method-signature">
+          <span class="method-name">reset!</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Drop all trackers
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000142-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000142-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 21</span>
-21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">tracker_method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-22:         <span class="ruby-identifier">track</span>(<span class="ruby-identifier">tracker_method</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>)
+21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset!</span>
+22:         <span class="ruby-ivar">@trackers</span> = []
 23:       <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000129" class="method-detail">
-        <a name="M000129"></a>
+      <div id="method-M000146" class="method-detail">
+        <a name="M000146"></a>
 
         <div class="method-heading">
-          <a href="#M000129" class="method-signature">
-          <span class="method-name">reset!</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000129-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000129-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 17</span>
-17:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset!</span>
-18:         <span class="ruby-ivar">@trackers</span> = []
-19:       <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000133" class="method-detail">
-        <a name="M000133"></a>
-
-        <div class="method-heading">
-          <a href="#M000133" class="method-signature">
+          <a href="#M000146" class="method-signature">
           <span class="method-name">track</span><span class="method-args">(tracker_klass, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Helper function to initialize a tracker and add it to the tracker array.
+<tt>tracker_class</tt> The class to include <tt>optiont</tt> The options to
+pass to the trackers.
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000133-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000133-source">
+            onclick="toggleCode('M000146-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000146-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 41</span>
-41:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">track</span>(<span class="ruby-identifier">tracker_klass</span>, <span class="ruby-identifier">options</span> = {})
-42:         <span class="ruby-identifier">tracker_klass</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Tracker</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">tracker_klass</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tracker_klass</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
-43:         <span class="ruby-ivar">@trackers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">tracker_klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>)
-44:       <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File lib/request_log_analyzer/aggregator/summarizer.rb, line 55</span>
+55:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">track</span>(<span class="ruby-identifier">tracker_klass</span>, <span class="ruby-identifier">options</span> = {})
+56:         <span class="ruby-identifier">tracker_klass</span> = <span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-constant">Tracker</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-constant">RequestLogAnalyzer</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_camelcase</span>(<span class="ruby-identifier">tracker_klass</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tracker_klass</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+57:         <span class="ruby-ivar">@trackers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">tracker_klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>)
+58:       <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -90,20 +90,20 @@ Aggregators will handle every passed request to yield a meaningfull
 results.
 </p>
 <ul>
-<li>Use the <a href="Controller.html#M000194">build</a>-function to <a
-href="Controller.html#M000194">build</a> a controller instance using
+<li>Use the <a href="Controller.html#M000197">build</a>-function to <a
+href="Controller.html#M000197">build</a> a controller instance using
 command line arguments.
 
 </li>
-<li>Use <a href="Controller.html#M000197">add_aggregator</a> to register a <a
-href="Controller.html#M000195">new</a> aggregator
+<li>Use <a href="Controller.html#M000200">add_aggregator</a> to register a <a
+href="Controller.html#M000198">new</a> aggregator
 
 </li>
-<li>Use add_source to register a <a href="Controller.html#M000195">new</a>
+<li>Use add_source to register a <a href="Controller.html#M000198">new</a>
 aggregator
 
 </li>
-<li>Use the <a href="Controller.html#M000202">run!</a> method to start the
+<li>Use the <a href="Controller.html#M000205">run!</a> method to start the
 parser and send the requests to the aggregators.
 
 </li>
@@ -124,15 +124,16 @@ helpful to parse requests from several logrotated log files.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000198">&gt;&gt;</a>&nbsp;&nbsp;
-      <a href="#M000197">add_aggregator</a>&nbsp;&nbsp;
-      <a href="#M000199">add_filter</a>&nbsp;&nbsp;
-      <a href="#M000201">aggregate_request</a>&nbsp;&nbsp;
-      <a href="#M000194">build</a>&nbsp;&nbsp;
-      <a href="#M000200">filter_request</a>&nbsp;&nbsp;
-      <a href="#M000196">handle_progress</a>&nbsp;&nbsp;
-      <a href="#M000195">new</a>&nbsp;&nbsp;
-      <a href="#M000202">run!</a>&nbsp;&nbsp;
+      <a href="#M000201">&gt;&gt;</a>&nbsp;&nbsp;
+      <a href="#M000200">add_aggregator</a>&nbsp;&nbsp;
+      <a href="#M000202">add_filter</a>&nbsp;&nbsp;
+      <a href="#M000204">aggregate_request</a>&nbsp;&nbsp;
+      <a href="#M000197">build</a>&nbsp;&nbsp;
+      <a href="#M000203">filter_request</a>&nbsp;&nbsp;
+      <a href="#M000199">handle_progress</a>&nbsp;&nbsp;
+      <a href="#M000206">install_signal_handlers</a>&nbsp;&nbsp;
+      <a href="#M000198">new</a>&nbsp;&nbsp;
+      <a href="#M000205">run!</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -199,11 +200,11 @@ helpful to parse requests from several logrotated log files.
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000194" class="method-detail">
-        <a name="M000194"></a>
+      <div id="method-M000197" class="method-detail">
+        <a name="M000197"></a>
 
         <div class="method-heading">
-          <a href="#M000194" class="method-signature">
+          <a href="#M000197" class="method-signature">
           <span class="method-name">build</span><span class="method-args">(arguments)</span>
           </a>
         </div>
@@ -217,8 +218,8 @@ containing parsed commandline parameters. &lt;rr&gt;report_with</tt> Width
 of the report. Defaults to 80.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000194-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000194-source">
+            onclick="toggleCode('M000197-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000197-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 32</span>
  32:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">arguments</span>)
@@ -295,18 +296,18 @@ of the report. Defaults to 80.
         </div>
       </div>
 
-      <div id="method-M000195" class="method-detail">
-        <a name="M000195"></a>
+      <div id="method-M000198" class="method-detail">
+        <a name="M000198"></a>
 
         <div class="method-heading">
-          <a href="#M000195" class="method-signature">
+          <a href="#M000198" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(source, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Builds a <a href="Controller.html#M000195">new</a> <a
+Builds a <a href="Controller.html#M000198">new</a> <a
 href="Controller.html">Controller</a> for the given log file format.
 <tt>format</tt> Logfile format. Defaults to :rails Options are passd on to
 the LogParser.
@@ -332,8 +333,8 @@ the LogParser.
 </li>
 </ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000195-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000195-source">
+            onclick="toggleCode('M000198-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000198-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 111</span>
 111:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span> = {})
@@ -360,8 +361,8 @@ the LogParser.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000198" class="method-detail">
-        <a name="M000198"></a>
+      <div id="method-M000201" class="method-detail">
+        <a name="M000201"></a>
 
         <div class="method-heading">
           <span class="method-name">&gt;&gt;</span><span class="method-args">(agg)</span>
@@ -369,16 +370,16 @@ the LogParser.
       
         <div class="method-description">
           <p>
-Alias for <a href="Controller.html#M000197">add_aggregator</a>
+Alias for <a href="Controller.html#M000200">add_aggregator</a>
 </p>
         </div>
       </div>
 
-      <div id="method-M000197" class="method-detail">
-        <a name="M000197"></a>
+      <div id="method-M000200" class="method-detail">
+        <a name="M000200"></a>
 
         <div class="method-heading">
-          <a href="#M000197" class="method-signature">
+          <a href="#M000200" class="method-signature">
           <span class="method-name">add_aggregator</span><span class="method-args">(agg)</span>
           </a>
         </div>
@@ -389,8 +390,8 @@ Adds an aggregator to the controller. The aggregator will be called for
 every request that is parsed from the provided sources (see add_source)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000197-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000197-source">
+            onclick="toggleCode('M000200-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000200-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 152</span>
 152:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_aggregator</span>(<span class="ruby-identifier">agg</span>)      
@@ -402,11 +403,11 @@ every request that is parsed from the provided sources (see add_source)
         </div>
       </div>
 
-      <div id="method-M000199" class="method-detail">
-        <a name="M000199"></a>
+      <div id="method-M000202" class="method-detail">
+        <a name="M000202"></a>
 
         <div class="method-heading">
-          <a href="#M000199" class="method-signature">
+          <a href="#M000202" class="method-signature">
           <span class="method-name">add_filter</span><span class="method-args">(filter, filter_options = {})</span>
           </a>
         </div>
@@ -416,8 +417,8 @@ every request that is parsed from the provided sources (see add_source)
 Adds a request filter to the controller.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000199-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000199-source">
+            onclick="toggleCode('M000202-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000202-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 160</span>
 160:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_filter</span>(<span class="ruby-identifier">filter</span>, <span class="ruby-identifier">filter_options</span> = {})
@@ -429,11 +430,11 @@ Adds a request filter to the controller.
         </div>
       </div>
 
-      <div id="method-M000201" class="method-detail">
-        <a name="M000201"></a>
+      <div id="method-M000204" class="method-detail">
+        <a name="M000204"></a>
 
         <div class="method-heading">
-          <a href="#M000201" class="method-signature">
+          <a href="#M000204" class="method-signature">
           <span class="method-name">aggregate_request</span><span class="method-args">(request)</span>
           </a>
         </div>
@@ -444,8 +445,8 @@ Push a request to all the aggregators (@aggregators). <tt>request</tt> The
 request to push to the aggregators.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000201-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000201-source">
+            onclick="toggleCode('M000204-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000204-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 178</span>
 178:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">aggregate_request</span>(<span class="ruby-identifier">request</span>)
@@ -457,11 +458,11 @@ request to push to the aggregators.
         </div>
       </div>
 
-      <div id="method-M000200" class="method-detail">
-        <a name="M000200"></a>
+      <div id="method-M000203" class="method-detail">
+        <a name="M000203"></a>
 
         <div class="method-heading">
-          <a href="#M000200" class="method-signature">
+          <a href="#M000203" class="method-signature">
           <span class="method-name">filter_request</span><span class="method-args">(request)</span>
           </a>
         </div>
@@ -472,8 +473,8 @@ Push a request through the entire filterchain (@filters). <tt>request</tt>
 The request to filter. Returns the filtered request or nil.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000200-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000200-source">
+            onclick="toggleCode('M000203-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000203-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 168</span>
 168:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filter_request</span>(<span class="ruby-identifier">request</span>)
@@ -488,11 +489,11 @@ The request to filter. Returns the filtered request or nil.
         </div>
       </div>
 
-      <div id="method-M000196" class="method-detail">
-        <a name="M000196"></a>
+      <div id="method-M000199" class="method-detail">
+        <a name="M000199"></a>
 
         <div class="method-heading">
-          <a href="#M000196" class="method-signature">
+          <a href="#M000199" class="method-signature">
           <span class="method-name">handle_progress</span><span class="method-args">(message, value = nil)</span>
           </a>
         </div>
@@ -505,8 +506,8 @@ and :finished or :interrupted when done. <tt>message</tt> Current state
 current line.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000196-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000196-source">
+            onclick="toggleCode('M000199-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000199-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 133</span>
 133:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">nil</span>)
@@ -530,11 +531,38 @@ current line.
         </div>
       </div>
 
-      <div id="method-M000202" class="method-detail">
-        <a name="M000202"></a>
+      <div id="method-M000206" class="method-detail">
+        <a name="M000206"></a>
 
         <div class="method-heading">
-          <a href="#M000202" class="method-signature">
+          <a href="#M000206" class="method-signature">
+          <span class="method-name">install_signal_handlers</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000206-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000206-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 219</span>
+219:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_signal_handlers</span>
+220:       <span class="ruby-constant">Signal</span>.<span class="ruby-identifier">trap</span>(<span class="ruby-value str">&quot;INT&quot;</span>) <span class="ruby-keyword kw">do</span>
+221:         <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">:interrupted</span>)
+222:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Caught interrupt! Stopping parsing...&quot;</span>
+223:         <span class="ruby-ivar">@interrupted</span> = <span class="ruby-keyword kw">true</span>
+224:       <span class="ruby-keyword kw">end</span>
+225:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000205" class="method-detail">
+        <a name="M000205"></a>
+
+        <div class="method-heading">
+          <a href="#M000205" class="method-signature">
           <span class="method-name">run!</span><span class="method-args">()</span>
           </a>
         </div>
@@ -567,40 +595,37 @@ Runs <a href="../RequestLogAnalyzer.html">RequestLogAnalyzer</a>
 </li>
 </ol>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000202-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000202-source">
+            onclick="toggleCode('M000205-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000205-source">
 <pre>
      <span class="ruby-comment cmt"># File lib/request_log_analyzer/controller.rb, line 191</span>
 191:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>
 192:       
 193:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">prepare</span> }
-194:       
-195:       <span class="ruby-keyword kw">begin</span>
-196:         <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">each_request</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
-197:           <span class="ruby-identifier">aggregate_request</span>(<span class="ruby-identifier">filter_request</span>(<span class="ruby-identifier">request</span>))
-198:         <span class="ruby-keyword kw">end</span>
-199:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Interrupt</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
-200:         <span class="ruby-identifier">handle_progress</span>(<span class="ruby-identifier">:interrupted</span>)
-201:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Caught interrupt! Stopped parsing.&quot;</span>
-202:       <span class="ruby-keyword kw">end</span>
-203: 
-204:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">finalize</span> }
-205: 
-206:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">header</span>
-207:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">report</span>(<span class="ruby-ivar">@output</span>) }
-208:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">footer</span>
-209:             
-210:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">finalize</span>
-211:       
-212:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">File</span>)
-213:         <span class="ruby-identifier">puts</span>
-214:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Report written to: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">path</span>)
-215:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Need an expert to analyze your application?&quot;</span>
-216:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Mail to contact@railsdoctors.com or visit us at http://railsdoctors.com&quot;</span>
-217:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Thanks for using request-log-analyzer!&quot;</span>
-218:         <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">close</span>
-219:       <span class="ruby-keyword kw">end</span>
-220:     <span class="ruby-keyword kw">end</span>
+194:       <span class="ruby-identifier">install_signal_handlers</span>
+195:       
+196:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">each_request</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
+197:         <span class="ruby-identifier">aggregate_request</span>(<span class="ruby-identifier">filter_request</span>(<span class="ruby-identifier">request</span>))
+198:         <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@interrupted</span>
+199:       <span class="ruby-keyword kw">end</span>
+200: 
+201:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">finalize</span> }
+202: 
+203:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">header</span>
+204:       <span class="ruby-ivar">@aggregators</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">agg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">agg</span>.<span class="ruby-identifier">report</span>(<span class="ruby-ivar">@output</span>) }
+205:       <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">footer</span>
+206:             
+207:       <span class="ruby-ivar">@source</span>.<span class="ruby-identifier">finalize</span>
+208:       
+209:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">File</span>)
+210:         <span class="ruby-identifier">puts</span>
+211:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Report written to: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">path</span>)
+212:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Need an expert to analyze your application?&quot;</span>
+213:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Mail to contact@railsdoctors.com or visit us at http://railsdoctors.com&quot;</span>
+214:         <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Thanks for using request-log-analyzer!&quot;</span>
+215:         <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">io</span>.<span class="ruby-identifier">close</span>
+216:       <span class="ruby-keyword kw">end</span>
+217:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

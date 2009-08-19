@@ -103,12 +103,12 @@ Currently, one processors is supported:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000203">build</a>&nbsp;&nbsp;
-      <a href="#M000204">new</a>&nbsp;&nbsp;
-      <a href="#M000205">process_file</a>&nbsp;&nbsp;
-      <a href="#M000206">process_io</a>&nbsp;&nbsp;
-      <a href="#M000208">run!</a>&nbsp;&nbsp;
-      <a href="#M000207">strip_line</a>&nbsp;&nbsp;
+      <a href="#M000207">build</a>&nbsp;&nbsp;
+      <a href="#M000208">new</a>&nbsp;&nbsp;
+      <a href="#M000209">process_file</a>&nbsp;&nbsp;
+      <a href="#M000210">process_io</a>&nbsp;&nbsp;
+      <a href="#M000212">run!</a>&nbsp;&nbsp;
+      <a href="#M000211">strip_line</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -165,11 +165,11 @@ Currently, one processors is supported:
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000203" class="method-detail">
-        <a name="M000203"></a>
+      <div id="method-M000207" class="method-detail">
+        <a name="M000207"></a>
 
         <div class="method-heading">
-          <a href="#M000203" class="method-signature">
+          <a href="#M000207" class="method-signature">
           <span class="method-name">build</span><span class="method-args">(command, arguments)</span>
           </a>
         </div>
@@ -188,8 +188,8 @@ will set the
 href="../CommandLine/Arguments.html">CommandLine::Arguments</a> instance)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000203-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000203-source">
+            onclick="toggleCode('M000207-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000207-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/log_processor.rb, line 24</span>
 24:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">command</span>, <span class="ruby-identifier">arguments</span>)
@@ -213,25 +213,25 @@ href="../CommandLine/Arguments.html">CommandLine::Arguments</a> instance)
         </div>
       </div>
 
-      <div id="method-M000204" class="method-detail">
-        <a name="M000204"></a>
+      <div id="method-M000208" class="method-detail">
+        <a name="M000208"></a>
 
         <div class="method-heading">
-          <a href="#M000204" class="method-signature">
+          <a href="#M000208" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(format, mode, options = {})</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Initializes a <a href="LogProcessor.html#M000204">new</a> <a
+Initializes a <a href="LogProcessor.html#M000208">new</a> <a
 href="LogProcessor.html">LogProcessor</a> instance. <tt>format</tt> The
 file format to use (e.g. :rails). <tt>mode</tt> The processing mode
 <tt>options</tt> A hash with options to take into account
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000204-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000204-source">
+            onclick="toggleCode('M000208-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000208-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/log_processor.rb, line 45</span>
 45:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">format</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">options</span> = {})
@@ -248,11 +248,11 @@ file format to use (e.g. :rails). <tt>mode</tt> The processing mode
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000205" class="method-detail">
-        <a name="M000205"></a>
+      <div id="method-M000209" class="method-detail">
+        <a name="M000209"></a>
 
         <div class="method-heading">
-          <a href="#M000205" class="method-signature">
+          <a href="#M000209" class="method-signature">
           <span class="method-name">process_file</span><span class="method-args">(file)</span>
           </a>
         </div>
@@ -260,12 +260,12 @@ file format to use (e.g. :rails). <tt>mode</tt> The processing mode
         <div class="method-description">
           <p>
 Processes input files by opening it and sending the filestream to <tt><a
-href="LogProcessor.html#M000206">process_io</a></tt>, in which the actual
+href="LogProcessor.html#M000210">process_io</a></tt>, in which the actual
 processing is performed. <tt>file</tt> The file to process
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000205-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000205-source">
+            onclick="toggleCode('M000209-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000209-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/log_processor.rb, line 56</span>
 56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_file</span>(<span class="ruby-identifier">file</span>)
@@ -276,11 +276,11 @@ processing is performed. <tt>file</tt> The file to process
         </div>
       </div>
 
-      <div id="method-M000206" class="method-detail">
-        <a name="M000206"></a>
+      <div id="method-M000210" class="method-detail">
+        <a name="M000210"></a>
 
         <div class="method-heading">
-          <a href="#M000206" class="method-signature">
+          <a href="#M000210" class="method-signature">
           <span class="method-name">process_io</span><span class="method-args">(io)</span>
           </a>
         </div>
@@ -292,8 +292,8 @@ according to the current operation mode <tt>io</tt> The IO instance to
 process.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000206-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000206-source">
+            onclick="toggleCode('M000210-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000210-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/log_processor.rb, line 63</span>
 63:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_io</span>(<span class="ruby-identifier">io</span>)
@@ -306,11 +306,11 @@ process.
         </div>
       </div>
 
-      <div id="method-M000208" class="method-detail">
-        <a name="M000208"></a>
+      <div id="method-M000212" class="method-detail">
+        <a name="M000212"></a>
 
         <div class="method-heading">
-          <a href="#M000208" class="method-signature">
+          <a href="#M000212" class="method-signature">
           <span class="method-name">run!</span><span class="method-args">()</span>
           </a>
         </div>
@@ -323,8 +323,8 @@ instances) or IO streams (IO instances). The strings &quot;-&quot; and
 &quot;STDIN&quot; will be substituted for the $stdin variable.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000208-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000208-source">
+            onclick="toggleCode('M000212-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000212-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/log_processor.rb, line 79</span>
 79:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run!</span>
@@ -352,11 +352,11 @@ instances) or IO streams (IO instances). The strings &quot;-&quot; and
         </div>
       </div>
 
-      <div id="method-M000207" class="method-detail">
-        <a name="M000207"></a>
+      <div id="method-M000211" class="method-detail">
+        <a name="M000211"></a>
 
         <div class="method-heading">
-          <a href="#M000207" class="method-signature">
+          <a href="#M000211" class="method-signature">
           <span class="method-name">strip_line</span><span class="method-args">(line)</span>
           </a>
         </div>
@@ -368,8 +368,8 @@ If no match is found, an empty line is returned, which will strip the line
 from the output. <tt>line</tt> The line to strip
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000207-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000207-source">
+            onclick="toggleCode('M000211-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000211-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/request_log_analyzer/log_processor.rb, line 72</span>
 72:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strip_line</span>(<span class="ruby-identifier">line</span>)

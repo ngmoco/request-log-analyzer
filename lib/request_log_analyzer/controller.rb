@@ -112,6 +112,7 @@ module RequestLogAnalyzer
       options[:report_amount] ||= 20
       options[:report_sort]   ||= 'sum,mean'
       options[:boring]        ||= false
+      options[:mailhost]      ||= 'localhost'
       
       # Deprecation warnings
       if options[:dump] && options[:yaml].blank?

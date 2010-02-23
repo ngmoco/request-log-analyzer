@@ -1,23 +1,27 @@
 module RequestLogAnalyzer::FileFormat
 
   class Mysql < Base
-    
+
+    extend CommonRegularExpressions
+
     line_definition :time do |line|
+      line.header = :alternative
       line.teaser = /\# Time: /
-      line.regexp = /\# Time: (\d\d\d\d\d\d \d{1,2}:\d\d:\d\d)/
+      line.regexp = /\# Time: (#{timestamp('%y%m%d %k:%M:%S')})/
       line.captures << { :name => :timestamp, :type => :timestamp }
-      line.header = true
     end
 
     line_definition :user_host do |line|
+      line.header = :alternative
       line.teaser = /\# User\@Host\: /
-      line.regexp = /\# User\@Host\: (\w+)\[\w+\] \@ ([\w\.-]*) \[([\d\.]*)\]/
+      line.regexp = /\# User\@Host\: ([\w-]+)\[[\w-]+\] \@ ([\w\.-]*) \[(#{ip_address(true)})\]/
       line.captures << { :name => :user, :type => :string } << 
                        { :name => :host, :type => :string } <<
                        { :name => :ip,   :type => :string }
     end
 
     line_definition :query_statistics do |line|
+      line.header = :alternative
       line.teaser = /\# Query_time: /
       line.regexp = /\# Query_time: (\d+(?:\.\d+)?)\s+Lock_time: (\d+(?:\.\d+)?)\s+Rows_sent: (\d+)\s+Rows_examined: (\d+)/
       line.captures << { :name => :query_time, :type => :duration, :unit => :sec } <<
@@ -32,12 +36,12 @@ module RequestLogAnalyzer::FileFormat
     end
 
     line_definition :query_part do |line|
-      line.regexp   = /^(?!(?:use |\# ))(.*[^;\s])\s*$/
+      line.regexp   = /^(?!(?:use |\# |SET ))(.*[^;\s])\s*$/
       line.captures << { :name => :query_fragment, :type => :string }
     end
 
     line_definition :query do |line|
-      line.regexp = /^(?!(?:use |\# ))(.*);\s*$/
+      line.regexp = /^(?!(?:use |\# |SET ))(.*);\s*$/
       line.captures << { :name => :query, :type => :sql }
       line.footer = true
     end
@@ -47,13 +51,16 @@ module RequestLogAnalyzer::FileFormat
     PER_USER_QUERY = Proc.new { |request| "#{request[:user]}@#{request.host}: #{request[:query]}" }
 
     report do |analyze|
-      analyze.timespan
+      analyze.timespan :line_type => :time
       analyze.frequency :user, :title => "Users with most queries"
       analyze.duration :query_time, :category => PER_USER, :title => 'Query time per user'
       analyze.duration :query_time, :category => PER_USER_QUERY, :title => 'Query time'
-      # analyze.duration :lock_time,  :category => PER_USER_QUERY, :title => 'Lock time'
-      analyze.count :category => PER_USER_QUERY, :title => "Rows examined", :field => :rows_examined
-      analyze.count :category => PER_USER_QUERY, :title => "Rows sent",     :field => :rows_sent
+      
+      analyze.duration :lock_time,  :category => PER_USER_QUERY, :title => 'Lock time',
+                       :if => lambda { |request| request[:lock_time] > 0.0 }
+      
+      analyze.numeric_value :rows_examined, :category => PER_USER_QUERY, :title => "Rows examined"
+      analyze.numeric_value :rows_sent,     :category => PER_USER_QUERY, :title => "Rows sent"
     end
   
     class Request < RequestLogAnalyzer::Request
@@ -83,7 +90,7 @@ module RequestLogAnalyzer::FileFormat
 
       # Convert the timestamp to an integer
       def convert_timestamp(value, definition)
-        all,y,m,d,h,i,s = value.split(/(\d\d)(\d\d)(\d\d) (\d?\d):(\d\d):(\d\d)/)
+        all,y,m,d,h,i,s = value.split(/(\d\d)(\d\d)(\d\d)\s+(\d?\d):(\d\d):(\d\d)/)
         ('20%s%s%s%s%s%s' % [y,m,d,h.rjust(2, '0'),i,s]).to_i
       end
     end

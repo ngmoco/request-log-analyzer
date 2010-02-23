@@ -7,6 +7,8 @@ module RequestLogAnalyzer::FileFormat
   # method as first argument.
   class Rails < Base
 
+    extend CommonRegularExpressions
+
     # Creates a Rails FileFormat instance.
     #
     # The lines that will be parsed can be defined by the argument to this function, 
@@ -64,11 +66,11 @@ module RequestLogAnalyzer::FileFormat
       end
 
       if lines.has_key?(:rendered)
-        analyze.duration :render_duration, :category => :render_file, :multiple_per_request => true, :title => 'Partial rendering duration'
+        analyze.duration :render_duration, :category => :render_file, :multiple => true, :title => 'Partial rendering duration'
       end
 
       if lines.has_key?(:query_executed)
-        analyze.duration :query_duration, :category => :query_sql, :multiple_per_request => true, :title => 'Query duration'
+        analyze.duration :query_duration, :category => :query_sql, :multiple => true, :title => 'Query duration'
       end
       
       return analyze.trackers + report_definer.trackers
@@ -86,7 +88,7 @@ module RequestLogAnalyzer::FileFormat
     LINE_DEFINITIONS = {
       :processing => RequestLogAnalyzer::LineDefinition.new(:processing, :header => true,
             :teaser   => /Processing /,
-            :regexp   => /Processing ((?:\w+::)?\w+)#(\w+)(?: to (\w+))? \(for (\d+\.\d+\.\d+\.\d+) at (\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d)\) \[([A-Z]+)\]/,
+            :regexp   => /Processing ((?:\w+::)*\w+)#(\w+)(?: to (\w+))? \(for (#{ip_address}) at (#{timestamp('%Y-%m-%d %H:%M:%S')})\) \[([A-Z]+)\]/,
             :captures => [{ :name => :controller, :type  => :string },
                           { :name => :action,     :type  => :string },
                           { :name => :format,     :type  => :string, :default => 'html' },
@@ -117,13 +119,13 @@ module RequestLogAnalyzer::FileFormat
                         { :name => :file,        :type => :string }]),
 
       :cache_hit => RequestLogAnalyzer::LineDefinition.new(:cache_hit,
-          :regexp => /Filter chain halted as \[\#<ActionController::Caching::Actions::ActionCacheFilter/),
+          :regexp => /Filter chain halted as \[\#<ActionController::Filters::AroundFilter.*\@method=.*(?:Caching::Actions::ActionCacheFilter|action_controller\/caching\/actions\.rb).*\] did_not_yield/),
 
       :parameters => RequestLogAnalyzer::LineDefinition.new(:parameters,
           :teaser   => /  Parameters:/,
           :regexp   => /  Parameters:\s+(\{.*\})/,
           :captures => [{ :name => :params, :type => :eval }]),
-          
+
       :rendered => RequestLogAnalyzer::LineDefinition.new(:rendered,
           :teaser   => /Rendered /,
           :regexp   => /Rendered (\w+(?:\/\w+)+) \((\d+\.\d+)ms\)/,
@@ -170,7 +172,5 @@ module RequestLogAnalyzer::FileFormat
         sql.gsub(/\b\d+\b/, ':int').gsub(/`([^`]+)`/, '\1').gsub(/'[^']*'/, ':string').rstrip
       end
     end
-
   end
-
 end

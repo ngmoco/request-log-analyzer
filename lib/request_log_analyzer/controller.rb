@@ -27,13 +27,12 @@ module RequestLogAnalyzer
       options[:database]       = arguments[:database]
       options[:reset_database] = arguments[:reset_database]
       options[:debug]          = arguments[:debug]
-      options[:yaml]           = arguments[:dump]
+      options[:yaml]           = arguments[:yaml] || arguments[:dump]
       options[:mail]           = arguments[:mail]
       options[:no_progress]    = arguments[:no_progress]
       options[:format]         = arguments[:format]
-      options[:output]         = arguments[:output]
+      options[:output]         = arguments[:output].downcase
       options[:file]           = arguments[:file]
-      options[:format]         = arguments[:format]
       options[:after]          = arguments[:after]
       options[:before]         = arguments[:before]
       options[:reject]         = arguments[:reject]
@@ -52,6 +51,13 @@ module RequestLogAnalyzer
         options[:format] = {:apache => arguments[:apache_format]}
       end
       
+      # Handle output format casing
+      if options[:output].class == String
+        options[:output] = 'FancyHTML'  if options[:output] =~ /^fancy_?html$/i
+        options[:output] = 'HTML'       if options[:output] =~ /^html$/i
+        options[:output] = 'FixedWidth' if options[:output] =~ /^fixed_?width$/i
+      end
+      
       # Register sources
       if arguments.parameters.length == 1
         file = arguments.parameters[0]
@@ -65,6 +71,20 @@ module RequestLogAnalyzer
         end
       else
         options.store(:source_files, arguments.parameters)
+      end
+      
+      # Guess file format
+      if !options[:format] && options[:source_files]
+        options[:format] = :rails # Default
+
+        if options[:source_files] != $stdin
+          if options[:source_files].class == String
+            options[:format] = RequestLogAnalyzer::FileFormat.autodetect(options[:source_files])
+
+          elsif options[:source_files].class == Array && options[:source_files].first != $stdin
+            options[:format] = RequestLogAnalyzer::FileFormat.autodetect(options[:source_files].first)
+          end
+        end
       end
       
       build(options)
@@ -81,12 +101,13 @@ module RequestLogAnalyzer
     # * <tt>:database</tt> Database file to insert encountered requests to.
     # * <tt>:debug</tt> Enables echo aggregator which will echo each request analyzed.
     # * <tt>:file</tt> Filestring, File or StringIO.
-    # * <tt>:format</tt> :rails, {:apache => 'FORMATSTRING'}, :merb, etcetera or Format Class. (Defaults to :rails).
+    # * <tt>:format</tt> :rails, {:apache => 'FORMATSTRING'}, :merb, :amazon_s3, :mysql or RequestLogAnalyzer::FileFormat class. (Defaults to :rails).
     # * <tt>:mail</tt> Email the results to this email address.
-    # * <tt>:no_progress</tt> Do not display the progress bar (increases speed).
-    # * <tt>:output</tt> :fixed_width, :html or Output class. Defaults to fixed width.
+    # * <tt>:mailhost</tt> Email the results to this mail server.
+    # * <tt>:no_progress</tt> Do not display the progress bar (increases parsing speed).
+    # * <tt>:output</tt> 'FixedWidth', 'HTML' or RequestLogAnalyzer::Output class. Defaults to 'FixedWidth'.
     # * <tt>:reject</tt> Reject specific {:field => :value} combination (expects a single hash).
-    # * <tt>:report_width</tt> Width or reports in characters. (Defaults to 80)
+    # * <tt>:report_width</tt> Width of reports in characters for FixedWidth reports. (Defaults to 80)
     # * <tt>:reset_database</tt> Reset the database before starting.
     # * <tt>:select</tt> Select specific {:field => :value} combination (expects a single hash).
     # * <tt>:source_files</tt> Source files to analyze. Provide either File, array of files or STDIN.
@@ -115,7 +136,7 @@ module RequestLogAnalyzer
       options[:mailhost]      ||= 'localhost'
       
       # Deprecation warnings
-      if options[:dump] && options[:yaml].blank?
+      if options[:dump]
         warn "[DEPRECATION] `:dump` is deprecated.  Please use `:yaml` instead."
         options[:yaml]          = options[:dump]
       end
@@ -123,7 +144,7 @@ module RequestLogAnalyzer
       # Set the output class
       output_args   = {}
       output_object = nil
-      if options[:output].is_a? Class
+      if options[:output].is_a?(Class)
         output_class = options[:output]
       else
         output_class = RequestLogAnalyzer::Output::const_get(options[:output])
